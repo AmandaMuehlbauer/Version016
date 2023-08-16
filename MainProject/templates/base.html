@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <!-- Bootstrap and CSS files -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" type= "text/css" href="/static/css/index.css" />
+  <title>Jidder Beta</title>
+  <title>{% block head_title %}Jidder Beta{% endblock %}</title>
+
+  <style>    {% block css %} {% endblock css %} </style>
+</head>
+
+<body>
+
+<!--
+  {% if request.user.is_authenticated %}
+  <div class="navbar-nav ml-auto">
+    <a href="{% url 'core:post_create' %}"
+      class="nav-item nav-link {% if request.path == '/post/create/' %}active{% endif %}">Create a post 2</a>
+
+  {% endif %}
+-->
+  <header class="header">
+    <div class="logo left">
+    <i id="menu" class="material-icons">menu</i>
+    <a class="logo" href="{% url 'core:home' %}"><span>
+    <img id="logo" src="{% static '/img/cat.png' %}" width="60" height="60"></span></a>
+    <a href="{% url 'core:home' %}"
+    class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">Jidder</a>
+    </div>
+    <div class="navbar-nav">
+     
+    </div>
+
+    
+
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <div class="container">
+
+        <div class="search center">
+          <form action="">
+            <input type="text" placeholder="Search" />
+            <button><i class="material-icons">search</i></button>
+          </form>
+          <i class="material-icons">notifications</i>
+      </div>
+       <!-- <a href="{% url 'core:home' %}" class="navbar-brand">Jidder</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>-->
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+          
+
+   
+ 
+
+    <div class="dropdown">
+      <div class="icons right">
+          <i class="material-icons">account_circle</i>
+          <div class="dropdown-content">
+            {% if user.is_authenticated %}
+                  Hi {{ user.username }}!
+            <a href="{% url 'users:profile' request.user.username %}"></a><hr>
+            <a href="#">Profile</a><br>
+            <a href="#">Register</a><br>
+            <a href="#">Settings</a><br>
+            <a href="#">Dark Mode</a><br>
+            <a href="#">Location</a><br>
+            <p><a href="{% url 'users:logout'  %}">Log Out</a></p>
+            {% else %}
+            <a href="{% url 'users:login' %}">Log In</a>
+
+{% endif %}
+</div>
+{% if user.is_authenticated %}
+<div class="navbar-nav ml-auto">
+  <a href="{% url 'core:post_create' %}"
+    class="nav-item nav-link {% if request.path == '/post/create/' %}active{% endif %}">
+    Create a post
+  </a>
+
+  {% else %}
+  <div class="navbar-nav ml-auto">
+
+    <a href="{% url 'users:signup' %}"
+      class="nav-item nav-link {% if request.path == '/users/signup/' %}active{% endif %}">Sign up</a>
+{% endif %}
+
+    </header>         
+  
+  
+</div>
+</nav>
+ 
+
+
+<main>
+  <div class="side-bar">
+    <!-- <div class=”side-bar”> -->
+    <div class="nav">
+
+       <a class="nav-link {% block homeactive %} {% endblock homeactive %}" href="#" >
+        <span><a href="{% url 'core:home' %}"
+          class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">
+         <i class="material-icons">home</i> Home </span></a>             
+ 
+
+       <a class="nav-link">
+        <i class="material-icons">local_fire_department</i>
+        <span>Trending</span>
+     </a>
+
+
+      <a class="nav-link" href="/Recommendations" {% block Recommendationsactive %}{% endblock Recommendationsactive %} > 
+      <span>
+          <i class="material-icons">done</i> Recommendations </span>
+      </a>
+
+
+      <a class="nav-link" href="/Subscriptions" > 
+      <span>
+          <i class="material-icons">subscriptions</i> Subscriptions </span>
+      </a> 
+
+      <hr>
+   
+      <a class="nav-link" href="/About" > 
+      <span>
+          <i class="material-icons">library_add_check</i> About </span>
+      </a>
+
+
+      <a class="nav-link" href="/History" > 
+      <span>
+          <i class="material-icons">history</i> History </span>
+      </a>
+
+      
+      <a class="nav-link" href="/YourPosts" > 
+      <span>
+          <i class="material-icons">local_post_office</i> Your Posts </span>
+      </a>
+
+
+
+      <a class="nav-link" href="/SavedForLater" > 
+      <span>
+          <i class="material-icons">watch_later</i> Saved for Later </span>
+      </a>
+
+
+
+      <a class="nav-link" href="/Liked" > 
+      <span>
+          <i class="material-icons">thumb_up</i> Liked </span>
+      </a>
+      
+        </div>
+
+
+</div>  </body>
+
+
+
+
+
+  {% block content %}
+  {% endblock content %}
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<!--
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>-->
+     <!-- Adding the message in the template -->
+     <!--
+ {% for message in messages %}
+ <div class="alert alert-success alert-dismissible fade show">
+   {{ message }}
+   <button type="button" class="close" data-dismiss="alert">&times;</button>
+ </div>
+ {% endfor %}
+
+ 
+ <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show">
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+</div>
+</body>
+</html>
+-->

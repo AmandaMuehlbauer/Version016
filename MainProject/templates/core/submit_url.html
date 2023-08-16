@@ -1,0 +1,16 @@
+
+<!-- yourappname/templates/yourappname/url_form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Form</title>
+</head>
+<body>
+    <h2>Submit a URL</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

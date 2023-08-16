@@ -1,0 +1,20 @@
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </head>
+<body>
+<p>Have a comment or suggestion? Let us know here!</p>
+
+<form action="" method="post" novalidate>
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Submit">
+</form>
+{% block content %} {% endblock %}
+
+
+
+
+</body>
+

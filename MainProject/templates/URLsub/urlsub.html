@@ -1,0 +1,47 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/input-tags/tagsinput.css' %}" />
+
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{% static 'plugins/input-tags/tagsinput.js' %}"></script>
+  </head>
+<body>
+<p>Help us build our community! Recommend a blog below:</p>
+
+<form action="" method="post" >
+{% csrf_token %}
+
+<div class="form-group">
+  <label>Username </label>
+  {{ form.username }}
+</div>
+
+<div class="form-group">
+  <label>URL </label>
+  {{ form.url }}
+</div>
+
+<div class="form-group">
+  <label>Description </label>
+  {{ form.description }}
+</div>
+
+
+<div class="form-group">
+  <label>Tags </label>
+  {% render_field form.tags class="form-control" id="input-tags" data-role="tagsinput" %}
+
+</div>
+<input type="submit" value="Submit">
+</form>
+{% block content %} {% endblock %}
+
+
+
+
+</body>
+
