@@ -9,7 +9,7 @@ Welcome to Jidder's documentation!
    :maxdepth: 2
 
    modules/views
-
+   :caption: Contents:
 
 
 

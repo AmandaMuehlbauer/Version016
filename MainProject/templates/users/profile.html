@@ -7,25 +7,37 @@
 {% block content %}
 <div class="container-fluid mt-5">
   <div class="row">
-    <div class="card col-lg-6 offset-lg-3 mb-3">
-      <div class="row">
-        {% if user.profile.image %}
-        <img class="card-img-top col-sm-3 col-4 my-3" src="{{ profile.image.url }}" alt="{{ user.username }}">
-        {% else %}
-        <img class="card-img-top col-sm-3 col-4 my-3" src="{% static 'img/avatar.svg' %}" alt="{{ user.username }}">
-        {% endif %}
-        <div class="card-body col-9">
-          <h2 class="card-title my-3">{{ user.username }}</h2>
-          <p>Last login on: {{ user.last_login }}</p>
-          <p class="card-text">{{ user.profile.about_me }}</p>
+    <div class="col-lg-3 mb-3">
+      <!-- Profile Banner -->
+      {% if user.profile.banner %}
+      <img class="img-fluid" src="{{ user.profile.banner.url }}" alt="{{ user.username }} Banner">
+      {% else %}
+      <!-- You can add a default banner image here if needed -->
+      {% endif %}
+    </div>
+    <div class="col-lg-9">
+      <div class="card mb-3">
+        <div class="row no-gutters">
+          <div class="col-md-3">
+            <!-- User Avatar -->
+            {% if user.profile.avatar %}
+            <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }} Avatar" class="card-img">
+            {% else %}
+            <!-- You can add a default avatar image here if needed -->
+            {% endif %}
+          </div>
+          <div class="col-md-9">
+            <div class="card-body">
+              <h2 class="card-title"><a href="{% url 'users:edit_profile' user.username %}">{{ user.username }}</a></h2>
+              <p class="card-text"><strong>About Me:</strong> {{ user.profile.about_me }}</p>
+              <p class="card-text"><strong>Interests:</strong> {{ user.profile.interests }}</p>
+              <!-- Add more user details here -->
+              <p class="card-text"><small class="text-muted">Last login on: {{ user.last_login }}</small></p>
+            </div>
+          </div>
         </div>
       </div>
-      <p><a href="{% url 'users:edit_profile' %}">Edit your profile</a></p>
-
-    <p><a href="{% url 'users:password_change' %}">Change password</a></p>
     </div>
   </div>
-  
-
 </div>
-{% endblock %}
+{% endblock content %}

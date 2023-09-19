@@ -1,12 +1,58 @@
+<!-- templates/core/post.html -->
+{% extends 'base.html' %}
 
-<!-- yourappname/templates/yourappname/url_form.html -->
+{% block css %}
+{% load static %}  
+<link rel = "stylesheet" type="text/css" href= "{% static "/static/home/css/index.css" %}" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+
+    <!-- jQuery library -->
+    <script src="{% static "blog/js/jquery-3.4.1.min.js " %}"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="{% static "blog/js/bootstrap.min.js " %}"></script>
+
+{% endblock css%}
+
+{% block head_title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+
 <!DOCTYPE html>
 <html>
-<head>
-    <title>URL Form</title>
-</head>
-<body>
-<h1>About Jidder</h1>
-    </form>
+
+<main>
+<section>
+    <h1>About Jidder</h1>
+    <p>
+        Welcome to our website! Jidder is an experimental 
+        project that aims to make it easier to find independent 
+        blogs from amateur content creators. </p>
+        <br>
+
+        <p>Jidder is for the curious.</p>
+        <br>
+
+    <p>At Jidder we have implemented a fuzzy search algorithm. 
+        The goal is to make a tool that is more conducive to exploration and finding random, new things.
+        
+        Think of it like an old-fashioned card catalog. </p>
+
+        <br>
+
+    <p>
+        This is a user-curated community. 
+        We encourage users to recommend blogs they find interesting and tag your recommendations by subject. 
+    </p>
+    <br>
+    <p>Recommend a blog here!</p>
+    <br>
+    <p>Leave us a comment or suggestion!</p>
+</section>
+
+
+</main>
 </body>
 </html>
+{% endblock content %}

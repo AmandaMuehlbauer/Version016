@@ -1,6 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block css %} 
+<link rel="stylesheet" type="text/css" href="{% static "/static/home/css/index.css" %}" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+{% endblock css%}
+
+{% block head_title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+
+  <link rel="stylesheet" type="text/css" href="{% static 'plugins/input-tags/tagsinput.css' %}" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="{% static 'plugins/input-tags/tagsinput.js' %}"></script>
+
+
+
 <body>
     <p>Thanks for your contribution to Jidder!</p>
     
 
     
     </body>
+
+{% endblock %}

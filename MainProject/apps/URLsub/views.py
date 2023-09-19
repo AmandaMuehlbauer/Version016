@@ -11,6 +11,8 @@ def urlsub(request):
       # create an instance of our form, and fill it with the POST data
         form = URLSubForm(request.POST)
         if form.is_valid():
+          #Set the username field of the form instance with the logged in user's name
+          form.instance.username=request.user
           form.save()
         return HttpResponseRedirect('thanks_url')
     else:
@@ -20,6 +22,7 @@ def urlsub(request):
     return render(request,
          'URLsub/urlsub.html',
          {'form': form})
+
 @login_required()
 def url_thanks(request):
     return render(request, 'URLsub/thanks_url.html', {})

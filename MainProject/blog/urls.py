@@ -28,7 +28,7 @@ urlpatterns = [
     path('users/', include(('apps.users.urls', 'users'), namespace='users')),  
     path('', include(('apps.ContactUs.urls', 'ContactUs'), namespace='ContactUs')),
     path('', include(('apps.URLsub.urls', 'URLsub'), namespace='URLsub')),  
- 
+    path('', include(('apps.Search.urls', 'Search'), namespace='Search')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

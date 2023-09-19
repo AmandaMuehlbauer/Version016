@@ -7,6 +7,9 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import User, Profile
 from django.contrib import messages
+from django.utils import timezone
+
+
 
 
 def signup(request):
@@ -20,22 +23,22 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'users/signup.html', {'form': form})
 
-
 def log_in(request):
     if request.user.is_authenticated:
         return redirect('core:home')
+    
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data["email"]
+            username = form.cleaned_data["username"]  # Change to 'username'
             password = form.cleaned_data["password"]
             # We check if the data is correct
-            user = authenticate(email=email, password=password)
+            user = authenticate(username=username, password=password)  # Change to 'username'
             if user:  # If the returned object is not None
                 login(request, user)  # we connect the user
                 return redirect('core:home')
             else:  # otherwise an error will be displayed
-                messages.error(request, 'Invalid email or password')
+                messages.error(request, 'Invalid username or password')
     else:
         form = LoginForm()
 
@@ -53,25 +56,35 @@ def profile(request, username):
     profile = get_object_or_404(Profile, user=user)
     return render(request, 'users/profile.html', {'profile': profile, 'user': user})
 
+
+
 @login_required
-def edit_profile(request):
-    if request.method == "POST":
-        form = EditProfileForm(request.user.username, request.POST, request.FILES)
+def edit_profile(request, username):
+    user = request.user
+  #  print(user)
+    profile = user.profile
 
+
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            about_me = form.cleaned_data["about_me"]
-            username = form.cleaned_data["username"]
-            image = form.cleaned_data["image"]
+            form.save()
+           
+            profile_url = reverse('users:profile', args=[username])  # Use the 'profile' URL name here
 
-            user = User.objects.get(id=request.user.id)
-            profile = Profile.objects.get(user=user)
-            user.username = username
-            user.save()
-            profile.about_me = about_me
-            if image:
-                profile.image = image
-            profile.save()
-            return redirect("users:profile", username=user.username)
+            
+            # Redirect to the user's profile page after editing
+            return redirect(profile_url)
     else:
-        form = EditProfileForm(request.user.username)
-    return render(request, "users/edit_profile.html", {'form': form})
+        form = EditProfileForm(instance=profile)
+
+         # Exclude the 'username' field from the form
+    form.fields.pop('username', None)
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'users/edit_profile.html', context)
+
+

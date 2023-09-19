@@ -1,47 +1,71 @@
+{% extends 'base.html' %}
 {% load static %}
 {% load widget_tweaks %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'plugins/input-tags/tagsinput.css' %}" />
+{% block css %} 
+<link rel="stylesheet" type="text/css" href="{% static "/static/home/css/index.css" %}" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+{% endblock css%}
 
-<head>
+{% block head_title %}{% endblock %}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="{% static 'plugins/input-tags/tagsinput.js' %}"></script>
-  </head>
-<body>
-<p>Help us build our community! Recommend a blog below:</p>
+{% block content %}
 
-<form action="" method="post" >
-{% csrf_token %}
+  <link rel="stylesheet" type="text/css" href="{% static 'plugins/input-tags/tagsinput.css' %}" />
 
-<div class="form-group">
-  <label>Username </label>
-  {{ form.username }}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="{% static 'plugins/input-tags/tagsinput.js' %}"></script>
+
+
+<div class="page-container">
+<header class="header">
+  <!-- Insert header content here-->
+
+</header>
+
+  <section class="form-header">
+    <h2> Blog Recommendations </h2>
+    <p> Help us build our community! Recommend a blog below: </p>
+  </section>
+
+
+
+      <section class="form-section">
+        <form action="{% url 'URLsub:urlsub' %}" method="post">
+          {% csrf_token %}
+
+          <div class="form-group">
+            <label for="{{ form.username.id_for_label }}">username:</label>
+            {{ form.username }}
+          </div>
+      
+     
+          <div class="form-group">
+            <label for="{{ form.description.id_for_label }}">Blog Description:</label>
+            {{ form.description }}
+          </div>
+      
+          <div class="form-group-plugin">
+            <label for="tags-input">Subject tags:
+              <br>Separate tags by a comma
+            </label>
+            {% render_field form.tags class="form-control" id="input-tags" data-role="tagsinput" %}
+          </div>
+      
+          <div class="form-group">
+            <label for="{{ form.url.id_for_label }}">Blog URL:</label>
+            {{ form.url }}
+          </div>
+      
+          <input type="submit" class="styled-button" value="Submit" name="urlsub">
+
+        </form>
+      </section>
+      
+
+      
+    
 </div>
-
-<div class="form-group">
-  <label>URL </label>
-  {{ form.url }}
-</div>
-
-<div class="form-group">
-  <label>Description </label>
-  {{ form.description }}
-</div>
-
-
-<div class="form-group">
-  <label>Tags </label>
-  {% render_field form.tags class="form-control" id="input-tags" data-role="tagsinput" %}
-
-</div>
-<input type="submit" value="Submit">
-</form>
-{% block content %} {% endblock %}
-
-
-
-
-</body>
+{% endblock content %}
 

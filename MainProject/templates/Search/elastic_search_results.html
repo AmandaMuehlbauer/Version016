@@ -1,0 +1,47 @@
+<!-- elastic_search_results.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block css %} 
+<link rel="stylesheet" type="text/css" href="{% static "/static/home/css/index.css" %}" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+{% endblock css%}
+
+{% block head_title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+
+<body>
+   
+ 
+    
+    {% if results %}
+ 
+        <ul>
+            {% for post in objects %}
+                <li>
+                    <a href="{{ post.url }}">{{ post.title }}</a>
+                    <p>{{ post.content }}</p>
+
+                    <!-- Add more fields as needed -->
+                </li>
+                
+            {% endfor %}
+
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+
+
+
+
+
+</body>
+</html>
+{% endblock content %}

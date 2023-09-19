@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 from decouple import config
 import sys # new
+from elasticsearch_dsl import connections
+from elasticsearch import RequestsHttpConnection
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,13 +46,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'django_elasticsearch_dsl',
     'taggit',
     'apps.users',
     'apps.core',
     'scraping',
+    'apps.Search',
     'apps.ContactUs',
     'apps.URLsub',
     'widget_tweaks',
+    'timezone_field',
 
 
 
@@ -176,3 +181,17 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 sys.path.append(os.path.join(BASE_DIR, 'apps')) # at the bottom of the file
+
+
+ELASTICSEARCH_DSL={
+     'default': {
+        'hosts': 'http://localhost:9200',
+    },
+}
+
+# Define an Elasticsearch connection
+connections.create_connection(
+    hosts=['http://localhost:9200'],  # Replace with your Elasticsearch server's URL and port
+    timeout=20,
+    verify_certs=False, 
+)

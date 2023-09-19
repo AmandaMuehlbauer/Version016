@@ -1,0 +1,124 @@
+<!-- templates/core/forum_post.html -->
+
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}  
+<link rel = "stylesheet" type="text/css" href= "{% static "/static/home/css/index.css" %}" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+
+
+
+{% endblock css%}
+
+{% block head_title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+
+
+<div class="container-fluid my-5">
+
+
+      <div class="card">
+        <h2 class="card-title text-center my-3">{{ post.title }}</h2>
+        <div class="card-text mt-5 p-4">
+          {{ post.content }}
+        </div>
+
+        <div class="text-muted text-center mb-3">
+          <div>
+            created: {{ post.created_on|date:"N j Y" }},
+            last updated: {{ post.updated_on|timesince }},
+            by 
+            <a class="badge badge-secondary" href="{% url 'users:profile' post.author.username %}">
+              {{ post.author }}
+            </a>
+
+          </div>
+          <div>
+            {% for tag in post.tags.all %}
+            <span class="badge badge-dark">{{ tag }}</span>
+   
+          </div>
+        </div>
+        {% if post.image %}
+        <img class="card-img-top" src="{{ post.image.url }}" alt="{{ post.title }}">
+        {% endif %}
+
+
+
+         
+        </div>
+            <a class="btn btn-primary" href="{% url 'core:post_update' post.id %}">Edit</a>
+            <a class="btn btn-danger" href="{% url 'core:post_delete' post.id %}">Delete</a>
+          </div>
+        </div>
+         
+        
+        
+        </div>
+      </div>
+
+{% endfor %}
+</div>
+<hr><hr>
+ <!-- List of comments -->
+ {% if comments %}
+ <div class="row mt-5">
+   <div class="col-lg-6 offset-lg-3">
+     Comment{{ comments.count|pluralize }}
+     <span class="badge badge-dark ml-2">{{ comments.count }}</span>
+   </div>
+   {% for comment in comments %}
+   <div class="col-lg-6 offset-lg-3 mt-2">
+     <div class="card p-2">
+       <div class="row">
+         <div class="col-12">
+           <img class="rounded-circle mr-2" src="{% static 'img/cat.png' %}" width="60" height="60" alt="Avatar">
+           <strong>{{ comment.author }}</strong> said
+         </div>
+         <div class="col-12">
+           <p class="m-1 mt-3">{{ comment.content }}</p>
+           <p class="text-right text-muted"><small>{{ comment.created }}</small></p>
+         </div>
+       </div>
+     </div>
+   </div>
+   {% endfor %}
+ </div>
+ {% endif %}
+ 
+
+<hr>
+
+
+ <!-- Form to leave comment -->
+ <div class="row mt-5">
+   <div class="col-lg-6 offset-lg-3">
+     <h3>Leave a comment</h3>
+     {% if user.is_authenticated %}
+     <form method='POST'>
+       {% csrf_token %}
+      
+     
+       <div class="form-group">
+         <span class="ml-2"></span>{{ form.content.label_tag }}
+         <textarea class="form-control {% if form.content.errors %}is-invalid{% endif %}" id="id_content"
+           name="content" rows="4">{{ form.content.value|default:'' }}</textarea>
+       </div>
+       <button class="btn btn-primary ml-2" type="submit">Reply</button>
+     </form>
+
+     {% else %}
+     <div class="navbar-nav ml-auto">
+   
+       <a href="{% url 'users:signup' %}"
+         class="nav-item nav-link {% if request.path == '/users/signup/' %}active{% endif %}">Sign up</a>
+         <a href="{% url 'users:login' %}">Log In</a>
+{% endif %}
+    </div>
+  </div>
+</div>
+{% endblock content %}
+

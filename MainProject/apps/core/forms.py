@@ -1,6 +1,6 @@
 # core/forms.py
 from django import forms
-from .models import Comment
+from .models import Comment, Post
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -15,4 +15,10 @@ class SubmitURL(forms.Form):
  #   class Meta:
   #      model = Contact
    #     fields =('name', 'email', 'content')
-    
+
+
+class PostForumForm(forms.ModelForm):
+    tags = forms.CharField(initial='')
+    class Meta:
+        model = Post
+        fields = ["title", "content", "image", "tags"]

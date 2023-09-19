@@ -1,0 +1,20 @@
+
+
+{% block content %}
+  <h1>Search</h1>
+
+  <form method="get">
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+
+  <h2>Search Results</h2>
+  <ul>
+    {% for result in results %}
+   <li> <a href="{% url 'core:post' pk=result.id slug=result.slug %}">{{ result.title }}</a></li>
+
+    {% empty %}
+      <li>No results found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

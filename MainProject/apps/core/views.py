@@ -26,9 +26,15 @@ class HomeView(ListView):
     queryset = Post.objects.all()
     paginate_by = 10
 
+
+class ForumView(ListView):
+    template_name = 'core/forum.html'
+    queryset = Post.objects.all()
+    paginate_by = 10
+
 class PostView(DetailView):
     model = Post
-    template_name = 'core/post.html'
+    template_name = 'core/forum_post.html'
     thing1 = Post.objects.all()
    # print("thing1", thing1)
     def get_context_data(self, **kwargs):
@@ -63,9 +69,10 @@ class PostView(DetailView):
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             content = form.cleaned_data['content']
+            author=form.cleaned_data['author']
 
             comments = Comment.objects.create(
-                name=name, email=email, content=content, post=post
+                name=name, author=author, email=email, content=content, post=post
             )
 
             form = CommentForm()
@@ -75,21 +82,47 @@ class PostView(DetailView):
         return self.render_to_response(context=context)
     
 
+#class PostCreateView(LoginRequiredMixin, CreateView):
+ #   model = Post
+
+  #  fields = ["title", "content", "image", "tags"]
+
+   # def get_success_url(self):
+    #    messages.success(
+     #       self.request, 'Your post has been created successfully.')
+      #  return reverse_lazy("core:forum")
+
+    #def form_valid(self, form):
+     #   obj = form.save(commit=False)
+      #  obj.username = self.request.user
+       # obj.slug = slugify(form.cleaned_data['title'])
+        #obj.save()
+        #return super().form_valid(form)
+    
+
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ["title", "content", "image", "tags"]
-
-    def get_success_url(self):
-        messages.success(
-            self.request, 'Your post has been created successfully.')
-        return reverse_lazy("core:home")
 
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.author = self.request.user
         obj.slug = slugify(form.cleaned_data['title'])
         obj.save()
+        messages.success(self.request, 'Your post has been created successfully.')
         return super().form_valid(form)
+
+    def get_success_url(self):
+        # After successfully creating the post, redirect to its detail view
+        return reverse_lazy("core:post", kwargs={"pk": self.object.pk, "slug": self.object.slug})
+
+    def get_form(self, form_class=None):
+        # Initialize the form with an empty "tags" field for GET requests
+        form = super().get_form(form_class=form_class)
+        if self.request.method == 'GET':
+            form.fields['tags'].initial = ''
+        return form
+
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
@@ -105,7 +138,7 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         messages.success(
             self.request, 'Your post has been updated successfully.')
-        return reverse_lazy("core:home")
+        return reverse_lazy("core:forum")
 
     def get_queryset(self):
         return self.model.objects.filter(author=self.request.user)
@@ -117,7 +150,7 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
     def get_success_url(self):
         messages.success(
             self.request, 'Your post has been deleted successfully.')
-        return reverse_lazy("core:home")
+        return reverse_lazy("core:forum")
 
     def get_queryset(self):
         return self.model.objects.filter(author=self.request.user)
@@ -136,7 +169,14 @@ def SubmitURLView(request):
 def AboutView(request):
     return render(request, 'core/about.html', {})
 
+def TrendingView(request):
+    return render(request, 'core/trending.html')
 
+def RecommendationsView(request):
+    return render(request, 'core/recommendations.html')
+
+def SubscriptionsView(request):
+    return render(request, 'core/subscriptions.html')
 
 class RSSPageView(ListView):
     model = News

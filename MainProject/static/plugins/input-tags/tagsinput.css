@@ -3,29 +3,54 @@
  * 
  */
 
+ /* Apply styles to the plugin tags section */
+ .form-group-plugin {
+  margin-bottom: 20px; /* Add spacing below the tags section */
+}
+
+/* Style the label for the tags section */
+.form-group-plugin label {
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(100, 100, 100);
+  margin-bottom: 5px;
+}
+
+
+
+
 .bootstrap-tagsinput {
-  background-color: #fff;
+  background-color: transparent;
   border: 1px solid #ccc;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   display: inline-block;
   padding: 4px 6px;
-  color: #555;
+  color: rgb(100,100,100);
   vertical-align: middle;
-  border-radius: 4px;
+  border-radius: 10px;
   width: 100%;
   line-height: 22px;
   cursor: text;
 }
+
 .bootstrap-tagsinput input {
   border: none;
   box-shadow: none;
   outline: none;
   background-color: transparent;
+  color: rgb(100, 100, 100);
   padding: 0 6px;
   margin: 0;
   width: auto;
   max-width: inherit;
 }
+
+.bootstrap-tagsinput.form-control input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px red;
+  border-radius: 10px;
+  outline: none;
+}
+
 .bootstrap-tagsinput.form-control input::-moz-placeholder {
   color: #777;
   opacity: 1;
@@ -36,31 +61,34 @@
 .bootstrap-tagsinput.form-control input::-webkit-input-placeholder {
   color: #777;
 }
-.bootstrap-tagsinput input:focus {
-  border: none;
-  box-shadow: none;
-}
+
+
+
 .bootstrap-tagsinput .badge {
-  margin: 2px 0;
+  margin: 2px 2px 2px 0;
   padding:5px 8px;
+  background-color: rgb(255, 0, 149);
 }
+
 .bootstrap-tagsinput .badge [data-role="remove"] {
   margin-left: 8px;
-  cursor: pointer;
+
 }
 .bootstrap-tagsinput .badge [data-role="remove"]:after {
   content: "×";
   padding: 0px 4px;
   background-color:rgba(0, 0, 0, 0.1);
-  border-radius:50%;
+  border-radius: 10px;
   font-size:13px
 }
 .bootstrap-tagsinput .badge [data-role="remove"]:hover:after {
-
   background-color:rgba(0, 0, 0, 0.62);}
+
 .bootstrap-tagsinput .badge [data-role="remove"]:hover:active {
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
+
+
 
 .tt-menu {
     position: absolute;
@@ -94,10 +122,12 @@
     white-space: nowrap;
 }
 
+
 .tt-suggestion:hover,
 .tt-suggestion:focus {
   color: #ffffff;
-  text-decoration: none;
+  text-decoration: underline;
   outline: 0;
   background-color: #428bca;
+
 }

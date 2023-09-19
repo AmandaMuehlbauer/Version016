@@ -1,9 +1,17 @@
 <!-- templates/core/post_form.html -->
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
 
 {% block head_title %}{% if update %}Update post{% else %}Create a post{% endif %}{% endblock head_title %}
 
 {% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/input-tags/tagsinput.css' %}" >
+
+
+
 <div class="container">
   <div class="row">
     <div class="col-8 offset-2">
@@ -38,20 +46,16 @@
           {% endif %}
         </div>
 
-        <div class="form-group">
-          {{ form.tags.label_tag }}<br>
-          <select class="custom-select w-25" name="tags" id="id_tags" multiple>
-            {% for name, value in form.tags.field.choices %}
-            <option value="{{ name }}">{{ value }}</option>
-            {% endfor %}
-          </select>
-          {% if form.tags.errors %}
-          <div class="invalid-feedback">{{ form.tags.errors }}</div>
-          {% endif %}
-        </div>
+
+          <div class="form-group-plugin">
+            <label for="tags-input">Subject tags:
+              <br>Separate tags by a comma
+            </label>
+        <!--    {% render_field form.tags class="form-control" id="input-tags" data-role="tagsinput" %}-->  
+
 
         <button type="submit" class="btn btn-primary">
-          {% if update %}Update the post{% else %}Create a post{% endif %}
+        {% if update %}Update the post{% else %}Create Post{% endif %}
         </button>
       </form>
 
@@ -59,3 +63,4 @@
   </div>
 </div>
 {% endblock content %}
+
