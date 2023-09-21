@@ -1,5 +1,5 @@
 #apps/Search/views.py
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Q
 from .forms import SearchForm
 from apps.core.models import Post, BlogFullRecommend  # Replace with your model
@@ -8,10 +8,11 @@ from elasticsearch_dsl import Search
 from .documents import PostDocument
 from elasticsearch.exceptions import NotFoundError
 from django.urls import reverse
+from .models import SearchHistory
 
 
 
-#import pdb; pdb.set_trace()
+#this is a basic search/lookup with the database. Not used in Jidder
 
 def search_view(request):
     form = SearchForm()
@@ -32,69 +33,7 @@ def search_view(request):
     return render(request, 'search/search_results.html', context)
 
 
-
-
-#def elastic_search_view(request):
-  #  form = SearchForm(request.GET)
-   # results = []
-   # objects=[] #This stores the retrieved objects from model
-   # post=[]
-
-
-    #if form.is_valid():
-     #   query = form.cleaned_data['query']
-     #   print(query)
-      #  client = Elasticsearch()  # Connect to the default Elasticsearch instance
-     #   print(client)
-       # s = Search(using=client, index='post')  # Replace 'myindex' with your index name
-     #   print(s)
-        #s = s.query("match", title=query)
-     #   print(s)
-
-        #response = s.execute()
-       
-       # print(response)
-        #results = response.hits
-    #    print(results)
-
-    ##Want to use primary key to do query lookup
-   
-   #     try:
-            # Execute the Elasticsearch query
-    #        response = s.execute()
-
-            # Extract primary keys (id) from Elasticsearch results
-     #       pk_values = [hit.meta.id for hit in response]
-           # print(pk_values)
-
-            # Generate URLs for each retrieved Post object
-      #      for post in objects:
-       #         post.url = reverse('core:post', args=[str(post.id), post.slug])
-                
-
-
-        #        print(objects)
-
-            #Generate the url 
-         #   post = Post.objects.get(pk_values)
-          #  print(post)
-
-    #    except NotFoundError:
-            # Handle the case when no results are found in Elasticsearch
-     #       pass
-
-
-
-
-
-  #  context = {
-   #     'form': form,
-    #    'results': results,
-     #   'objects': objects
-    #}
-    #return render(request, 'search/elastic_search_results.html', context)
-
-
+#This is the function that is used in the Jidder searchbar. It uses elasticsearch. 
 
 def elastic_search_view(request):
     form = SearchForm(request.GET)
@@ -106,6 +45,11 @@ def elastic_search_view(request):
         client = Elasticsearch()  # Connect to the default Elasticsearch instance
         s = Search(using=client, index='post')  # Replace 'myindex' with your index name
         s = s.query("match", title=query)
+
+        # Save the search history to the database
+        if request.user.is_authenticated:
+            search_history = SearchHistory(user=request.user, query=query)
+            search_history.save()
 
         response = s.execute()
         results = response.hits
@@ -128,3 +72,15 @@ def elastic_search_view(request):
         'objects': objects
     }
     return render(request, 'search/elastic_search_results.html', context)
+
+
+#Function to display search results back to users:
+
+def view_search_history(request):
+    if request.user.is_authenticated:
+        search_history = SearchHistory.objects.filter(user=request.user).order_by('-timestamp')
+        return render(request, 'Search/search_history.html', {'search_history': search_history})
+    else:
+        # Handle the case when the user is not authenticated
+        return redirect('users:login')  # Redirect to the login page or handle as needed
+

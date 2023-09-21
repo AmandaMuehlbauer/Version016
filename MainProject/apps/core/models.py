@@ -3,6 +3,7 @@
 from django.db import models
 from django.conf import settings
 from taggit.managers import TaggableManager
+from apps.users.models import User
 
 class Tag(models.Model):
     # Remove the 'name' field, as django-taggit handles tags internally
@@ -14,13 +15,16 @@ class Tag(models.Model):
     def __str__(self):
         return ', '.join(self.tags.names())  # Return a comma-separated list of tag names
 
+
+
+
 class Post(models.Model):
     title = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE)
     content = models.TextField()
     image = models.ImageField(upload_to='', blank=True, null=True)
-    tags = models.ManyToManyField(Tag, blank=True)
+    tags = TaggableManager()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now= True)
 
@@ -35,7 +39,7 @@ class Post(models.Model):
     
 
 class Comment(models.Model):
-    name = models.CharField(max_length=50)
+    #name = models.CharField(max_length=50)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE)
     email = models.EmailField(max_length=100)
     content = models.TextField()
@@ -46,7 +50,7 @@ class Comment(models.Model):
        ordering = ('-created',)
 
     def __str__(self):
-       return 'Comment by {}'.format(self.name)
+       return 'Comment by {}'.format(self.author.username)
     
 
 #This model stores full blog recommendations
@@ -57,7 +61,7 @@ class BlogFullRecommend(models.Model):
     author = models.CharField(max_length=200, db_index=True, blank=True)
     content = models.TextField(max_length=500, blank=True)
     image = models.ImageField(upload_to='', blank=True, null=True)
-    tags = models.ManyToManyField(Tag, blank=True)
+    tags = TaggableManager()
     last_updated = models.DateTimeField(blank=True)
 
     class Meta:
@@ -84,3 +88,11 @@ class BlogFullRecommend(models.Model):
 
    # def __str__(self):
     #    return self.title
+
+
+#User interaction tracking
+class UserPostInteraction(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    interaction_type = models.CharField(max_length=255) 
+    timestamp = models.DateTimeField(auto_now_add=True)

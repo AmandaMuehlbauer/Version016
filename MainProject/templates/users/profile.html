@@ -9,9 +9,10 @@
   <div class="row">
     <div class="col-lg-3 mb-3">
       <!-- Profile Banner -->
+      <!--
       {% if user.profile.banner %}
       <img class="img-fluid" src="{{ user.profile.banner.url }}" alt="{{ user.username }} Banner">
-      {% else %}
+      {% else %}-->
       <!-- You can add a default banner image here if needed -->
       {% endif %}
     </div>
@@ -20,11 +21,14 @@
         <div class="row no-gutters">
           <div class="col-md-3">
             <!-- User Avatar -->
-            {% if user.profile.avatar %}
-            <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }} Avatar" class="card-img">
+            {% if user.is_authenticated %}
+            {% if profile and profile.avatar %}
+              <img src="{{ profile.avatar.url }}" alt="{{ user.username }}'s Avatar" class="user-avatar">
             {% else %}
-            <!-- You can add a default avatar image here if needed -->
+              <!-- Handle the case when the user doesn't have an avatar -->
+              <i class="material-icons">account_circle</i>
             {% endif %}
+          {% endif %}
           </div>
           <div class="col-md-9">
             <div class="card-body">

@@ -25,6 +25,8 @@
          confirmKeys:[13] //-- Only enter                                                                                   
        });
     </script>
+
+
   <title>Jidder Beta</title>
 
 
@@ -74,16 +76,22 @@
 
     <div class="dropdown">
       <div class="icons right">
-          <i class="material-icons">account_circle</i>
+        
+            <i class="material-icons">account_circle</i>
+   
+          
+
           <div class="dropdown-content">
             {% if user.is_authenticated %}
-                  Hi {{ user.username }}!
-            <a href="{% url 'users:profile' user.username %}">Profile</a><hr>
+            <a href="{% url 'users:profile' user.username %}">  Hi {{ user.username }}!</a> <hr>
+           
+            <a href="#">Create a Post</a><br>
 
             <a href="#">Register</a><br>
             <a href="#">Settings</a><br>
             <a href="#">Dark Mode</a><br>
             <a href="#">Location</a><br>
+  
             <p><a href="{% url 'users:logout'  %}">Log Out</a></p>
             {% else %}
             <a href="{% url 'users:login' %}">Log In</a>
@@ -150,10 +158,13 @@
       </a>
 
 
-      <a class="nav-link" href="/History" > 
-      <span>
-          <i class="material-icons">history</i> History </span>
+      {% if user.is_authenticated %}
+      <a class="nav-link" href="{% url 'Search:search_history' %}">
+        <span>
+          <i class="material-icons">history</i> History
+        </span>
       </a>
+    {% endif %}
 
       
 

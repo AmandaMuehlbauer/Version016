@@ -13,9 +13,7 @@
 
   <link rel="stylesheet" type="text/css" href="{% static 'plugins/input-tags/tagsinput.css' %}" />
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src="{% static 'plugins/input-tags/tagsinput.js' %}"></script>
+
 
 
 <div class="page-container">
@@ -35,24 +33,22 @@
         <form action="{% url 'URLsub:urlsub' %}" method="post">
           {% csrf_token %}
 
-          <div class="form-group">
-            <label for="{{ form.username.id_for_label }}">username:</label>
-            {{ form.username }}
-          </div>
+
       
      
           <div class="form-group">
             <label for="{{ form.description.id_for_label }}">Blog Description:</label>
             {{ form.description }}
           </div>
-      
+
           <div class="form-group-plugin">
-            <label for="tags-input">Subject tags:
-              <br>Separate tags by a comma
-            </label>
+            <label for="{{ form.tags.id_for_label }}">Subject tags:<br>Separate tags by a comma</label>
             {% render_field form.tags class="form-control" id="input-tags" data-role="tagsinput" %}
-          </div>
+        </div>
+        
+        
       
+
           <div class="form-group">
             <label for="{{ form.url.id_for_label }}">Blog URL:</label>
             {{ form.url }}

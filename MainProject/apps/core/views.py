@@ -20,6 +20,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponseRedirect
 from django.views import generic
 from django.core.mail import send_mail
+from apps.users.models import User
+
+
+
 
 class HomeView(ListView):
     template_name = 'core/home.html'
@@ -32,72 +36,116 @@ class ForumView(ListView):
     queryset = Post.objects.all()
     paginate_by = 10
 
+
+#class PostView(DetailView):
+ #   model = Post
+  #  template_name = 'core/forum_post.html'
+   # thing1 = Post.objects.all()
+
+    #def get_context_data(self, **kwargs):
+     #   context = super().get_context_data(**kwargs)
+      #  pk = self.kwargs["pk"]
+       # slug = self.kwargs["slug"]
+
+        #form = CommentForm()
+        #post = get_object_or_404(Post, pk=pk, slug=slug)
+        #comments = post.comment_set.all()
+
+        #stuff=get_object_or_404(Post, id=self.kwargs['pk'])
+
+     #   context['post'] = post
+      #  context['comments'] = comments
+       # context['form'] = form
+        #return context
+    
+   # def post(self, request, *args, **kwargs):
+    #    form = CommentForm(request.POST)
+     #   self.object = self.get_object()
+      #  context = super().get_context_data(**kwargs)
+
+       # post = Post.objects.filter(id=self.kwargs['pk'])[0]
+        #comments = post.comment_set.all()
+
+        #context['post'] = post
+        #context['comments'] = comments
+        #context['form'] = form
+
+      
+
+
+      #  if form.is_valid():
+                    # Access the logged-in user's information
+       #     logged_in_user = request.user
+
+        # Set the user's name and email in the form
+        #    if isinstance(logged_in_user, User):
+         #       content = form.cleaned_data.get('content', '')  # Define 'content' here
+          #      form.instance.author = logged_in_user
+           #     form.instance.email = logged_in_user.email
+
+            #    comment = Comment(
+             #       author=logged_in_user,
+              #      email=logged_in_user.email,  # Set the email from the user's account
+               #     content=content,  # Use the 'content' variable defined above
+                #    post=post
+              #  )
+        
+        #    print(content)
+         #   print(author)
+
+
+        # Create a Comment instance but don't save it yet
+
+            
+
+          #  comment.save()  # Save the comment to the database
+
+           # form = CommentForm()
+            #context['form'] = form
+            #return self.render_to_response(context=context)
+        
+      #  else:
+       #     print(form.errors)  # Print validation errors to the console
+        #    print("Invalid User instance:", logged_in_user)
+
+     #   return self.render_to_response(context=context)
+    
+
 class PostView(DetailView):
     model = Post
     template_name = 'core/forum_post.html'
-    thing1 = Post.objects.all()
-   # print("thing1", thing1)
+    context_object_name = 'post'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        pk = self.kwargs["pk"]
-        slug = self.kwargs["slug"]
-
-        form = CommentForm()
-        post = get_object_or_404(Post, pk=pk, slug=slug)
-        comments = post.comment_set.all()
-
-        stuff=get_object_or_404(Post, id=self.kwargs['pk'])
-
-        context['post'] = post
-        context['comments'] = comments
-        context['form'] = form
+        context['comments'] = self.object.comment_set.all()
+        context['form'] = CommentForm()
         return context
-    
+
     def post(self, request, *args, **kwargs):
+        post = self.get_object()
         form = CommentForm(request.POST)
-        self.object = self.get_object()
-        context = super().get_context_data(**kwargs)
 
-        post = Post.objects.filter(id=self.kwargs['pk'])[0]
-        comments = post.comment_set.all()
-
-        context['post'] = post
-        context['comments'] = comments
-        context['form'] = form
-
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
+        if form.is_valid() and request.user.is_authenticated:
             content = form.cleaned_data['content']
-            author=form.cleaned_data['author']
+            author = request.user
 
-            comments = Comment.objects.create(
-                name=name, author=author, email=email, content=content, post=post
-            )
+            try:
+                comment = Comment.objects.create(
+                    author=author,
+                    email=author.email,
+                    content=content,
+                    post=post
+                )
+                print("Comment created:", comment)  # Debugging line
+            except Exception as e:
+                print("Error creating comment:", str(e))  # Debugging line
 
-            form = CommentForm()
-            context['form'] = form
-            return self.render_to_response(context=context)
+        else:
+            print("Form is not valid or user is not authenticated")  # Debugging line
+            print("Form errors:", form.errors)  # Debugging line
 
-        return self.render_to_response(context=context)
-    
-
-#class PostCreateView(LoginRequiredMixin, CreateView):
- #   model = Post
-
-  #  fields = ["title", "content", "image", "tags"]
-
-   # def get_success_url(self):
-    #    messages.success(
-     #       self.request, 'Your post has been created successfully.')
-      #  return reverse_lazy("core:forum")
-
-    #def form_valid(self, form):
-     #   obj = form.save(commit=False)
-      #  obj.username = self.request.user
-       # obj.slug = slugify(form.cleaned_data['title'])
-        #obj.save()
-        #return super().form_valid(form)
+        return redirect('core:post', pk=post.pk, slug=post.slug)
     
 
 class PostCreateView(LoginRequiredMixin, CreateView):

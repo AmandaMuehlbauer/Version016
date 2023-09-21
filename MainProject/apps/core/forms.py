@@ -5,7 +5,15 @@ from .models import Comment, Post
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('name', 'email', 'content')
+        fields = ('email', 'content')  # Exclude 'author' field from the form
+        exclude = ['author']  # Alternatively, you can use exclude as a list
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['email'].required = True
+        self.fields['content'].required = True
+
+
 
 class SubmitURL(forms.Form):
     url = forms.URLField(label='URL', max_length=200)

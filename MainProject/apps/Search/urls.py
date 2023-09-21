@@ -7,5 +7,7 @@ urlpatterns = [
     # Other URL patterns
     path('search/', views.search_view, name='search_view'),
     path('elastic-search/', views.elastic_search_view, name='elastic_search_view'),
+    path('elastic-search/history/', views.view_search_history, name='search_history'),
+
 
 ]
