@@ -98,7 +98,7 @@ domdf-python-tools==3.6.1
 ecs-logging==2.0.2
 elastic-transport==8.4.0
 elasticsearch==7.17.9
-elasticsearch-curator==8.0.8
+elasticsearch-curator
 elasticsearch-dsl==7.4.1
 elasticsearch8==8.8.2
 entrypoints==0.4
