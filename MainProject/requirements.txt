@@ -73,7 +73,7 @@ cytoolz==0.11.0
 #daal4py==2021.5.0
 #dask==2022.2.1
 datashader==0.13.0
-datashape==0.5.4
+#datashape==0.5.4
 debugpy==1.5.1
 decorator==5.1.1
 defusedxml==0.7.1
@@ -233,7 +233,7 @@ pipenv==2023.7.4
 pipreqs==0.4.13
 pkginfo==1.8.2
 platformdirs==3.5.0
-plotly==5.6.0
+#plotly==5.6.0
 pluggy==1.0.0
 poyo==0.5.0
 prometheus-client==0.13.1
