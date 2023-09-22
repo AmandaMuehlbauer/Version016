@@ -297,12 +297,12 @@ rsa==4.7.2
 Rtree==0.9.7
 ruamel.yaml==0.17.21
 ruamel.yaml.clib==0.2.6
-ruamel-yaml-conda==0.15.100
+#ruamel-yaml-conda==0.15.100
 s3transfer==0.5.0
 scikit-image==0.19.2
-scikit-learn==1.0.2
-scikit-learn-intelex==2021.20220215.132722
-scipy==1.7.3
+#scikit-learn==1.0.2
+#scikit-learn-intelex==2021.20220215.132722
+#scipy==1.7.3
 Scrapy==2.6.1
 seaborn==0.11.2
 selenium==4.11.2
