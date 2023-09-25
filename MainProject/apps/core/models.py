@@ -94,5 +94,7 @@ class BlogFullRecommend(models.Model):
 class UserPostInteraction(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    interaction_type = models.CharField(max_length=255) 
+    interaction_type = models.CharField(max_length=255)  # e.g., "Click", "Like", "Comment"
     timestamp = models.DateTimeField(auto_now_add=True)
+    comment_text = models.TextField(blank=True, null=True)  # For tracking text for comments
+    # Other fields for additional data as needed

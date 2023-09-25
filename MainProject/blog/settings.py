@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-from decouple import config
+#from decouple import Config
 import sys # new
 from elasticsearch_dsl import connections
 from elasticsearch import RequestsHttpConnection
@@ -169,7 +169,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/assets")
 CELERY_RESULT_BACKEND = "django-db"
 
 # This configures Redis as the datastore between Django + Celery
-CELERY_BROKER_URL = config('CELERY_BROKER_REDIS_URL', default='redis://localhost:6379')
+#CELERY_BROKER_URL = Config('CELERY_BROKER_REDIS_URL', default='redis://localhost:6379')
 # if you out to use os.environ the config is:
 # CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_REDIS_URL', 'redis://localhost:6379')
 
