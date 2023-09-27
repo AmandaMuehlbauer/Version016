@@ -101,24 +101,17 @@ WSGI_APPLICATION = "blog.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-#DATABASES = {
- #   "default": {
-  #    'ENGINE': 'django.db.backends.postgresql',
-   #   'NAME': 'blog',
-    #  'USER': 'test',
-     # 'PASSWORD': '1234',
-     # 'HOST': '',
-     # 'PORT': 5432
-    #}
-#}
+
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
+        'NAME': os.environ.get('DB_NAME', 'blog'),
+        'USER': os.environ.get('DB_USER', 'test'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'hey little songbird gimme a song'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
