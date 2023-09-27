@@ -327,7 +327,7 @@ webcolors = "1.13"
 webencodings = "0.5.1"
 websocket-client = "1.6.3"
 werkzeug = "2.3.7"
-whitenoise = "6.5.0"
+whitenoise = {extras = ["brotli"], version = "^6.5.0"}
 widgetsnbextension = "4.0.9"
 wrapt = "1.15.0"
 wsproto = "1.2.0"
