@@ -15,10 +15,13 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-#from decouple import Config
 import sys # new
 from elasticsearch_dsl import connections
-from elasticsearch import RequestsHttpConnection
+from decouple import config
+
+
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -107,13 +110,13 @@ WSGI_APPLICATION = "blog.wsgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-      'ENGINE': 'django.db.backends.postgresql',
-      'NAME': 'blog',
-      'USER': 'test',
-      'PASSWORD': '1234',
-      'HOST': '',
-      'PORT': 5432
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='5432'),
     }
 }
 
