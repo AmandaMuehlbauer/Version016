@@ -20,7 +20,7 @@ fi
 export DJANGO_SETTINGS_MODULE
 
 # Install project dependencies using Poetry
-poetry install --no-dev  # Use `--no-dev` to exclude development dependencies
+poetry install --only main  # Use `--no-dev` to exclude development dependencies
 
 # Run other necessary commands
 poetry run python3 manage.py collectstatic --no-input
