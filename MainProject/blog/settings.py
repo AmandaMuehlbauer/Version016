@@ -18,7 +18,7 @@ import os
 import sys # new
 from elasticsearch_dsl import connections
 from decouple import config
-import dj_database_url
+
 
 
 
@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'taggit',
     'apps.users',
     'apps.core',
-    'scraping',
+  #  'scraping',
     'apps.Search',
     'apps.ContactUs',
     'apps.URLsub',

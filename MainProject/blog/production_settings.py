@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     'taggit',
     'apps.users',
     'apps.core',
-    'scraping',
+   # 'scraping',
     'apps.Search',
     'apps.ContactUs',
     'apps.URLsub',

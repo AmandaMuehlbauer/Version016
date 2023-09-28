@@ -1,7 +1,7 @@
 # core/urls.py
 from django.urls import path
 from . import views
-from .views import HomeView, PostView, PostCreateView, PostUpdateView, PostDeleteView, RSSPageView, ForumView
+from .views import HomeView, PostView, PostCreateView, PostUpdateView, PostDeleteView,  ForumView
 #, AddDislike, AddLike
 
 urlpatterns = [
@@ -17,6 +17,6 @@ urlpatterns = [
     path('Trending/', views.TrendingView, name='trending'),
     path('Recommendations/', views.RecommendationsView, name='recommendations'),
     path('Subscriptions/', views.SubscriptionsView, name='subscriptions'),
-    path('rsstest/', RSSPageView.as_view(), name="rsstest"),
+ #   path('rsstest/', RSSPageView.as_view(), name="rsstest"),
 
 ]

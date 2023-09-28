@@ -10,7 +10,7 @@ from django.views.generic import (
 )
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Post, Comment
-from scraping.models import News
+#from scraping.models import News
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.text import slugify
 from django.urls import reverse_lazy, reverse
@@ -226,16 +226,16 @@ def RecommendationsView(request):
 def SubscriptionsView(request):
     return render(request, 'core/subscriptions.html')
 
-class RSSPageView(ListView):
-    model = News
-    template_name = 'core/rsstest.html'
-    context_object_name = 'articles' 
-    thing = News.objects.all()
+#class RSSPageView(ListView):
+ #   model = News
+  #  template_name = 'core/rsstest.html'
+   # context_object_name = 'articles' 
+    #thing = News.objects.all()
     # assign "News" object list to the object "articles"
     # pass news objects as queryset for listview
-    print("Check thing:", thing)
+    #print("Check thing:", thing)
   
-    def get_queryset(self):
-        return News.objects.all()
+    #def get_queryset(self):
+     #   return News.objects.all()
 
 
