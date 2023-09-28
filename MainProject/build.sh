@@ -2,10 +2,6 @@
 # exit on error
 set -o errexit
 
-# Install Poetry (if not already installed)
-if [ ! -f /usr/local/bin/poetry ]; then
-    curl -sSL https://install.python-poetry.org | python -
-fi
 
 # Determine the deployment environment based on an environment variable (e.g., DEPLOY_ENV)
 if [ "$DEPLOY_ENV" = "production" ]; then
