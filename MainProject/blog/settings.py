@@ -18,6 +18,7 @@ import os
 import sys # new
 from elasticsearch_dsl import connections
 from decouple import config
+import dj_database_url
 
 
 
