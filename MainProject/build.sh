@@ -13,11 +13,13 @@ else
 fi
 
 # Export the DJANGO_SETTINGS_MODULE environment variable
-export DJANGO_SETTINGS_MODULE
+#export DJANGO_SETTINGS_MODULE
 
+echo "you are here 1"
 # Install project dependencies using Poetry
 poetry install 
 
+echo "you are here 2"
 # Run other necessary commands
 poetry run python3 manage.py collectstatic --no-input
 poetry run python3 manage.py migrate
@@ -26,5 +28,5 @@ poetry run python3 manage.py migrate
 
 # Example: Start Gunicorn
 export PORT=8000
-poetry run gunicorn blog.wsgi:application -b 0.0.0.0:$PORT
+#poetry run gunicorn blog.wsgi:application -b 0.0.0.0:$PORT
 
