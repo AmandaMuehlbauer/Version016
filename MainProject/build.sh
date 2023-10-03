@@ -14,6 +14,7 @@ fi
 
 # Export the DJANGO_SETTINGS_MODULE environment variable
 #export DJANGO_SETTINGS_MODULE
+echo DJANGO_SETTINGS_MODULE
 
 echo "you are here 1"
 # Install project dependencies using Poetry
