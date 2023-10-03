@@ -44,7 +44,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = ['jidder.onrender.com']
+ALLOWED_HOSTS = ['3.134.238.10', '3.129.111.220', '52.15.118.168', 'jidder.onrender.com']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
