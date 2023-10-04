@@ -43,6 +43,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 
 DEBUG = config('DEBUG', default=False, cast=bool)
+print(DEBUG)
 
 ALLOWED_HOSTS = [ 'jidder.onrender.com']
 
@@ -223,3 +224,5 @@ ELASTICSEARCH_DSL={
   #  timeout=20,
    # verify_certs=False, 
 #)
+
+print(DEBUG)
