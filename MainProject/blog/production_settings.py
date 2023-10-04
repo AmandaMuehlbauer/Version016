@@ -213,13 +213,13 @@ sys.path.append(os.path.join(BASE_DIR, 'apps')) # at the bottom of the file
 
 ELASTICSEARCH_DSL={
      'default': {
-        'hosts': 'jidder-elasticsearch:9200',
+        'hosts': 'srv-ckeah4mnpffc73ad5o0g-5fddc575c7-qpc8c:9200',
     },
 }
 
 # Define an Elasticsearch connection
 connections.create_connection(
-    hosts=['jidder-elasticsearch:9200'],  # Replace with your Elasticsearch server's URL and port
+    hosts=['srv-ckeah4mnpffc73ad5o0g-5fddc575c7-qpc8c:9200'],  # Replace with your Elasticsearch server's URL and port
     timeout=20,
     verify_certs=False, 
 )
