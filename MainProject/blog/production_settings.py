@@ -214,7 +214,7 @@ sys.path.append(os.path.join(BASE_DIR, 'apps')) # at the bottom of the file
 
 ELASTICSEARCH_DSL={
      'default': {
-        'hosts': 'srv-ckeah4mnpffc73ad5o0g-5fddc575c7-qpc8c:9200',
+        'hosts': 'jidder-elasticsearch:9300',
     },
 }
 
