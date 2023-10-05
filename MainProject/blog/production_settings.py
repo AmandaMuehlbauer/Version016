@@ -44,6 +44,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG=True
 #DEBUG = config('DEBUG', default=False, cast=bool)
 print(DEBUG)
+print("made it here")
 
 ALLOWED_HOSTS = [ 'jidder.onrender.com']
 
@@ -178,17 +179,17 @@ LOGIN_URL = "/users/login"
 # Here, they well be accessible at your-domain.onrender.com/static/...
 STATIC_URL = '/static/'
 # Following settings only make sense on production and may break development environments.
-if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
-    STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, "static/css/"),
     os.path.join(BASE_DIR, "static/img/"),
-#    os.path.join(BASE_DIR, "static/js/"),
+    os.path.join(BASE_DIR, "static/js/"),
    
 ]
 
