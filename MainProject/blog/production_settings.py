@@ -41,8 +41,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 #SECRET_KEY = "django-insecure-n1(8673js4qwf9ud3%7em!s(=)jr%^%d0^t^uxu)p+vj^(-kdb" #This is the default key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG=True
+#DEBUG = config('DEBUG', default=False, cast=bool)
 print(DEBUG)
 
 ALLOWED_HOSTS = [ 'jidder.onrender.com']
