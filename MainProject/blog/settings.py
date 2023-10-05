@@ -212,10 +212,18 @@ ELASTICSEARCH_DSL={
 }
 
 # Define an Elasticsearch connection
-connections.create_connection(
-    hosts=['http://localhost:9200'],  # Replace with your Elasticsearch server's URL and port
-    timeout=20,
-    verify_certs=False, 
-)
+#connections.create_connection(
+ #   hosts=['http://localhost:9200'],  # Replace with your Elasticsearch server's URL and port
+  #  timeout=20,
+   # verify_certs=False, 
+#)
+# Use Elasticsearch as the search backend
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.search.backends.elasticsearch7',
+        'URLS': ['http://localhost:9200'],  # Elasticsearch server URL
+        'INDEX': 'post_index',  # Name of your Elasticsearch index
+    },
+}
 
 print("Using dev settings")

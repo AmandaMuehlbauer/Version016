@@ -219,6 +219,15 @@ ELASTICSEARCH_DSL={
     },
 }
 
+# Use Elasticsearch as the search backend
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.search.backends.elasticsearch7',
+        'URLS': ['jidder-elasticsearch:9300'],  # Elasticsearch server URL
+        'INDEX': 'post_index',  # Name of your Elasticsearch index
+    },
+}
+
 # Define an Elasticsearch connection
 #connections.create_connection(
  #   hosts=['srv-ckeah4mnpffc73ad5o0g-5fddc575c7-qpc8c:9200'],  # Replace with your Elasticsearch server's URL and port

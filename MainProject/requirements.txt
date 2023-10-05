@@ -1,5 +1,6 @@
 alabaster==0.7.13
 amqp==5.1.1
+anyascii==0.3.2
 anyio==4.0.0
 apeye==1.4.1
 apeye-core==1.1.4
@@ -62,23 +63,31 @@ django-crispy-forms==2.0
 django-debug-toolbar==4.2.0
 django-elasticsearch==7.0.2
 django-elasticsearch-dsl==7.3
+django-filter==23.3
 django-googlesearch==0.2
+django-modelcluster==6.1
+django-permissionedforms==0.1
 django-taggit==4.0.0
 django-timezone-field==6.0.1
+django-treebeard==4.7
 django-widget-tweaks==1.5.0
+djangorestframework==3.14.0
 docopt==0.6.2
 docstring-to-markdown==0.12
 docutils==0.20.1
 domdf-python-tools==3.6.1
+draftjs-exporter==2.1.7
 dulwich==0.21.6
 elastic-transport==8.4.0
 elasticsearch==7.17.9
 elasticsearch-dsl==7.4.1
 entrypoints==0.4
+et-xmlfile==1.1.0
 exceptiongroup==1.1.3
 executing==1.2.0
 fastjsonschema==2.18.0
 filelock==3.12.4
+filetype==1.2.0
 flake8==6.1.0
 fonttools==4.42.1
 fqdn==1.5.1
@@ -105,6 +114,7 @@ h11==0.14.0
 h5py==3.9.0
 HeapDict==1.0.1
 holoviews==1.17.1
+html5lib==1.1
 httplib2==0.22.0
 hvplot==0.8.4
 hyperlink==21.0.0
@@ -143,6 +153,7 @@ jupyterlab-widgets==3.0.9
 keyring==24.2.0
 kiwisolver==1.4.5
 kombu==5.3.2
+l18n==2021.3
 lazy-object-proxy==1.9.0
 libarchive-c==5.0
 linkify-it-py==2.0.2
@@ -175,6 +186,7 @@ numba==0.58.0
 numexpr==2.8.6
 numpy==1.25.2
 numpydoc==1.5.0
+openpyxl==3.1.2
 outcome==1.2.0
 overrides==7.4.0
 packaging==23.1
@@ -191,6 +203,7 @@ pep8==1.7.1
 pexpect==4.8.0
 pickleshare==0.7.5
 Pillow==10.0.1
+pillow-heif==0.13.0
 pipdeptree==2.13.0
 pipenv==2023.9.8
 pipreqs==0.4.13
@@ -273,7 +286,7 @@ Scrapy==2.11.0
 selenium==4.12.0
 Send2Trash==1.8.2
 service-identity==23.1.0
-setuptools-scm==8.0.3
+setuptools-scm==8.0.4
 shellingham==1.5.3
 sip==6.7.11
 six==1.16.0
@@ -297,6 +310,7 @@ statsmodels==0.14.0
 sympy==1.12
 tabulate==0.9.0
 tblib==2.0.0
+telepath==0.3.1
 tenacity==8.2.3
 terminado==0.17.1
 testpath==0.6.0
@@ -335,6 +349,7 @@ virtualenv==20.24.5
 virtualenv-clone==0.5.7
 voluptuous==0.13.1
 w3lib==2.1.2
+wagtail==5.1.2
 watchdog==3.0.0
 wcwidth==0.2.6
 webcolors==1.13
@@ -343,6 +358,7 @@ websocket-client==1.6.3
 Werkzeug==2.3.7
 whitenoise==6.5.0
 widgetsnbextension==4.0.9
+Willow==1.6.2
 wrapt==1.15.0
 wsproto==1.2.0
 wurlitzer==3.0.3
