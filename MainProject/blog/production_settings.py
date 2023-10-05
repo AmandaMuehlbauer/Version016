@@ -193,7 +193,7 @@ STATICFILES_DIRS = [
    
 ]
 
-#STATIC_ROOT = os.path.join(BASE_DIR, "static/assets")
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_collected')
 
 # save Celery task results in Django's database
 CELERY_RESULT_BACKEND = "django-db"
