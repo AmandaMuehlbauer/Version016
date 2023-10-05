@@ -225,4 +225,4 @@ ELASTICSEARCH_DSL={
    # verify_certs=False, 
 #)
 
-print(DEBUG)
+print("Using production settings")
