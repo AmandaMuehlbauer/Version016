@@ -26,6 +26,17 @@ files = [
 vine = ">=5.0.0"
 
 [[package]]
+name = "anyascii"
+version = "0.3.2"
+description = "Unicode to ASCII transliteration"
+optional = false
+python-versions = ">=3.3"
+files = [
+    {file = "anyascii-0.3.2-py3-none-any.whl", hash = "sha256:3b3beef6fc43d9036d3b0529050b0c48bfad8bc960e9e562d7223cfb94fe45d4"},
+    {file = "anyascii-0.3.2.tar.gz", hash = "sha256:9d5d32ef844fe225b8bc7cba7f950534fae4da27a9bf3a6bea2cb0ea46ce4730"},
+]
+
+[[package]]
 name = "anyio"
 version = "4.0.0"
 description = "High level compatibility layer for multiple asynchronous event loop implementations"
@@ -324,13 +335,13 @@ files = [
 
 [[package]]
 name = "beautifulsoup4"
-version = "4.12.2"
+version = "4.11.2"
 description = "Screen-scraping library"
 optional = false
 python-versions = ">=3.6.0"
 files = [
-    {file = "beautifulsoup4-4.12.2-py3-none-any.whl", hash = "sha256:bd2520ca0d9d7d12694a53d44ac482d181b4ec1888909b035a3dbf40d0f57d4a"},
-    {file = "beautifulsoup4-4.12.2.tar.gz", hash = "sha256:492bbc69dca35d12daac71c4db1bfff0c876c00ef4a2ffacce226d4638eb72da"},
+    {file = "beautifulsoup4-4.11.2-py3-none-any.whl", hash = "sha256:0e79446b10b3ecb499c1556f7e228a53e64a2bfcebd455f370d8927cb5b59e39"},
+    {file = "beautifulsoup4-4.11.2.tar.gz", hash = "sha256:bc4bdda6717de5a2987436fb8d72f45dc90dd856bdfd512a1314ce90349a0106"},
 ]
 
 [package.dependencies]
@@ -1469,6 +1480,20 @@ elasticsearch-dsl = ">=7.2.0,<8.0.0"
 six = "*"
 
 [[package]]
+name = "django-filter"
+version = "23.3"
+description = "Django-filter is a reusable Django application for allowing users to filter querysets dynamically."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "django-filter-23.3.tar.gz", hash = "sha256:015fe155582e1805b40629344e4a6cf3cc40450827d294d040b4b8c1749a9fa6"},
+    {file = "django_filter-23.3-py3-none-any.whl", hash = "sha256:65bc5d1d8f4fff3aaf74cb5da537b6620e9214fb4b3180f6c560776b1b6dccd0"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
+
+[[package]]
 name = "django-googlesearch"
 version = "0.2"
 description = "Django Google linked custom search engine app."
@@ -1480,6 +1505,41 @@ files = [
 
 [package.dependencies]
 Django = "*"
+
+[[package]]
+name = "django-modelcluster"
+version = "6.1"
+description = "Django extension to allow working with 'clusters' of models as a single unit, independently of the database"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django-modelcluster-6.1.tar.gz", hash = "sha256:3b1791638046c73ae7415327cf54bfa0adad9d89d342a5b86d0ec29a2504e067"},
+    {file = "django_modelcluster-6.1-py2.py3-none-any.whl", hash = "sha256:8ce72635db4b90b34993afda5021ed8676ef94f1d4c607466d0f8d3f676c5b64"},
+]
+
+[package.dependencies]
+django = ">=3.2"
+pytz = ">=2022.4"
+
+[package.extras]
+taggit = ["django-taggit (>=2.0)"]
+
+[[package]]
+name = "django-permissionedforms"
+version = "0.1"
+description = "Django extension for creating forms that vary according to user permissions"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "django-permissionedforms-0.1.tar.gz", hash = "sha256:4340bb20c4477fffb13b4cc5cccf9f1b1010b64f79956c291c72d2ad2ed243f8"},
+    {file = "django_permissionedforms-0.1-py2.py3-none-any.whl", hash = "sha256:d341a961a27cc77fde8cc42141c6ab55cc1f0cb886963cc2d6967b9674fa47d6"},
+]
+
+[package.dependencies]
+Django = "*"
+
+[package.extras]
+testing = ["django-modelcluster"]
 
 [[package]]
 name = "django-taggit"
@@ -1510,6 +1570,20 @@ files = [
 Django = ">=3.2,<5.0"
 
 [[package]]
+name = "django-treebeard"
+version = "4.7"
+description = "Efficient tree implementations for Django"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django-treebeard-4.7.tar.gz", hash = "sha256:c751a3f924158c288fea89afc25a7151979faf01bf11fdc7be3b858099dfa56d"},
+    {file = "django_treebeard-4.7-py3-none-any.whl", hash = "sha256:787117995ff985d98e6c2b241ef6b9d37fe8ff7051cd7535c283616a0b5b2645"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
+
+[[package]]
 name = "django-widget-tweaks"
 version = "1.5.0"
 description = "Tweak the form field rendering in templates, not in python-level form definitions."
@@ -1519,6 +1593,21 @@ files = [
     {file = "django-widget-tweaks-1.5.0.tar.gz", hash = "sha256:1c2180681ebb994e922c754804c7ffebbe1245014777ac47897a81f57cc629c7"},
     {file = "django_widget_tweaks-1.5.0-py3-none-any.whl", hash = "sha256:a41b7b2f05bd44d673d11ebd6c09a96f1d013ee98121cb98c384fe84e33b881e"},
 ]
+
+[[package]]
+name = "djangorestframework"
+version = "3.14.0"
+description = "Web APIs for Django, made easy."
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "djangorestframework-3.14.0-py3-none-any.whl", hash = "sha256:eb63f58c9f218e1a7d064d17a70751f528ed4e1d35547fdade9aaf4cd103fd08"},
+    {file = "djangorestframework-3.14.0.tar.gz", hash = "sha256:579a333e6256b09489cbe0a067e66abe55c6595d8926be6b99423786334350c8"},
+]
+
+[package.dependencies]
+django = ">=3.0"
+pytz = "*"
 
 [[package]]
 name = "docopt"
@@ -1570,6 +1659,22 @@ typing-extensions = ">=3.7.4.1"
 [package.extras]
 all = ["pytz (>=2019.1)"]
 dates = ["pytz (>=2019.1)"]
+
+[[package]]
+name = "draftjs-exporter"
+version = "2.1.7"
+description = "Library to convert rich text from Draft.js raw ContentState to HTML"
+optional = false
+python-versions = "*"
+files = [
+    {file = "draftjs_exporter-2.1.7-py3-none-any.whl", hash = "sha256:d415a9964690a2cddb66a31ef32dd46c277e9b80434b94e39e3043188ed83e33"},
+    {file = "draftjs_exporter-2.1.7.tar.gz", hash = "sha256:5839cbc29d7bce2fb99837a404ca40c3a07313f2a20e2700de7ad6aa9a9a18fb"},
+]
+
+[package.extras]
+html5lib = ["beautifulsoup4 (>=4.4.1,<5)", "html5lib (>=0.999,<=1.0.1)"]
+lxml = ["lxml (>=4.2.0,<5)"]
+testing = ["beautifulsoup4 (>=4.4.1,<5)", "coverage (>=4.1.0)", "flake8 (>=3.2.0)", "html5lib (>=0.999,<=1.0.1)", "isort (==4.2.5)", "lxml (>=4.2.0,<5)", "markov-draftjs (==0.1.1)", "memory-profiler (==0.47)", "psutil (==5.4.1)", "tox (>=2.3.1)"]
 
 [[package]]
 name = "elastic-transport"
@@ -1641,6 +1746,17 @@ files = [
 ]
 
 [[package]]
+name = "et-xmlfile"
+version = "1.1.0"
+description = "An implementation of lxml.xmlfile for the standard library"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "et_xmlfile-1.1.0-py3-none-any.whl", hash = "sha256:a2ba85d1d6a74ef63837eed693bcb89c3f752169b0e3e7ae5b16ca5e1b3deada"},
+    {file = "et_xmlfile-1.1.0.tar.gz", hash = "sha256:8eb9e2bc2f8c97e37a2dc85a09ecdcdec9d8a396530a6d5a33b30b9a92da0c5c"},
+]
+
+[[package]]
 name = "exceptiongroup"
 version = "1.1.3"
 description = "Backport of PEP 654 (exception groups)"
@@ -1697,6 +1813,17 @@ files = [
 docs = ["furo (>=2023.7.26)", "sphinx (>=7.1.2)", "sphinx-autodoc-typehints (>=1.24)"]
 testing = ["covdefaults (>=2.3)", "coverage (>=7.3)", "diff-cover (>=7.7)", "pytest (>=7.4)", "pytest-cov (>=4.1)", "pytest-mock (>=3.11.1)", "pytest-timeout (>=2.1)"]
 typing = ["typing-extensions (>=4.7.1)"]
+
+[[package]]
+name = "filetype"
+version = "1.2.0"
+description = "Infer file type and MIME type of any file/buffer. No external dependencies."
+optional = false
+python-versions = "*"
+files = [
+    {file = "filetype-1.2.0-py2.py3-none-any.whl", hash = "sha256:7ce71b6880181241cf7ac8697a2f1eb6a8bd9b429f7ad6d27b8db9ba5f1c2d25"},
+    {file = "filetype-1.2.0.tar.gz", hash = "sha256:66b56cd6474bf41d8c54660347d37afcc3f7d1970648de365c102ef77548aadb"},
+]
 
 [[package]]
 name = "flake8"
@@ -2506,6 +2633,27 @@ ui = ["playwright", "pytest-playwright"]
 unit-tests = ["bokeh", "bokeh (>=2.4.3)", "cftime", "codecov", "dash (>=1.16)", "dask", "datashader (>=0.11.1)", "ffmpeg", "flaky", "ibis-framework", "ipython (>=5.4.0)", "matplotlib (>=3)", "nbconvert", "netcdf4", "networkx", "notebook", "pillow", "plotly (>=4.0)", "pooch", "pre-commit", "pyarrow", "pytest", "pytest-cov", "pytest-xdist", "ruff", "scikit-image", "scipy", "selenium", "shapely", "spatialpandas", "streamz (>=0.5.0)", "xarray (>=0.10.4)"]
 
 [[package]]
+name = "html5lib"
+version = "1.1"
+description = "HTML parser based on the WHATWG HTML specification"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+files = [
+    {file = "html5lib-1.1-py2.py3-none-any.whl", hash = "sha256:0d78f8fde1c230e99fe37986a60526d7049ed4bf8a9fadbad5f00e22e58e041d"},
+    {file = "html5lib-1.1.tar.gz", hash = "sha256:b2e5b40261e20f354d198eae92afc10d750afb487ed5e50f9c4eaf07c184146f"},
+]
+
+[package.dependencies]
+six = ">=1.9"
+webencodings = "*"
+
+[package.extras]
+all = ["chardet (>=2.2)", "genshi", "lxml"]
+chardet = ["chardet (>=2.2)"]
+genshi = ["genshi"]
+lxml = ["lxml"]
+
+[[package]]
 name = "httplib2"
 version = "0.22.0"
 description = "A comprehensive HTTP client library."
@@ -3267,6 +3415,21 @@ sqlalchemy = ["sqlalchemy (>=1.4.48,<2.1)"]
 sqs = ["boto3 (>=1.26.143)", "pycurl (>=7.43.0.5)", "urllib3 (>=1.26.16)"]
 yaml = ["PyYAML (>=3.10)"]
 zookeeper = ["kazoo (>=2.8.0)"]
+
+[[package]]
+name = "l18n"
+version = "2021.3"
+description = "Internationalization for pytz timezones and territories"
+optional = false
+python-versions = "*"
+files = [
+    {file = "l18n-2021.3-py3-none-any.whl", hash = "sha256:78495d1df95b6f7dcc694d1ba8994df709c463a1cbac1bf016e1b9a5ce7280b9"},
+    {file = "l18n-2021.3.tar.gz", hash = "sha256:1956e890d673d17135cc20913253c154f6bc1c00266c22b7d503cc1a5a42d848"},
+]
+
+[package.dependencies]
+pytz = ">=2020.1"
+six = "*"
 
 [[package]]
 name = "lazy-object-proxy"
@@ -4154,6 +4317,20 @@ sphinx = ">=4.2"
 testing = ["matplotlib", "pytest", "pytest-cov"]
 
 [[package]]
+name = "openpyxl"
+version = "3.1.2"
+description = "A Python library to read/write Excel 2010 xlsx/xlsm files"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "openpyxl-3.1.2-py2.py3-none-any.whl", hash = "sha256:f91456ead12ab3c6c2e9491cf33ba6d08357d802192379bb482f1033ade496f5"},
+    {file = "openpyxl-3.1.2.tar.gz", hash = "sha256:a6f5977418eff3b2d5500d54d9db50c8277a368436f4e4f8ddb1be3422870184"},
+]
+
+[package.dependencies]
+et-xmlfile = "*"
+
+[[package]]
 name = "outcome"
 version = "1.2.0"
 description = "Capture the outcome of Python function calls."
@@ -4556,6 +4733,70 @@ files = [
 [package.extras]
 docs = ["furo", "olefile", "sphinx (>=2.4)", "sphinx-copybutton", "sphinx-inline-tabs", "sphinx-removed-in", "sphinxext-opengraph"]
 tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "packaging", "pyroma", "pytest", "pytest-cov", "pytest-timeout"]
+
+[[package]]
+name = "pillow-heif"
+version = "0.13.0"
+description = "Python interface for libheif library"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "pillow_heif-0.13.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:a909f52b396f24596610ca7aba809b298ddad6801169a3506f01c5ebae48ca47"},
+    {file = "pillow_heif-0.13.0-cp310-cp310-macosx_12_0_arm64.whl", hash = "sha256:9c4b7a8108f927edf3d2ac105545a4157a422361422f085b2a7acb6dc7c372b2"},
+    {file = "pillow_heif-0.13.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2c3a42e5ba890f4b27ad9d5a1bb77f33a3ca5eb5490f21d784b02e4055614eae"},
+    {file = "pillow_heif-0.13.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ded3a1a467dace13511b3de0d1976c25096e440429214d2cebbdcfd42f2b3fbb"},
+    {file = "pillow_heif-0.13.0-cp310-cp310-musllinux_1_1_aarch64.whl", hash = "sha256:640855b86593f980b5332983fd5af13a33ed9f7a937990b99372ec4b4b7818d3"},
+    {file = "pillow_heif-0.13.0-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:065d6f1ef07d35a45df625a8757da1b1e3c522593f9c5301c3aa11098c76eeef"},
+    {file = "pillow_heif-0.13.0-cp310-cp310-win_amd64.whl", hash = "sha256:71a583bdce36312b2f1b385e57fcabf8d23be8b3b3b45efeaed06cacf7029b22"},
+    {file = "pillow_heif-0.13.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:f91f43c7fe09903cb75b9ce15d5a9e69dad370d2081810fc4b2953a616dc8c6f"},
+    {file = "pillow_heif-0.13.0-cp311-cp311-macosx_12_0_arm64.whl", hash = "sha256:f4daa03c473eb4467f93a57ff2f5eb4fc66f649fdffc5fd3c8106603de7b7b66"},
+    {file = "pillow_heif-0.13.0-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:62758bf775e0c720dc159057136c685d21f20ed71d83117771cf863c6f675ff0"},
+    {file = "pillow_heif-0.13.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:292c9bba20aa366732f0e6f35ad462aafa89385c09cbd4a4cdcd8f309c9296dd"},
+    {file = "pillow_heif-0.13.0-cp311-cp311-musllinux_1_1_aarch64.whl", hash = "sha256:2bf43a48ee4b723be9c0366a316c4c56fbc9c583f99730babb60d265372eeea7"},
+    {file = "pillow_heif-0.13.0-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:88c07d147158aa12f09636fe252d3550907600aeec57974ada57c84bd4d08efd"},
+    {file = "pillow_heif-0.13.0-cp311-cp311-win_amd64.whl", hash = "sha256:efa72a8fc136a324b59b3a3a0bac15803054d33a1738728c720c37ed47eddab3"},
+    {file = "pillow_heif-0.13.0-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:a9e966a0fd2a2d1ae2e56b2010a240ae968de88145b133a17fc1606ff2f8d838"},
+    {file = "pillow_heif-0.13.0-cp312-cp312-macosx_12_0_arm64.whl", hash = "sha256:ee6055fef87de9ae24a483221ca68a8d6d6cb295cb78730a9a23a4b05cdf4908"},
+    {file = "pillow_heif-0.13.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:c9be78d1d11c1d3971e69efcaf67bfabbc6f6ee72889015c79e6160f3e2a3d42"},
+    {file = "pillow_heif-0.13.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5580d2a211da6e14445f7a5e95caa62f0d4d279ad4070382efaee59a0c0e58e5"},
+    {file = "pillow_heif-0.13.0-cp312-cp312-musllinux_1_1_aarch64.whl", hash = "sha256:101bc0506b91aa22a91676d62c808c4f005e6ab095e241bb828aa752418cdf88"},
+    {file = "pillow_heif-0.13.0-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:6c705770da571dcef7756f85b8d12c230d2064c886f12b929c462bec607313b2"},
+    {file = "pillow_heif-0.13.0-cp312-cp312-win_amd64.whl", hash = "sha256:2abcefcce289ecda74b845342dcd0e3a29930e77ac5520e45347808b3b0bf2cb"},
+    {file = "pillow_heif-0.13.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:1fa4c23c01395d60003b8fdb323f9aa8f881041c90ec6fa71ab8ff51a93b41b1"},
+    {file = "pillow_heif-0.13.0-cp38-cp38-macosx_12_0_arm64.whl", hash = "sha256:a820033ae9ac529cedbe53723b7afdf9cb4f8af37e02e78bc38609808edc1ac7"},
+    {file = "pillow_heif-0.13.0-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:1db6f82b7e71c5e45e9cbd09c918942f672a935ed721088e98965edd67ef8aca"},
+    {file = "pillow_heif-0.13.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:dfdcc57a7bc8e1f9038877552d0ca3a9ee00f380e3b8ee7494c5687b8b88097e"},
+    {file = "pillow_heif-0.13.0-cp38-cp38-musllinux_1_1_aarch64.whl", hash = "sha256:35dccc16d1c699341330f60ab7f656d76e18cac5b9d7423f5856cc00144f608b"},
+    {file = "pillow_heif-0.13.0-cp38-cp38-musllinux_1_1_x86_64.whl", hash = "sha256:0ea71504cfef432e28b4ef3f08e92483cf951b487cf24c973824bfe0514a8102"},
+    {file = "pillow_heif-0.13.0-cp38-cp38-win_amd64.whl", hash = "sha256:b4469f8c504907e850ec03d1d7e6716779a8d0e27a2343feea2aa59ddf2d2790"},
+    {file = "pillow_heif-0.13.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:e95ccb268cfc4a8b02f20142a6e65ceae90e7be86cb6aac231b10b034c8c23da"},
+    {file = "pillow_heif-0.13.0-cp39-cp39-macosx_12_0_arm64.whl", hash = "sha256:1478de370c3d043fdf32bae926174b77e5c9956b4b68218193746cb194c56afc"},
+    {file = "pillow_heif-0.13.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:08f2416f5157b34ac7df4d960f1a5c3a7f65c85f91451f5f5215debbd9568ea0"},
+    {file = "pillow_heif-0.13.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:10c25c30fcf2a0d86cf6d643e27166d4fa6a027a4ee4e330bd2c01afd534b714"},
+    {file = "pillow_heif-0.13.0-cp39-cp39-musllinux_1_1_aarch64.whl", hash = "sha256:a409abc6624216758358b8b9d97959c97809dec61a447bacf475f8ededdbd541"},
+    {file = "pillow_heif-0.13.0-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:63841f6f84fe3a02de5d5c78c7d85b6dcf8659c0c9559acf8c7523c815440b0e"},
+    {file = "pillow_heif-0.13.0-cp39-cp39-win_amd64.whl", hash = "sha256:ac65176b5b1010b216c0db1540e25bd90a7ff271402dbea8f6ea140b493611e1"},
+    {file = "pillow_heif-0.13.0-pp310-pypy310_pp73-macosx_10_9_x86_64.whl", hash = "sha256:457ed3c2bc0376aebb80453fd69e9259fcb727e45ce737185016b9df1e063986"},
+    {file = "pillow_heif-0.13.0-pp310-pypy310_pp73-macosx_12_0_arm64.whl", hash = "sha256:6bc46ffc5d9f7a396fb1493b40f834bde96975a0371c38ebae2f4fe4398103d8"},
+    {file = "pillow_heif-0.13.0-pp310-pypy310_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2c78f930ae35a24ff95d3c525b1d9794288dbed5b0ff66a3bdfff71a0a33cf02"},
+    {file = "pillow_heif-0.13.0-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b9611dab5575f8c4851f154c088e572d264c5587590892920c0e33ad874cc608"},
+    {file = "pillow_heif-0.13.0-pp310-pypy310_pp73-win_amd64.whl", hash = "sha256:80b65c84216e23b2a36bc0799f82e68b8881cde60b3af2a68d0e23edb9f9faae"},
+    {file = "pillow_heif-0.13.0-pp39-pypy39_pp73-macosx_10_9_x86_64.whl", hash = "sha256:2f4fb8647fc3ffafe34aed111770c2126c8fd2e04ab9c124fe16b74752aa6c0d"},
+    {file = "pillow_heif-0.13.0-pp39-pypy39_pp73-macosx_12_0_arm64.whl", hash = "sha256:c204ca4eb0ee59ab883f6b8475e889663c7230eba87197e024559af4808508af"},
+    {file = "pillow_heif-0.13.0-pp39-pypy39_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:4fbf127bca5e24edd074acd7e13f40af08acf1006d54e63108415c7521eddb2c"},
+    {file = "pillow_heif-0.13.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8fe2d04f77e5901acc393ecdb99e00d9fc1409d39b7f8a2f9c85c0f37ae11a1f"},
+    {file = "pillow_heif-0.13.0-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:c110efb24c719a045c8304dbb83031a4156431ad761306020916eeab3855c80e"},
+    {file = "pillow_heif-0.13.0.tar.gz", hash = "sha256:be337495d0be5accf4d6ea6614f61293c40c86dc8d3e5e6eb63661f90f472362"},
+]
+
+[package.dependencies]
+pillow = ">=9.1.1"
+
+[package.extras]
+dev = ["coverage", "defusedxml", "numpy", "opencv-python (==4.8.0.74)", "packaging", "pre-commit", "pylint", "pympler", "pytest"]
+docs = ["sphinx (>=4.4)", "sphinx-issues (>=3.0.1)", "sphinx-rtd-theme (>=1.0)"]
+tests = ["defusedxml", "numpy", "packaging", "pympler", "pytest"]
+tests-min = ["defusedxml", "packaging", "pytest"]
 
 [[package]]
 name = "pipdeptree"
@@ -6883,6 +7124,20 @@ files = [
 ]
 
 [[package]]
+name = "telepath"
+version = "0.3.1"
+description = "A library for exchanging data between Python and JavaScript"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "telepath-0.3.1-py38-none-any.whl", hash = "sha256:c280aa8e77ad71ce80e96500a4e4d4a32f35b7e0b52e896bb5fde9a5bcf0699a"},
+    {file = "telepath-0.3.1.tar.gz", hash = "sha256:925c0609e0a8a6488ec4a55b19d485882cf72223b2b19fe2359a50fddd813c9c"},
+]
+
+[package.extras]
+docs = ["mkdocs (>=1.1,<1.2)", "mkdocs-material (>=6.2,<6.3)"]
+
+[[package]]
 name = "tenacity"
 version = "8.2.3"
 description = "Retry code until it succeeds"
@@ -7561,6 +7816,40 @@ files = [
 ]
 
 [[package]]
+name = "wagtail"
+version = "5.1.2"
+description = "A Django content management system."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "wagtail-5.1.2-py3-none-any.whl", hash = "sha256:f4df51dea3b492d21effae2523cb1aed11631e354844c02c7eb8f5985d79bf38"},
+    {file = "wagtail-5.1.2.tar.gz", hash = "sha256:1f79d7810e27a644340016da7d02f860425f9ff78ace09706cc895f5e6610828"},
+]
+
+[package.dependencies]
+anyascii = ">=0.1.5"
+beautifulsoup4 = ">=4.8,<4.12"
+Django = ">=3.2,<4.3"
+django-filter = ">=2.2,<24"
+django-modelcluster = ">=6.0,<7.0"
+django-permissionedforms = ">=0.1,<1.0"
+django-taggit = ">=2.0,<5.0"
+django-treebeard = ">=4.5.1,<5.0"
+djangorestframework = ">=3.11.1,<4.0"
+draftjs-exporter = ">=2.1.5,<3.0"
+html5lib = ">=0.999,<2"
+l18n = ">=2018.5"
+openpyxl = ">=3.0.10,<4.0"
+Pillow = ">=9.1.0,<11.0.0"
+requests = ">=2.11.1,<3.0"
+telepath = ">=0.1.1,<1"
+Willow = {version = ">=1.6.2,<1.7", extras = ["heif"]}
+
+[package.extras]
+docs = ["Sphinx (>=1.5.2)", "myst-parser (==0.18.1)", "pyenchant (>=3.1.1,<4)", "sphinx-autobuild (>=0.6.0)", "sphinx-copybutton (>=0.5,<1.0)", "sphinx-wagtail-theme (==6.1.1)", "sphinxcontrib-spelling (>=5.4.0,<6)"]
+testing = ["Jinja2 (>=3.0,<3.2)", "azure-mgmt-cdn (>=12.0,<13.0)", "azure-mgmt-frontdoor (>=1.0,<1.1)", "black (==22.3.0)", "boto3 (>=1.16,<1.17)", "coverage (>=3.7.0)", "curlylint (==0.13.1)", "django-pattern-library (>=0.7,<0.8)", "djhtml (==1.5.2)", "doc8 (==0.8.1)", "factory-boy (>=3.2)", "freezegun (>=0.3.8)", "polib (>=1.1,<2.0)", "python-dateutil (>=2.7)", "pytz (>=2014.7)", "ruff (==0.0.272)", "semgrep (==1.3.0)"]
+
+[[package]]
 name = "watchdog"
 version = "3.0.0"
 description = "Filesystem events monitoring"
@@ -7696,6 +7985,27 @@ files = [
     {file = "widgetsnbextension-4.0.9-py3-none-any.whl", hash = "sha256:91452ca8445beb805792f206e560c1769284267a30ceb1cec9f5bcc887d15175"},
     {file = "widgetsnbextension-4.0.9.tar.gz", hash = "sha256:3c1f5e46dc1166dfd40a42d685e6a51396fd34ff878742a3e47c6f0cc4a2a385"},
 ]
+
+[[package]]
+name = "willow"
+version = "1.6.2"
+description = "A Python image library that sits on top of Pillow, Wand and OpenCV"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "willow-1.6.2-py3-none-any.whl", hash = "sha256:957a4af8a7733e116a65eca34da11afe3fd52ffdb397494c8823901c25863787"},
+    {file = "willow-1.6.2.tar.gz", hash = "sha256:e2d0450fd78ab19052d0478b888ef163e3264e8dcd1af002dd691458db98056f"},
+]
+
+[package.dependencies]
+defusedxml = ">=0.7,<1.0"
+filetype = ">=1.0.10,<1.1.0 || >1.1.0"
+pillow-heif = {version = ">=0.10.0,<1.0.0", optional = true, markers = "extra == \"heif\""}
+
+[package.extras]
+docs = ["Sphinx (>=7.0)", "sphinx-wagtail-theme (==6.0.0)", "sphinx_copybutton (>=0.5)", "sphinxcontrib-spelling (>=8.0,<9.0)"]
+heif = ["pillow-heif (>=0.10.0,<1.0.0)"]
+testing = ["Pillow (>=9.1.0,<11.0.0)", "Wand (>=0.6,<1.0)", "black (==22.3.0)", "coverage[toml] (>=7.2.7,<8.0)", "mock (>=3.0,<4.0)", "pillow-heif (>=0.10.0,<1.0.0)", "ruff (==0.0.275)"]
 
 [[package]]
 name = "wrapt"
@@ -8112,4 +8422,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "860b08114b9158709cc20fdfb23d820922aa53a1df9b9b9606f2d1e3e2392a1b"
+content-hash = "0f6532b377ccea904dc20e258eb52bfaae6f865bf7ec938db3a4342f0cdebea2"
