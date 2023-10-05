@@ -14,7 +14,11 @@ from django.core.wsgi import get_wsgi_application
 # Set the DJANGO_SETTINGS_MODULE environment variable based on the environment
 if os.environ.get("DEPLOY_ENV") == "production":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "blog.production_settings")
+    print("Using production")
 else:
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "blog.settings")
+    print("Using development settings")
+
+
 
 application = get_wsgi_application()
