@@ -22,6 +22,12 @@ echo "you are here 1"
 # Install project dependencies using Poetry
 poetry install 
 
+#Create superuser, but only if CREATE_SUPERUSER variable is saved in environment
+if [[ $CREATE_SUPERUSER ]];
+then
+  poetry run python3 manage.py createsuperuser --no-input
+fi
+
 echo "you are here 2"
 # Run other necessary commands
 poetry run python3 manage.py collectstatic --no-input
