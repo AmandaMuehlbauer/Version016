@@ -23,8 +23,8 @@ class Post(models.Model):
     slug = models.SlugField(max_length=200, db_index=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE)
     content = models.TextField()
-    image = models.ImageField(upload_to='', blank=True, null=True)
-    tags = TaggableManager()
+    image = models.ImageField(upload_to='Post_image/', blank=True, null=True)
+    tags = TaggableManager(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now= True)
 
@@ -60,8 +60,8 @@ class BlogFullRecommend(models.Model):
     url = models.URLField(db_index=True)
     author = models.CharField(max_length=200, db_index=True, blank=True)
     content = models.TextField(max_length=500, blank=True)
-    image = models.ImageField(upload_to='', blank=True, null=True)
-    tags = TaggableManager()
+    image = models.ImageField(upload_to='BlogFullRecommend_image/', blank=True, null=True)
+    tags = TaggableManager(blank=True)
     last_updated = models.DateTimeField(blank=True)
 
     class Meta:

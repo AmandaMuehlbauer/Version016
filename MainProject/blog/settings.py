@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'apps.URLsub',
     'widget_tweaks',
     'timezone_field',
+    'django_cleanup.apps.CleanupConfig',
 
 
 
