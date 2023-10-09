@@ -215,18 +215,11 @@ sys.path.append(os.path.join(BASE_DIR, 'apps')) # at the bottom of the file
 
 ELASTICSEARCH_DSL={
      'default': {
-        'hosts': 'jidder-elasticsearch:9300',
+        'hosts': 'jidder-elasticsearch:9200',
     },
 }
 
-# Use Elasticsearch as the search backend
-WAGTAILSEARCH_BACKENDS = {
-    'default': {
-        'BACKEND': 'wagtail.search.backends.elasticsearch7',
-        'URLS': ['jidder-elasticsearch:9300'],  # Elasticsearch server URL
-        'INDEX': 'post_index',  # Name of your Elasticsearch index
-    },
-}
+
 
 # Define an Elasticsearch connection
 #connections.create_connection(
