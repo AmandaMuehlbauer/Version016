@@ -1,7 +1,12 @@
 from elasticsearch import Elasticsearch
 
 # Create an Elasticsearch client connected to your Elasticsearch instance
-client = Elasticsearch([{'host': 'localhost', 'port': 9200}])
+
+# Create an Elasticsearch client connected to your Elasticsearch instance
+client = Elasticsearch(
+    [{'host': 'jidder-elasticsearch', 'port': 9300}],
+    use_ssl=False  # Set to True if your Elasticsearch cluster uses SSL
+)
 
 # Specify the index you want to query
 index_name = 'post'
