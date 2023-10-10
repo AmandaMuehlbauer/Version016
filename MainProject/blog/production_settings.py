@@ -87,6 +87,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    
 
 ]
 
@@ -180,11 +181,9 @@ LOGIN_URL = "/users/login"
 STATIC_URL = '/static/'
 # Following settings only make sense on production and may break development environments.
     # in your application directory on Render.
-STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, "static/css/"),
@@ -192,6 +191,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static/js/"),
    
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_collected')
 
