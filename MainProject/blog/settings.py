@@ -219,12 +219,12 @@ ELASTICSEARCH_DSL={
    # verify_certs=False, 
 #)
 # Use Elasticsearch as the search backend
-WAGTAILSEARCH_BACKENDS = {
-    'default': {
-        'BACKEND': 'wagtail.search.backends.elasticsearch7',
-        'URLS': ['http://localhost:9200'],  # Elasticsearch server URL
-        'INDEX': 'post_index',  # Name of your Elasticsearch index
-    },
-}
+#WAGTAILSEARCH_BACKENDS = {
+ #   'default': {
+  #      'BACKEND': 'wagtail.search.backends.elasticsearch7',
+   #     'URLS': ['http://localhost:9200'],  # Elasticsearch server URL
+    #    'INDEX': 'post_index',  # Name of your Elasticsearch index
+    #},
+#}
 
 print("Using dev settings")

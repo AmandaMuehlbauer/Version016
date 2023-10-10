@@ -45,6 +45,11 @@ def elastic_search_view(request):
         client = Elasticsearch()  # Connect to the default Elasticsearch instance
         s = Search(using=client, index='post')  # Replace 'myindex' with your index name
         s = s.query("match", title=query)
+        print("Form is valid")
+
+        res = PostDocument.search().query("match", title="cat")
+
+        print(res)
 
         # Save the search history to the database
         if request.user.is_authenticated:
