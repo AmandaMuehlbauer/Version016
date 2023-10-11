@@ -237,6 +237,9 @@ ELASTICSEARCH_DSL={
     },
 }
 
+# Debugging Elasticsearch configuration
+print(f"ELASTICSEARCH_DSL: {ELASTICSEARCH_DSL}")
+
 
 
 # Define an Elasticsearch connection
