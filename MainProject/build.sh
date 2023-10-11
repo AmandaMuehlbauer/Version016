@@ -30,7 +30,7 @@ poetry install
 
 echo "you are here 2"
 # Run other necessary commands
-poetry run python3 manage.py collectstatic
+echo "yes" | poetry run python3 manage.py collectstatic
 poetry run python3 manage.py migrate
 
 # Additional steps for the deployment process (e.g., starting the web server, configuring environment variables)
