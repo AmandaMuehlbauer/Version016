@@ -198,6 +198,21 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_collected')
 
+# Enable WhiteNoise compression for CSS and JS (optional, but recommended for production)
+WHITE_NOISE_USE_FINDERS = True
+
+# Compress files served via WhiteNoise (optional, but recommended)
+WHITE_NOISE_USE_GZIP = True
+
+# Debugging static file settings
+print(f"STATIC_URL: {STATIC_URL}")
+print(f"STATIC_ROOT: {STATIC_ROOT}")
+print(f"STATICFILES_DIRS: {STATICFILES_DIRS}")
+print(f"STATICFILES_STORAGE: {STATICFILES_STORAGE}")
+print(f"WHITE_NOISE_USE_FINDERS: {WHITE_NOISE_USE_FINDERS}")
+print(f"WHITE_NOISE_USE_GZIP: {WHITE_NOISE_USE_GZIP}")
+
+
 # save Celery task results in Django's database
 CELERY_RESULT_BACKEND = "django-db"
 
