@@ -41,7 +41,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 #SECRET_KEY = "django-insecure-n1(8673js4qwf9ud3%7em!s(=)jr%^%d0^t^uxu)p+vj^(-kdb" #This is the default key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG=False
+DEBUG=True
 #DEBUG = config('DEBUG', default=False, cast=bool)
 print(DEBUG)
 print("made it here")
@@ -162,7 +162,7 @@ AUTH_USER_MODEL = 'users.User'
 
 #MEDIA_DIR = '/opt/render/project/src/MainProject/'
 
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = '/opt/render/project/src/MainProject/media'
 
 MEDIA_URL = '/media/'
 #MEDIA_URL='/opt/render/project/src/MainProject/media/'
