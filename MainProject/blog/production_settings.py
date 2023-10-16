@@ -160,11 +160,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'users.User'
 
-MEDIA_DIR = '/opt/render/project/src/MainProject/'
+#MEDIA_DIR = '/opt/render/project/src/MainProject/'
 
-MEDIA_ROOT = MEDIA_DIR / 'media'
-print(f"MEDIA_DIR: {MEDIA_DIR}")
-print(f"MEDIA_ROOT: {MEDIA_ROOT}")
+MEDIA_ROOT = BASE_DIR / 'media'
 
 MEDIA_URL = '/media/'
 #MEDIA_URL='/opt/render/project/src/MainProject/media/'
