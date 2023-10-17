@@ -9,6 +9,7 @@ from .documents import PostDocument
 from elasticsearch.exceptions import NotFoundError
 from django.urls import reverse
 from .models import SearchHistory
+import os
 
 
 
@@ -42,7 +43,15 @@ def elastic_search_view(request):
 
     if form.is_valid():
         query = form.cleaned_data['query']
-        client = Elasticsearch()  # Connect to the default Elasticsearch instance
+        #client = Elasticsearch()  # Connect to the default Elasticsearch instance
+        #client = Elasticsearch(hosts=[{'host': 'jidder-elasticsearch', 'port': 9200}])
+        if os.environ.get("ENVIRONMENT") == "production":
+    # Use production Elasticsearch settings
+            client = Elasticsearch(hosts=[{'host': 'jidder-elasticsearch', 'port': 9200}])
+        else:
+    # Use development Elasticsearch settings
+            client = Elasticsearch()
+
         s = Search(using=client, index='post')  # Replace 'myindex' with your index name
         s = s.query("match", title=query)
         print("Form is valid")
