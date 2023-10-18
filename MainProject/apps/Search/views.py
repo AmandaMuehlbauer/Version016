@@ -66,11 +66,15 @@ def elastic_search_view(request):
 
 
         s = Search(using=client, index='post')  # Replace 'myindex' with your index name
+        print("first s:")
+        print(s)
         s = s.query("match", title=query)
+        print("second s:")
+        print(s)
         print("Form is valid")
 
         res = PostDocument.search().query("match", title="cat")
-
+        print("this is the res var:")
         print(res)
 
         # Save the search history to the database
@@ -79,11 +83,15 @@ def elastic_search_view(request):
             search_history.save()
 
         response = s.execute()
+        print("response:")
+        print(response)
         results = response.hits
-
+        print("results:")
+        print(results)
         # Extract primary keys (id) from Elasticsearch results
         pk_values = [hit.meta.id for hit in response]
-
+        print("pk_values")
+        print(pk_values)
         # Look up full Post objects using the primary keys
         if pk_values:
             objects = Post.objects.filter(id__in=pk_values)
