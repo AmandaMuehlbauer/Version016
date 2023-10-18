@@ -55,6 +55,7 @@ def elastic_search_view(request):
         try:
             # Attempt to connect to Elasticsearch
             client.ping()
+            print("Successfully connected to Elasticsearch server")
         except ConnectionError:
             # If the connection fails, handle the error as needed
             # For example, you can log the error or return an error response
