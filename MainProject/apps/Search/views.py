@@ -77,10 +77,7 @@ def elastic_search_view(request):
         print("this is the res var:")
         print(res)
 
-        # Save the search history to the database
-        if request.user.is_authenticated:
-            search_history = SearchHistory(user=request.user, query=query)
-            search_history.save()
+
 
         response = s.execute()
         print("response:")
@@ -106,6 +103,12 @@ def elastic_search_view(request):
         'results': results,
         'objects': objects
     }
+
+            # Save the search history to the database
+    if request.user.is_authenticated:
+        search_history = SearchHistory(user=request.user, query=query)
+        search_history.save()
+        
     return render(request, 'search/elastic_search_results.html', context)
 
 
