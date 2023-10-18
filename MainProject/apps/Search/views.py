@@ -52,6 +52,18 @@ def elastic_search_view(request):
     # Use development Elasticsearch settings
             client = Elasticsearch()
 
+        try:
+            # Attempt to connect to Elasticsearch
+            client.ping()
+        except ConnectionError:
+            # If the connection fails, handle the error as needed
+            # For example, you can log the error or return an error response
+            return HttpResponse("Failed to connect to Elasticsearch server")
+
+        # The rest of your code for Elasticsearch query and processing goes here
+        # ...
+
+
         s = Search(using=client, index='post')  # Replace 'myindex' with your index name
         s = s.query("match", title=query)
         print("Form is valid")
