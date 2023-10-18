@@ -65,22 +65,24 @@ def elastic_search_view(request):
         # ...
 
 
-        s = Search(using=client, index='post')  # Replace 'myindex' with your index name
+        s = Search(using=client, index='post')  # create a Search object
         print("first s:")
         print(s)
-        s = s.query("match", title=query)
+        s = s.query('multi_match', query=query, fields=['title', 'content']) #define the search query
+
         print("second s:")
         print(s)
         print("Form is valid")
 
-        res = PostDocument.search().query("match", title="cat")
-        print("this is the res var:")
-        print(res)
+        #res = PostDocument.search().query("match", title="cat")
+        #print("this is the res var:")
+        #print(res)
 
 
 
         try:
             response = s.execute()
+            print(response.success())
         except Exception as e:
             print(f"An error occurred when executing the Elasticsearch query: {e}")
         print("response:")
