@@ -79,7 +79,10 @@ def elastic_search_view(request):
 
 
 
-        response = s.execute()
+        try:
+            response = s.execute()
+        except Exception as e:
+            print(f"An error occurred when executing the Elasticsearch query: {e}")
         print("response:")
         print(response)
         results = response.hits
@@ -108,7 +111,7 @@ def elastic_search_view(request):
     if request.user.is_authenticated:
         search_history = SearchHistory(user=request.user, query=query)
         search_history.save()
-        
+
     return render(request, 'search/elastic_search_results.html', context)
 
 
