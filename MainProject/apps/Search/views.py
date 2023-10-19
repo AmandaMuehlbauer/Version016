@@ -10,6 +10,9 @@ from elasticsearch.exceptions import NotFoundError
 from django.urls import reverse
 from .models import SearchHistory
 import os
+import logging
+from elasticsearch.exceptions import ConnectionError, ElasticsearchException
+
 
 
 #this is a basic search/lookup with the database. Not used in Jidder
@@ -104,6 +107,14 @@ def elastic_search_view_draft001(request):
 
     return render(request, 'search/elastic_search_results.html', context)
 
+
+# Configure logging
+logging.basicConfig(
+    level=logging.DEBUG,  # Set the desired log level (INFO, DEBUG, etc.)
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    filename='elasticsearch_search.log',  # Change the filename as needed
+)
+
 def elastic_search_view(request):
     form = SearchForm(request.GET)
     results = []
@@ -112,11 +123,10 @@ def elastic_search_view(request):
     if form.is_valid():
         query = form.cleaned_data['query']
 
-        # Determine the Elasticsearch server based on the environment
         if os.environ.get("ENVIRONMENT") == "production":
-            es_server = 'jidder-elasticsearch:9200'  # Use the production server
+            es_server = 'jidder-elasticsearch:9200'
         else:
-            es_server = 'localhost:9200'  # Use the development server
+            es_server = 'localhost:9200'
 
         try:
             # Establish an Elasticsearch connection
@@ -124,7 +134,10 @@ def elastic_search_view(request):
 
             # Ping the Elasticsearch server to check the connection
             if not client.ping():
+                logging.error("Failed to connect to Elasticsearch server")
                 return HttpResponse("Failed to connect to Elasticsearch server")
+
+            logging.info("Successfully connected to Elasticsearch server")
 
             # Build and execute the Elasticsearch search
             response = client.search(
@@ -149,8 +162,10 @@ def elastic_search_view(request):
             objects = Post.objects.filter(id__in=[result['_id'] for result in results])
 
         except ConnectionError:
+            logging.error("Failed to connect to Elasticsearch server")
             return HttpResponse("Failed to connect to Elasticsearch server")
         except ElasticsearchException as e:
+            logging.error(f"An error occurred when executing the Elasticsearch query: {e}")
             print(f"An error occurred when executing the Elasticsearch query: {e}")
 
     context = {

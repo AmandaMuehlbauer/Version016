@@ -1,0 +1,155 @@
+2023-10-19 20:23:53,363 - DEBUG - Starting new HTTP connection (1): localhost:9200
+2023-10-19 20:23:53,637 - DEBUG - http://localhost:9200 "GET / HTTP/1.1" 200 508
+2023-10-19 20:23:53,639 - INFO - GET http://localhost:9200/ [status:200 request:0.277s]
+2023-10-19 20:23:53,639 - DEBUG - > None
+2023-10-19 20:23:53,640 - DEBUG - < {
+  "name" : "a46f32a3c7d9",
+  "cluster_name" : "docker-cluster",
+  "cluster_uuid" : "YmGgBroNT7WWjXJ8Hh5Wrw",
+  "version" : {
+    "number" : "7.3.0",
+    "build_flavor" : "default",
+    "build_type" : "docker",
+    "build_hash" : "de777fa",
+    "build_date" : "2019-07-24T18:30:11.767338Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.1.0",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+2023-10-19 20:23:53,654 - DEBUG - http://localhost:9200 "HEAD / HTTP/1.1" 200 0
+2023-10-19 20:23:53,654 - INFO - HEAD http://localhost:9200/ [status:200 request:0.013s]
+2023-10-19 20:23:53,654 - DEBUG - > None
+2023-10-19 20:23:53,654 - DEBUG - < 
+2023-10-19 20:23:53,654 - INFO - Successfully connected to Elasticsearch server
+2023-10-19 20:23:53,912 - DEBUG - http://localhost:9200 "POST /post/_search HTTP/1.1" 200 162
+2023-10-19 20:23:53,912 - INFO - POST http://localhost:9200/post/_search [status:200 request:0.257s]
+2023-10-19 20:23:53,913 - DEBUG - > {"query":{"multi_match":{"query":"cat","fields":["title","content"]}}}
+2023-10-19 20:23:53,913 - DEBUG - < {"took":157,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]}}
+2023-10-19 20:23:56,076 - DEBUG - Starting new HTTP connection (1): localhost:9200
+2023-10-19 20:23:56,174 - DEBUG - http://localhost:9200 "GET / HTTP/1.1" 200 508
+2023-10-19 20:23:56,174 - INFO - GET http://localhost:9200/ [status:200 request:0.098s]
+2023-10-19 20:23:56,174 - DEBUG - > None
+2023-10-19 20:23:56,174 - DEBUG - < {
+  "name" : "a46f32a3c7d9",
+  "cluster_name" : "docker-cluster",
+  "cluster_uuid" : "YmGgBroNT7WWjXJ8Hh5Wrw",
+  "version" : {
+    "number" : "7.3.0",
+    "build_flavor" : "default",
+    "build_type" : "docker",
+    "build_hash" : "de777fa",
+    "build_date" : "2019-07-24T18:30:11.767338Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.1.0",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+2023-10-19 20:23:56,179 - DEBUG - http://localhost:9200 "HEAD / HTTP/1.1" 200 0
+2023-10-19 20:23:56,180 - INFO - HEAD http://localhost:9200/ [status:200 request:0.006s]
+2023-10-19 20:23:56,180 - DEBUG - > None
+2023-10-19 20:23:56,180 - DEBUG - < 
+2023-10-19 20:23:56,180 - INFO - Successfully connected to Elasticsearch server
+2023-10-19 20:23:56,238 - DEBUG - http://localhost:9200 "POST /post/_search HTTP/1.1" 200 340
+2023-10-19 20:23:56,238 - INFO - POST http://localhost:9200/post/_search [status:200 request:0.057s]
+2023-10-19 20:23:56,238 - DEBUG - > {"query":{"multi_match":{"query":"post","fields":["title","content"]}}}
+2023-10-19 20:23:56,239 - DEBUG - < {"took":33,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":1,"relation":"eq"},"max_score":0.2876821,"hits":[{"_index":"post","_type":"_doc","_id":"23","_score":0.2876821,"_source":{"title":"This is the first post","content":"Hi, this is my first post to the forum","username":null}}]}}
+2023-10-19 20:24:44,657 - DEBUG - Starting new HTTP connection (1): localhost:9200
+2023-10-19 20:24:44,800 - DEBUG - http://localhost:9200 "GET / HTTP/1.1" 200 508
+2023-10-19 20:24:44,800 - INFO - GET http://localhost:9200/ [status:200 request:0.143s]
+2023-10-19 20:24:44,800 - DEBUG - > None
+2023-10-19 20:24:44,800 - DEBUG - < {
+  "name" : "a46f32a3c7d9",
+  "cluster_name" : "docker-cluster",
+  "cluster_uuid" : "YmGgBroNT7WWjXJ8Hh5Wrw",
+  "version" : {
+    "number" : "7.3.0",
+    "build_flavor" : "default",
+    "build_type" : "docker",
+    "build_hash" : "de777fa",
+    "build_date" : "2019-07-24T18:30:11.767338Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.1.0",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+2023-10-19 20:24:44,805 - DEBUG - http://localhost:9200 "HEAD / HTTP/1.1" 200 0
+2023-10-19 20:24:44,806 - INFO - HEAD http://localhost:9200/ [status:200 request:0.005s]
+2023-10-19 20:24:44,806 - DEBUG - > None
+2023-10-19 20:24:44,806 - DEBUG - < 
+2023-10-19 20:24:44,806 - INFO - Successfully connected to Elasticsearch server
+2023-10-19 20:24:44,914 - DEBUG - http://localhost:9200 "POST /post/_search HTTP/1.1" 200 161
+2023-10-19 20:24:44,914 - INFO - POST http://localhost:9200/post/_search [status:200 request:0.108s]
+2023-10-19 20:24:44,914 - DEBUG - > {"query":{"multi_match":{"query":"cat","fields":["title","content"]}}}
+2023-10-19 20:24:44,914 - DEBUG - < {"took":55,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]}}
+2023-10-19 20:24:46,832 - DEBUG - Starting new HTTP connection (1): localhost:9200
+2023-10-19 20:24:46,916 - DEBUG - http://localhost:9200 "GET / HTTP/1.1" 200 508
+2023-10-19 20:24:46,916 - INFO - GET http://localhost:9200/ [status:200 request:0.085s]
+2023-10-19 20:24:46,916 - DEBUG - > None
+2023-10-19 20:24:46,916 - DEBUG - < {
+  "name" : "a46f32a3c7d9",
+  "cluster_name" : "docker-cluster",
+  "cluster_uuid" : "YmGgBroNT7WWjXJ8Hh5Wrw",
+  "version" : {
+    "number" : "7.3.0",
+    "build_flavor" : "default",
+    "build_type" : "docker",
+    "build_hash" : "de777fa",
+    "build_date" : "2019-07-24T18:30:11.767338Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.1.0",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+2023-10-19 20:24:46,922 - DEBUG - http://localhost:9200 "HEAD / HTTP/1.1" 200 0
+2023-10-19 20:24:46,923 - INFO - HEAD http://localhost:9200/ [status:200 request:0.006s]
+2023-10-19 20:24:46,923 - DEBUG - > None
+2023-10-19 20:24:46,923 - DEBUG - < 
+2023-10-19 20:24:46,923 - INFO - Successfully connected to Elasticsearch server
+2023-10-19 20:24:47,016 - DEBUG - http://localhost:9200 "POST /post/_search HTTP/1.1" 200 340
+2023-10-19 20:24:47,016 - INFO - POST http://localhost:9200/post/_search [status:200 request:0.093s]
+2023-10-19 20:24:47,016 - DEBUG - > {"query":{"multi_match":{"query":"post","fields":["title","content"]}}}
+2023-10-19 20:24:47,016 - DEBUG - < {"took":61,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":1,"relation":"eq"},"max_score":0.2876821,"hits":[{"_index":"post","_type":"_doc","_id":"23","_score":0.2876821,"_source":{"title":"This is the first post","content":"Hi, this is my first post to the forum","username":null}}]}}
+2023-10-19 20:24:55,767 - DEBUG - Starting new HTTP connection (1): localhost:9200
+2023-10-19 20:24:55,847 - DEBUG - http://localhost:9200 "GET / HTTP/1.1" 200 508
+2023-10-19 20:24:55,848 - INFO - GET http://localhost:9200/ [status:200 request:0.081s]
+2023-10-19 20:24:55,848 - DEBUG - > None
+2023-10-19 20:24:55,848 - DEBUG - < {
+  "name" : "a46f32a3c7d9",
+  "cluster_name" : "docker-cluster",
+  "cluster_uuid" : "YmGgBroNT7WWjXJ8Hh5Wrw",
+  "version" : {
+    "number" : "7.3.0",
+    "build_flavor" : "default",
+    "build_type" : "docker",
+    "build_hash" : "de777fa",
+    "build_date" : "2019-07-24T18:30:11.767338Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.1.0",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+2023-10-19 20:24:55,859 - DEBUG - http://localhost:9200 "HEAD / HTTP/1.1" 200 0
+2023-10-19 20:24:55,860 - INFO - HEAD http://localhost:9200/ [status:200 request:0.011s]
+2023-10-19 20:24:55,860 - DEBUG - > None
+2023-10-19 20:24:55,860 - DEBUG - < 
+2023-10-19 20:24:55,860 - INFO - Successfully connected to Elasticsearch server
+2023-10-19 20:24:55,902 - DEBUG - http://localhost:9200 "POST /post/_search HTTP/1.1" 200 161
+2023-10-19 20:24:55,902 - INFO - POST http://localhost:9200/post/_search [status:200 request:0.042s]
+2023-10-19 20:24:55,902 - DEBUG - > {"query":{"multi_match":{"query":"ernie","fields":["title","content"]}}}
+2023-10-19 20:24:55,902 - DEBUG - < {"took":23,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]}}
