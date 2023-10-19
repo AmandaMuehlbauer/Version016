@@ -153,3 +153,254 @@
 2023-10-19 20:24:55,902 - INFO - POST http://localhost:9200/post/_search [status:200 request:0.042s]
 2023-10-19 20:24:55,902 - DEBUG - > {"query":{"multi_match":{"query":"ernie","fields":["title","content"]}}}
 2023-10-19 20:24:55,902 - DEBUG - < {"took":23,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]}}
+2023-10-19 20:46:05,571 - ERROR - Internal Server Error: /elastic-search/
+Traceback (most recent call last):
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 134, in elastic_search_view
+    check_port("jidder-elasticsearch:", 9200)
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 119, in check_port
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+           ^^^^^^
+NameError: name 'socket' is not defined
+2023-10-19 20:46:06,320 - ERROR - Internal Server Error: /elastic-search/
+Traceback (most recent call last):
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 134, in elastic_search_view
+    check_port("jidder-elasticsearch:", 9200)
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 119, in check_port
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+           ^^^^^^
+NameError: name 'socket' is not defined
+2023-10-19 20:46:06,817 - ERROR - Internal Server Error: /elastic-search/
+Traceback (most recent call last):
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 134, in elastic_search_view
+    check_port("jidder-elasticsearch:", 9200)
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 119, in check_port
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+           ^^^^^^
+NameError: name 'socket' is not defined
+2023-10-19 20:46:09,846 - ERROR - Internal Server Error: /elastic-search/
+Traceback (most recent call last):
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 134, in elastic_search_view
+    check_port("jidder-elasticsearch:", 9200)
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 119, in check_port
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+           ^^^^^^
+NameError: name 'socket' is not defined
+2023-10-19 20:46:23,820 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-19 20:46:27,246 - ERROR - Internal Server Error: /elastic-search/
+Traceback (most recent call last):
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 134, in elastic_search_view
+    check_port("jidder-elasticsearch:", 9200)
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 122, in check_port
+    result = sock.connect_ex((host, port))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+2023-10-19 20:46:27,715 - ERROR - Internal Server Error: /elastic-search/
+Traceback (most recent call last):
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 134, in elastic_search_view
+    check_port("jidder-elasticsearch:", 9200)
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 122, in check_port
+    result = sock.connect_ex((host, port))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+2023-10-19 20:46:33,295 - ERROR - Internal Server Error: /elastic-search/
+Traceback (most recent call last):
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 134, in elastic_search_view
+    check_port("jidder-elasticsearch:", 9200)
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 122, in check_port
+    result = sock.connect_ex((host, port))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+2023-10-19 20:46:55,537 - ERROR - Internal Server Error: /elastic-search/
+Traceback (most recent call last):
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 134, in elastic_search_view
+    check_port("localhost:", 9200)
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 122, in check_port
+    result = sock.connect_ex((host, port))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+2023-10-19 20:46:55,539 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-19 20:46:56,697 - ERROR - Internal Server Error: /elastic-search/
+Traceback (most recent call last):
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 134, in elastic_search_view
+    check_port("localhost:", 9200)
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 122, in check_port
+    result = sock.connect_ex((host, port))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+2023-10-19 20:47:01,813 - ERROR - Internal Server Error: /elastic-search/
+Traceback (most recent call last):
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 134, in elastic_search_view
+    check_port("localhost:", 9200)
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 122, in check_port
+    result = sock.connect_ex((host, port))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+2023-10-19 20:47:03,895 - ERROR - Internal Server Error: /elastic-search/
+Traceback (most recent call last):
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 134, in elastic_search_view
+    check_port("localhost:", 9200)
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 122, in check_port
+    result = sock.connect_ex((host, port))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+2023-10-19 20:47:16,655 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-19 20:47:17,755 - DEBUG - Starting new HTTP connection (1): localhost:9200
+2023-10-19 20:47:17,907 - DEBUG - http://localhost:9200 "GET / HTTP/1.1" 200 508
+2023-10-19 20:47:17,907 - INFO - GET http://localhost:9200/ [status:200 request:0.153s]
+2023-10-19 20:47:17,907 - DEBUG - > None
+2023-10-19 20:47:17,908 - DEBUG - < {
+  "name" : "a46f32a3c7d9",
+  "cluster_name" : "docker-cluster",
+  "cluster_uuid" : "YmGgBroNT7WWjXJ8Hh5Wrw",
+  "version" : {
+    "number" : "7.3.0",
+    "build_flavor" : "default",
+    "build_type" : "docker",
+    "build_hash" : "de777fa",
+    "build_date" : "2019-07-24T18:30:11.767338Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.1.0",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+2023-10-19 20:47:17,921 - DEBUG - http://localhost:9200 "HEAD / HTTP/1.1" 200 0
+2023-10-19 20:47:17,922 - INFO - HEAD http://localhost:9200/ [status:200 request:0.013s]
+2023-10-19 20:47:17,922 - DEBUG - > None
+2023-10-19 20:47:17,922 - DEBUG - < 
+2023-10-19 20:47:17,922 - INFO - Successfully connected to Elasticsearch server
+2023-10-19 20:47:18,251 - DEBUG - http://localhost:9200 "POST /post/_search HTTP/1.1" 200 162
+2023-10-19 20:47:18,252 - INFO - POST http://localhost:9200/post/_search [status:200 request:0.329s]
+2023-10-19 20:47:18,253 - DEBUG - > {"query":{"multi_match":{"query":"cat","fields":["title","content"]}}}
+2023-10-19 20:47:18,253 - DEBUG - < {"took":200,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]}}
+2023-10-19 20:47:21,590 - DEBUG - Starting new HTTP connection (1): localhost:9200
+2023-10-19 20:47:21,658 - DEBUG - http://localhost:9200 "GET / HTTP/1.1" 200 508
+2023-10-19 20:47:21,658 - INFO - GET http://localhost:9200/ [status:200 request:0.069s]
+2023-10-19 20:47:21,658 - DEBUG - > None
+2023-10-19 20:47:21,658 - DEBUG - < {
+  "name" : "a46f32a3c7d9",
+  "cluster_name" : "docker-cluster",
+  "cluster_uuid" : "YmGgBroNT7WWjXJ8Hh5Wrw",
+  "version" : {
+    "number" : "7.3.0",
+    "build_flavor" : "default",
+    "build_type" : "docker",
+    "build_hash" : "de777fa",
+    "build_date" : "2019-07-24T18:30:11.767338Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.1.0",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+2023-10-19 20:47:21,663 - DEBUG - http://localhost:9200 "HEAD / HTTP/1.1" 200 0
+2023-10-19 20:47:21,663 - INFO - HEAD http://localhost:9200/ [status:200 request:0.004s]
+2023-10-19 20:47:21,663 - DEBUG - > None
+2023-10-19 20:47:21,663 - DEBUG - < 
+2023-10-19 20:47:21,663 - INFO - Successfully connected to Elasticsearch server
+2023-10-19 20:47:21,706 - DEBUG - http://localhost:9200 "POST /post/_search HTTP/1.1" 200 161
+2023-10-19 20:47:21,707 - INFO - POST http://localhost:9200/post/_search [status:200 request:0.043s]
+2023-10-19 20:47:21,707 - DEBUG - > {"query":{"multi_match":{"query":"cat","fields":["title","content"]}}}
+2023-10-19 20:47:21,707 - DEBUG - < {"took":21,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]}}
+2023-10-19 20:47:25,010 - DEBUG - Starting new HTTP connection (1): localhost:9200
+2023-10-19 20:47:25,046 - DEBUG - http://localhost:9200 "GET / HTTP/1.1" 200 508
+2023-10-19 20:47:25,046 - INFO - GET http://localhost:9200/ [status:200 request:0.037s]
+2023-10-19 20:47:25,047 - DEBUG - > None
+2023-10-19 20:47:25,047 - DEBUG - < {
+  "name" : "a46f32a3c7d9",
+  "cluster_name" : "docker-cluster",
+  "cluster_uuid" : "YmGgBroNT7WWjXJ8Hh5Wrw",
+  "version" : {
+    "number" : "7.3.0",
+    "build_flavor" : "default",
+    "build_type" : "docker",
+    "build_hash" : "de777fa",
+    "build_date" : "2019-07-24T18:30:11.767338Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.1.0",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+2023-10-19 20:47:25,049 - DEBUG - http://localhost:9200 "HEAD / HTTP/1.1" 200 0
+2023-10-19 20:47:25,050 - INFO - HEAD http://localhost:9200/ [status:200 request:0.003s]
+2023-10-19 20:47:25,050 - DEBUG - > None
+2023-10-19 20:47:25,050 - DEBUG - < 
+2023-10-19 20:47:25,050 - INFO - Successfully connected to Elasticsearch server
+2023-10-19 20:47:25,084 - DEBUG - http://localhost:9200 "POST /post/_search HTTP/1.1" 200 340
+2023-10-19 20:47:25,084 - INFO - POST http://localhost:9200/post/_search [status:200 request:0.033s]
+2023-10-19 20:47:25,084 - DEBUG - > {"query":{"multi_match":{"query":"post","fields":["title","content"]}}}
+2023-10-19 20:47:25,084 - DEBUG - < {"took":20,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":1,"relation":"eq"},"max_score":0.2876821,"hits":[{"_index":"post","_type":"_doc","_id":"23","_score":0.2876821,"_source":{"title":"This is the first post","content":"Hi, this is my first post to the forum","username":null}}]}}
+2023-10-19 20:47:55,429 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.

@@ -12,7 +12,7 @@ from .models import SearchHistory
 import os
 import logging
 from elasticsearch.exceptions import ConnectionError, ElasticsearchException
-
+import socket
 
 
 #this is a basic search/lookup with the database. Not used in Jidder
@@ -131,7 +131,7 @@ def check_port(host, port):
 
 def elastic_search_view(request):
 
-    check_port("jidder-elasticsearch:", 9200)
+    check_port("jidder-elasticsearch", 9200)
     form = SearchForm(request.GET)
     results = []
     objects = []
