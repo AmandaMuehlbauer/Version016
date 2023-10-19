@@ -135,9 +135,11 @@ def elastic_search_view(request):
             # Ping the Elasticsearch server to check the connection
             if not client.ping():
                 logging.error("Failed to connect to Elasticsearch server")
+                print("failed to connect to ES server")
                 return HttpResponse("Failed to connect to Elasticsearch server")
 
             logging.info("Successfully connected to Elasticsearch server")
+            print("successfully connected to ES server")
 
             # Build and execute the Elasticsearch search
             response = client.search(
@@ -153,6 +155,8 @@ def elastic_search_view(request):
             )
 
             results = response['hits']['hits']
+            print("results:")
+            print(results)
 
             if request.user.is_authenticated:
                 # Save the search history to the database
