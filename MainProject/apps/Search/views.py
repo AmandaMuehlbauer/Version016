@@ -17,7 +17,7 @@ import socket
 
 #this is a basic search/lookup with the database. Not used in Jidder
 
-def search_view(request):
+def elastic_search_view(request):
     form = SearchForm()
     results = []
 
@@ -33,7 +33,7 @@ def search_view(request):
             'results': results
         }
 
-    return render(request, 'search/search_results.html', context)
+    return render(request, 'search/elastic_search_results.html', context)
 
 
 #This is the function that is used in the Jidder searchbar. It uses elasticsearch. 
@@ -129,7 +129,7 @@ def check_port(host, port):
     sock.close()
 
 
-def elastic_search_view(request):
+def elastic_search_view_draft002(request):
 
     check_port("jidder-elasticsearch", 9200)
     form = SearchForm(request.GET)
