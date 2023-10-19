@@ -115,7 +115,23 @@ logging.basicConfig(
     filename='elasticsearch_search.log',  # Change the filename as needed
 )
 
+def check_port(host, port):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(1)
+
+    result = sock.connect_ex((host, port))
+
+    if result == 0:
+        print(f"Port {port} is open")
+    else:
+        print(f"Port {port} is closed")
+
+    sock.close()
+
+
 def elastic_search_view(request):
+
+    check_port("jidder-elasticsearch:", 9200)
     form = SearchForm(request.GET)
     results = []
     objects = []
