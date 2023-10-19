@@ -10,11 +10,6 @@ from elasticsearch.exceptions import NotFoundError
 from django.urls import reverse
 from .models import SearchHistory
 import os
-from django.http import JsonResponse
-import requests
-
-
-
 
 
 #this is a basic search/lookup with the database. Not used in Jidder
@@ -40,7 +35,7 @@ def search_view(request):
 
 #This is the function that is used in the Jidder searchbar. It uses elasticsearch. 
 
-def elastic_search_view(request):
+def elastic_search_view_draft001(request):
     form = SearchForm(request.GET)
     results = []
     objects = []  # This stores the retrieved objects from the model
@@ -71,12 +66,6 @@ def elastic_search_view(request):
 
         s = Search(using=client, index='post').params(request_timeout=30)  # create a Search object
         s = s.query('multi_match', query=query, fields=['title', 'content']) #define the search query
-
-
-        #res = PostDocument.search().query("match", title="cat")
-        #print("this is the res var:")
-        #print(res)
-
 
 
         try:
@@ -114,6 +103,64 @@ def elastic_search_view(request):
         search_history.save()
 
     return render(request, 'search/elastic_search_results.html', context)
+
+def elastic_search_view(request):
+    form = SearchForm(request.GET)
+    results = []
+    objects = []
+
+    if form.is_valid():
+        query = form.cleaned_data['query']
+
+        # Determine the Elasticsearch server based on the environment
+        if os.environ.get("ENVIRONMENT") == "production":
+            es_server = 'jidder-elasticsearch:9200'  # Use the production server
+        else:
+            es_server = 'localhost:9200'  # Use the development server
+
+        try:
+            # Establish an Elasticsearch connection
+            client = Elasticsearch(hosts=[es_server])
+
+            # Ping the Elasticsearch server to check the connection
+            if not client.ping():
+                return HttpResponse("Failed to connect to Elasticsearch server")
+
+            # Build and execute the Elasticsearch search
+            response = client.search(
+                index='post',  # Replace with your index name
+                body={
+                    "query": {
+                        "multi_match": {
+                            "query": query,
+                            "fields": ["title", "content"]
+                        }
+                    }
+                }
+            )
+
+            results = response['hits']['hits']
+
+            if request.user.is_authenticated:
+                # Save the search history to the database
+                search_history = SearchHistory(user=request.user, query=query)
+                search_history.save()
+
+            objects = Post.objects.filter(id__in=[result['_id'] for result in results])
+
+        except ConnectionError:
+            return HttpResponse("Failed to connect to Elasticsearch server")
+        except ElasticsearchException as e:
+            print(f"An error occurred when executing the Elasticsearch query: {e}")
+
+    context = {
+        'form': form,
+        'results': results,
+        'objects': objects,
+    }
+
+    return render(request, 'search/elastic_search_results.html', context)
+
 
 
 #Function to display search results back to users:

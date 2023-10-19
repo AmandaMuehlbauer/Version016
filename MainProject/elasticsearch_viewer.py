@@ -1,28 +1,38 @@
 from elasticsearch import Elasticsearch
 
-# Create an Elasticsearch client connected to your Elasticsearch instance
 
-# Create an Elasticsearch client connected to your Elasticsearch instance
-client = Elasticsearch(
-    [{'host': 'jidder-elasticsearch', 'port': 9200}],
-    use_ssl=False  # Set to True if your Elasticsearch cluster uses SSL
-)
+def test_elasticsearch_connection():
+    # Define the Elasticsearch URL and port
+    elasticsearch_url = 'http://localhost'
+    elasticsearch_port = 9200
 
-# Specify the index you want to query
-index_name = 'post'
+    try:
+        # Create an Elasticsearch client
+        client = Elasticsearch(hosts=[{'host': elasticsearch_url, 'port': elasticsearch_port}])
 
-# Use a search query to retrieve all documents in the 'post' index
-search_query = {
-    "query": {
-        "match_all": {}
-    }
-}
+        # Check the connection
+        if client.ping():
+            print("Successfully connected to Elasticsearch server")
+            
+            # Perform a simple query to verify the Elasticsearch server
+            query = {
+                "query": {
+                    "match_all": {}
+                }
+            }
 
-# Perform the search
-response = client.search(index=index_name, body=search_query)
+            # Replace 'your_index_name' with the name of your Elasticsearch index
+            response = client.search(index='your_index_name', body=query)
 
-# Extract and display the documents
-hits = response['hits']['hits']
+            # Print the response
+            print("Elasticsearch query results:")
+            print(response)
 
-for hit in hits:
-    print(hit['_source'])
+        else:
+            print("Failed to connect to Elasticsearch server")
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    test_elasticsearch_connection()
