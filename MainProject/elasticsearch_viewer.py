@@ -4,7 +4,7 @@ from elasticsearch import Elasticsearch
 
 # Create an Elasticsearch client connected to your Elasticsearch instance
 client = Elasticsearch(
-    [{'host': 'jidder-elasticsearch', 'port': 9300}],
+    [{'host': 'jidder-elasticsearch', 'port': 9200}],
     use_ssl=False  # Set to True if your Elasticsearch cluster uses SSL
 )
 

@@ -10,6 +10,10 @@ from elasticsearch.exceptions import NotFoundError
 from django.urls import reverse
 from .models import SearchHistory
 import os
+from django.http import JsonResponse
+import requests
+
+
 
 
 
@@ -65,14 +69,9 @@ def elastic_search_view(request):
         # ...
 
 
-        s = Search(using=client, index='post')  # create a Search object
-        print("first s:")
-        print(s)
+        s = Search(using=client, index='post').params(request_timeout=30)  # create a Search object
         s = s.query('multi_match', query=query, fields=['title', 'content']) #define the search query
 
-        print("second s:")
-        print(s)
-        print("Form is valid")
 
         #res = PostDocument.search().query("match", title="cat")
         #print("this is the res var:")
@@ -126,4 +125,5 @@ def view_search_history(request):
     else:
         # Handle the case when the user is not authenticated
         return redirect('users:login')  # Redirect to the login page or handle as needed
+
 
