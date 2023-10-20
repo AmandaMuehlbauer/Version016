@@ -52,7 +52,7 @@ def search_view(request):
         print("context:")
         print(context)
 
-    return render(request, 'search/search_results.html', context)
+    return render(request, 'Search/search_results.html', context)
 
 
 

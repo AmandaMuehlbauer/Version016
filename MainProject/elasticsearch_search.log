@@ -598,3 +598,5 @@ django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'content' 
 2023-10-20 03:47:23,874 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
 2023-10-20 03:50:27,971 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
 2023-10-20 03:52:52,037 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-20 04:12:52,740 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-20 04:13:02,725 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
