@@ -58,7 +58,7 @@ def search_view(request):
 
 #This is the function that is used in the Jidder searchbar. It uses elasticsearch. 
 
-def elastic_search_view(request):
+def elastic_search_view_001(request):
     form = SearchForm(request.GET)
     results = []
     objects = []  # This stores the retrieved objects from the model
@@ -129,6 +129,73 @@ def elastic_search_view(request):
 
 
 
+def elastic_search_view(request):
+    form = SearchForm(request.GET)
+    results = []
+    objects = []  # This stores the retrieved objects from the model
+
+    if form.is_valid():
+        query = form.cleaned_data['query']
+        
+        if os.environ.get("ENVIRONMENT") == "production":
+            # Use production Elasticsearch settings
+            client = Elasticsearch(hosts=['jidder-elasticsearch:9200'])
+        else:
+            # Use development Elasticsearch settings
+            client = Elasticsearch()
+
+        try:
+            # Attempt to connect to Elasticsearch
+            client.ping()
+            print("Successfully connected to Elasticsearch server")
+        except ConnectionError:
+            # If the connection fails, handle the error as needed
+            # For example, you can log the error or return an error response
+            return HttpResponse("Failed to connect to Elasticsearch server")
+
+        # The rest of your code for Elasticsearch query and processing goes here
+        # ...
+
+        try:
+            response = client.search(
+                index='post',
+                body={
+                    "query": {
+                        "multi_match": {
+                            "query": query,
+                            "fields": ["title", "content"]
+                        }
+                    }
+                }
+            )
+            print(response)
+            results = response['hits']['hits']
+        except Exception as e:
+            print(f"An error occurred when executing the Elasticsearch query: {e}")
+
+        # Extract primary keys (id) from Elasticsearch results
+        pk_values = [hit['_id'] for hit in results]
+        # Look up full Post objects using the primary keys
+        if pk_values:
+            objects = Post.objects.filter(id__in=pk_values)
+
+            # Generate URLs for each retrieved Post object
+            for post in objects:
+                post.url = reverse('core:post', args=[str(post.id), post.slug])
+                print(post.url)
+
+    context = {
+        'form': form,
+        'results': results,
+        'objects': objects
+    }
+
+    # Save the search history to the database
+    if request.user.is_authenticated:
+        search_history = SearchHistory(user=request.user, query=query)
+        search_history.save()
+
+    return render(request, 'Search/elastic_search_results.html', context)
 
 
 
