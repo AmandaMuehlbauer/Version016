@@ -125,28 +125,9 @@ def elastic_search_view(request):
         search_history = SearchHistory(user=request.user, query=query)
         search_history.save()
 
-    return render(request, 'search/elastic_search_results.html', context)
+    return render(request, 'Search/elastic_search_results.html', context)
 
 
-# Configure logging
-logging.basicConfig(
-    level=logging.DEBUG,  # Set the desired log level (INFO, DEBUG, etc.)
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    filename='elasticsearch_search.log',  # Change the filename as needed
-)
-
-def check_port(host, port):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(1)
-
-    result = sock.connect_ex((host, port))
-
-    if result == 0:
-        print(f"Port {port} is open")
-    else:
-        print(f"Port {port} is closed")
-
-    sock.close()
 
 
 

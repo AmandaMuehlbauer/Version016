@@ -600,3 +600,33 @@ django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'content' 
 2023-10-20 03:52:52,037 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
 2023-10-20 04:12:52,740 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
 2023-10-20 04:13:02,725 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-20 04:20:30,177 - DEBUG - Starting new HTTP connection (1): localhost:9200
+2023-10-20 04:20:30,277 - DEBUG - http://localhost:9200 "GET / HTTP/1.1" 200 508
+2023-10-20 04:20:30,278 - INFO - GET http://localhost:9200/ [status:200 request:0.101s]
+2023-10-20 04:20:30,278 - DEBUG - > None
+2023-10-20 04:20:30,279 - DEBUG - < {
+  "name" : "a46f32a3c7d9",
+  "cluster_name" : "docker-cluster",
+  "cluster_uuid" : "YmGgBroNT7WWjXJ8Hh5Wrw",
+  "version" : {
+    "number" : "7.3.0",
+    "build_flavor" : "default",
+    "build_type" : "docker",
+    "build_hash" : "de777fa",
+    "build_date" : "2019-07-24T18:30:11.767338Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.1.0",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+2023-10-20 04:20:30,287 - DEBUG - http://localhost:9200 "HEAD / HTTP/1.1" 200 0
+2023-10-20 04:20:30,287 - INFO - HEAD http://localhost:9200/ [status:200 request:0.008s]
+2023-10-20 04:20:30,288 - DEBUG - > None
+2023-10-20 04:20:30,288 - DEBUG - < 
+2023-10-20 04:20:30,330 - DEBUG - http://localhost:9200 "POST /post/_search HTTP/1.1" 200 340
+2023-10-20 04:20:30,331 - INFO - POST http://localhost:9200/post/_search [status:200 request:0.042s]
+2023-10-20 04:20:30,331 - DEBUG - > {"query":{"multi_match":{"query":"post","fields":["title","content"]}}}
+2023-10-20 04:20:30,331 - DEBUG - < {"took":25,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":1,"relation":"eq"},"max_score":0.2876821,"hits":[{"_index":"post","_type":"_doc","_id":"23","_score":0.2876821,"_source":{"title":"This is the first post","content":"Hi, this is my first post to the forum","username":null}}]}}
