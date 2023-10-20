@@ -404,3 +404,197 @@ socket.gaierror: [Errno 8] nodename nor servname provided, or not known
 2023-10-19 20:47:25,084 - DEBUG - > {"query":{"multi_match":{"query":"post","fields":["title","content"]}}}
 2023-10-19 20:47:25,084 - DEBUG - < {"took":20,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":1,"relation":"eq"},"max_score":0.2876821,"hits":[{"_index":"post","_type":"_doc","_id":"23","_score":0.2876821,"_source":{"title":"This is the first post","content":"Hi, this is my first post to the forum","username":null}}]}}
 2023-10-19 20:47:55,429 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-19 21:19:30,534 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-19 21:19:42,842 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-20 03:38:03,191 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-20 03:38:19,212 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-20 03:38:22,645 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-20 03:39:38,958 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-20 03:39:42,408 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-20 03:39:43,825 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/urls.py changed, reloading.
+2023-10-20 03:40:56,745 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/urls.py changed, reloading.
+2023-10-20 03:41:04,594 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/urls.py changed, reloading.
+2023-10-20 03:41:18,444 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-20 03:41:33,313 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-20 03:41:37,790 - DEBUG - Starting new HTTP connection (1): localhost:9200
+2023-10-20 03:41:38,045 - DEBUG - http://localhost:9200 "GET / HTTP/1.1" 200 508
+2023-10-20 03:41:38,045 - INFO - GET http://localhost:9200/ [status:200 request:0.255s]
+2023-10-20 03:41:38,045 - DEBUG - > None
+2023-10-20 03:41:38,045 - DEBUG - < {
+  "name" : "a46f32a3c7d9",
+  "cluster_name" : "docker-cluster",
+  "cluster_uuid" : "YmGgBroNT7WWjXJ8Hh5Wrw",
+  "version" : {
+    "number" : "7.3.0",
+    "build_flavor" : "default",
+    "build_type" : "docker",
+    "build_hash" : "de777fa",
+    "build_date" : "2019-07-24T18:30:11.767338Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.1.0",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+2023-10-20 03:41:38,077 - DEBUG - http://localhost:9200 "HEAD / HTTP/1.1" 200 0
+2023-10-20 03:41:38,077 - INFO - HEAD http://localhost:9200/ [status:200 request:0.032s]
+2023-10-20 03:41:38,077 - DEBUG - > None
+2023-10-20 03:41:38,077 - DEBUG - < 
+2023-10-20 03:41:38,502 - DEBUG - http://localhost:9200 "POST /post/_search HTTP/1.1" 200 341
+2023-10-20 03:41:38,502 - INFO - POST http://localhost:9200/post/_search [status:200 request:0.425s]
+2023-10-20 03:41:38,503 - DEBUG - > {"query":{"multi_match":{"query":"first","fields":["title","content"]}}}
+2023-10-20 03:41:38,503 - DEBUG - < {"took":165,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":1,"relation":"eq"},"max_score":0.2876821,"hits":[{"_index":"post","_type":"_doc","_id":"23","_score":0.2876821,"_source":{"title":"This is the first post","content":"Hi, this is my first post to the forum","username":null}}]}}
+2023-10-20 03:41:40,690 - ERROR - Internal Server Error: /search/
+Traceback (most recent call last):
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 36, in search_view
+    return render(request, 'search/search_results.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 226, in do_block
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'content' appears more than once
+2023-10-20 03:41:43,736 - ERROR - Internal Server Error: /search/
+Traceback (most recent call last):
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py", line 36, in search_view
+    return render(request, 'search/search_results.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 226, in do_block
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'content' appears more than once
+2023-10-20 03:43:50,456 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-20 03:44:33,466 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-20 03:44:35,181 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/urls.py changed, reloading.
+2023-10-20 03:44:45,930 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/urls.py changed, reloading.
+2023-10-20 03:46:40,928 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-20 03:46:49,434 - DEBUG - Starting new HTTP connection (1): localhost:9200
+2023-10-20 03:46:49,520 - DEBUG - http://localhost:9200 "GET / HTTP/1.1" 200 508
+2023-10-20 03:46:49,522 - INFO - GET http://localhost:9200/ [status:200 request:0.088s]
+2023-10-20 03:46:49,522 - DEBUG - > None
+2023-10-20 03:46:49,523 - DEBUG - < {
+  "name" : "a46f32a3c7d9",
+  "cluster_name" : "docker-cluster",
+  "cluster_uuid" : "YmGgBroNT7WWjXJ8Hh5Wrw",
+  "version" : {
+    "number" : "7.3.0",
+    "build_flavor" : "default",
+    "build_type" : "docker",
+    "build_hash" : "de777fa",
+    "build_date" : "2019-07-24T18:30:11.767338Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.1.0",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+2023-10-20 03:46:49,532 - DEBUG - http://localhost:9200 "HEAD / HTTP/1.1" 200 0
+2023-10-20 03:46:49,533 - INFO - HEAD http://localhost:9200/ [status:200 request:0.008s]
+2023-10-20 03:46:49,533 - DEBUG - > None
+2023-10-20 03:46:49,533 - DEBUG - < 
+2023-10-20 03:46:49,591 - DEBUG - http://localhost:9200 "POST /post/_search HTTP/1.1" 200 340
+2023-10-20 03:46:49,592 - INFO - POST http://localhost:9200/post/_search [status:200 request:0.059s]
+2023-10-20 03:46:49,592 - DEBUG - > {"query":{"multi_match":{"query":"post","fields":["title","content"]}}}
+2023-10-20 03:46:49,592 - DEBUG - < {"took":22,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":1,"relation":"eq"},"max_score":0.2876821,"hits":[{"_index":"post","_type":"_doc","_id":"23","_score":0.2876821,"_source":{"title":"This is the first post","content":"Hi, this is my first post to the forum","username":null}}]}}
+2023-10-20 03:47:23,874 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-20 03:50:27,971 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.
+2023-10-20 03:52:52,037 - INFO - /Users/amandamuehlbauer/Documents/myproject/Version016/MainProject/apps/Search/views.py changed, reloading.

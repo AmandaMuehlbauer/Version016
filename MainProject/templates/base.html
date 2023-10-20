@@ -61,7 +61,7 @@
 
 
       <div class="search center">
-        <form method="get" action="{% url 'Search:elastic_search_view' %}">
+        <form method="get" action="{% url 'Search:search_view' %}">
           {{ form.search.as_p }}
           <input type="text" placeholder="Search" name="query">
           <button><i class="material-icons">search</i></button>

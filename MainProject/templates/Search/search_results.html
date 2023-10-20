@@ -1,20 +1,73 @@
 
 
+<!-- search_results.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block css %} 
+<link rel="stylesheet" type="text/css" href="{% static "/static/home/css/index.css" %}" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+{% endblock css%}
+
+{% block head_title %}{{ post.title }}{% endblock %}
+
 {% block content %}
-  <h1>Search</h1>
 
-  <form method="get">
-    {{ form.as_p }}
-    <button type="submit">Search</button>
-  </form>
+<!DOCTYPE html>
+<html>
 
-  <h2>Search Results</h2>
-  <ul>
-    {% for result in results %}
-   <li> <a href="{% url 'core:post' pk=result.id slug=result.slug %}">{{ result.title }}</a></li>
+<body>
+   
+ 
+    
+    {% if results %}
+ 
+        <ul>
+            {% for post in objects %}
+            <a href="{% url 'core:post' post.id post.slug %}">
+            <div class="entry">
+            
+              <div class="thumbnail">
+                {% if post.image %}
+                
+                
+               
+                <img  src="{{ post.image.url }}"  alt="{{ post.title }}">
+                {% else %}
+                <img src="/static/img/default.png">
+          
+                {% endif %}
+          
+              </div>
+            
+               
+          
+                <div class="card-title">{{ post.title| truncatechars:100 }} </div>
+                <div class="author"> {{ post.author }}</div>
+                <div class="card-text">{{ post.content| truncatechars:100 }}</div>
+              </div>
+                <div class="text-muted mb-3"></div>
+          
+            </a>
+            {% endfor %}
 
-    {% empty %}
-      <li>No results found.</li>
-    {% endfor %}
-  </ul>
-{% endblock %}
+        </ul>
+
+
+
+
+        
+
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+
+
+
+
+
+</body>
+</html>
+{% endblock content %}
