@@ -120,6 +120,7 @@ class PostView(DetailView):
         context = super().get_context_data(**kwargs)
         context['comments'] = self.object.comment_set.all()
         context['form'] = CommentForm()
+        context['author_username'] = self.object.author.username
         return context
 
     def post(self, request, *args, **kwargs):
