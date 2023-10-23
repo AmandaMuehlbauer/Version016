@@ -4,7 +4,7 @@ from django.db.models import Q
 from .forms import SearchForm
 from apps.core.models import Post, BlogFullRecommend  # Replace with your model
 from elasticsearch import Elasticsearch
-from elasticsearch_dsl import Search
+#from elasticsearch_dsl import Search
 from .documents import PostDocument
 from elasticsearch.exceptions import NotFoundError
 from django.urls import reverse
@@ -12,38 +12,96 @@ from .models import SearchHistory
 import os
 import logging
 from elasticsearch.exceptions import ConnectionError, ElasticsearchException
-import socket
+import re
 
+# Define a list of common stop words
+stop_words = ["the", "and", "is", "this", "a", "an", "of", "in", "to", "for"]
 
-#this is a basic search/lookup with the database. Not used in Jidder
+def remove_stop_words(query):
+    # Split the query into individual words
+    words = query.split()
+
+    # Remove common stop words
+    clean_words = [word for word in words if word.lower() not in stop_words]
+
+    # Rejoin the remaining words into a clean query
+    clean_query = " ".join(clean_words)
+
+    return clean_query
+
+def parse_boolean_query(query):
+    # Split the query into individual words
+    words = query.split()
+
+    # Define a mapping of boolean operators to their Q object equivalents
+    operators = {
+        "AND": Q.AND,
+        "OR": Q.OR,
+    }
+
+    # Initialize a list to store Q objects
+    q_objects = []
+
+    # Iterate through the words and construct the query
+    for word in words:
+        if word.upper() in operators:
+            operator = operators[word.upper()]
+            q_objects.append(operator)
+        else:
+            # Remove common stop words from individual words
+            cleaned_word = remove_stop_words(word)
+            q_objects.append(
+                Q(title__icontains=cleaned_word) |
+                Q(content__icontains=cleaned_word) |
+                Q(author__username__icontains=cleaned_word) |
+                Q(tags__name__icontains=cleaned_word)
+            )
+
+    # Combine the Q objects using logical operators
+    boolean_query = q_objects[0]
+    for i in range(1, len(q_objects), 2):
+        if i + 1 < len(q_objects):
+            boolean_query = boolean_query & q_objects[i + 1]
+
+    return boolean_query
 
 def search_view(request):
     form = SearchForm()
     results = []
     objects = []
 
-
     if request.method == 'GET':
         form = SearchForm(request.GET)
         if form.is_valid():
             query = form.cleaned_data['query']
-            print("query:")
-            print(query)
-            results = Post.objects.filter(title__icontains=query)
+
+            # Parse the boolean query
+            boolean_query = parse_boolean_query(query)
+            print("boolean_query:")
+            print(boolean_query)
+
+            # Perform the search using the boolean query
+            results = Post.objects.filter(boolean_query).distinct()
+
             print("results:")
             print(results)
 
-                        # Extract primary keys (id) from the Post objects
-          # Look up full Post objects using the primary keys
+            # Extract primary keys (id) from the Post objects
             pk_values = [post.id for post in results]
-        if pk_values:
-            objects = Post.objects.filter(id__in=pk_values)
 
-            # Generate URLs for each retrieved Post object
-            for post in objects:
-                post.url = reverse('core:post', args=[str(post.id), post.slug])
-                print(post.url)
-        
+            if pk_values:
+                objects = Post.objects.filter(id__in=pk_values)
+
+                # Generate URLs for each retrieved Post object
+                for post in objects:
+                    post.url = reverse('core:post', args=[str(post.id), post.slug])
+                    print(post.url)
+
+            # Save the search history to the database
+            if request.user.is_authenticated:
+                search_history = SearchHistory(user=request.user, query=query)
+                search_history.save()
+
         context = {
             'form': form,
             'results': results,
@@ -53,8 +111,6 @@ def search_view(request):
         print(context)
 
     return render(request, 'Search/search_results.html', context)
-
-
 
 #This is the function that is used in the Jidder searchbar. It uses elasticsearch. 
 
