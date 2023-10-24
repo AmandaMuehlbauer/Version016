@@ -84,10 +84,10 @@
           <div class="dropdown-content">
             {% if user.is_authenticated %}
             <a href="{% url 'users:profile' user.username %}">  Hi {{ user.username }}!</a> <hr>
-           
-            <a href="#">Create a Post</a><br>
+            <a href="{% url 'core:post_create' %}"
+            class=" {% if request.path == '/post/create/' %}active{% endif %}">Create a Post </a><br>
 
-            <a href="#">Register</a><br>
+
             <a href="#">Settings</a><br>
             <a href="#">Dark Mode</a><br>
             <a href="#">Location</a><br>
@@ -130,7 +130,7 @@
       </a>
 
 
-      <a class="nav-link" href="/Subscriptions" > 
+      <a class="nav-link" href="/Subscriptions"{% block Subscriptionsactive %}{% endblock Subscriptionsactive %} > 
       <span>
           <i class="material-icons">subscriptions</i> Subscriptions </span>
       </a> 
@@ -144,7 +144,7 @@
    
 
 
-        <a class="nav-link" href="/YourPosts" > 
+        <a class="nav-link" href="/YourPosts" {% block YourPostsactive %}{% endblock YourPostsactive %}> 
           <span>
               <i class="material-icons">local_post_office</i> Your Posts </span>
           </a>
@@ -170,14 +170,14 @@
 
 
 
-      <a class="nav-link" href="/SavedForLater" > 
+      <a class="nav-link" href="/SavedForLater" {% block SavedForLateractive %}{% endblock SavedForLateractive %}> 
       <span>
           <i class="material-icons">watch_later</i> Saved for Later </span>
       </a>
 
 
 
-      <a class="nav-link" href="/Liked" > 
+      <a class="nav-link" href="/Liked" {% block Likedactive %}{% endblock Likedactive %} > 
       <span>
           <i class="material-icons">thumb_up</i> Liked </span>
       </a>

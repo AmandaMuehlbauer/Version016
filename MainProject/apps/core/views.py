@@ -227,6 +227,14 @@ def RecommendationsView(request):
 def SubscriptionsView(request):
     return render(request, 'core/subscriptions.html')
 
+def YourPostsView(request):
+    return render(request, 'core/yourposts.html')
+
+def SavedForLaterView(request):
+    return render(request, 'core/savedforlater.html')
+
+def LikedView(request):
+    return render(request, 'core/liked.html')
 #class RSSPageView(ListView):
  #   model = News
   #  template_name = 'core/rsstest.html'
