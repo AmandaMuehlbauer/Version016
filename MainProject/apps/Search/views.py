@@ -3,15 +3,15 @@ from django.shortcuts import render, redirect
 from django.db.models import Q
 from .forms import SearchForm
 from apps.core.models import Post, BlogFullRecommend  # Replace with your model
-from elasticsearch import Elasticsearch
+#from elasticsearch import Elasticsearch
 #from elasticsearch_dsl import Search
 from .documents import PostDocument
-from elasticsearch.exceptions import NotFoundError
+#from elasticsearch.exceptions import NotFoundError
 from django.urls import reverse
 from .models import SearchHistory
 import os
 import logging
-from elasticsearch.exceptions import ConnectionError, ElasticsearchException
+#from elasticsearch.exceptions import ConnectionError, ElasticsearchException
 import re
 
 # Define a list of common stop words
