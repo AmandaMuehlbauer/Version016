@@ -34,7 +34,7 @@ echo "yes" | poetry run python3 manage.py collectstatic
 poetry run python3 manage.py migrate
 
 #Set up Elasticsearch index
-poetry run python3 manage.py search_index --populate
+#poetry run python3 manage.py search_index --populate
 
 # Additional steps for the deployment process (e.g., starting the web server, configuring environment variables)
 
