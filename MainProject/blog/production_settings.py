@@ -63,7 +63,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'django_elasticsearch_dsl',
+  #  'django_elasticsearch_dsl',
     'taggit',
     'apps.users',
     'apps.core',
@@ -235,14 +235,14 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 sys.path.append(os.path.join(BASE_DIR, 'apps')) # at the bottom of the file
 
 
-ELASTICSEARCH_DSL={
-     'default': {
-        'hosts': 'jidder-elasticsearch:9200',
-    },
-}
+#ELASTICSEARCH_DSL={
+ #    'default': {
+  #      'hosts': 'jidder-elasticsearch:9200',
+   # },
+#}
 
 # Debugging Elasticsearch configuration
-print(f"ELASTICSEARCH_DSL: {ELASTICSEARCH_DSL}")
+#print(f"ELASTICSEARCH_DSL: {ELASTICSEARCH_DSL}")
 
 
 

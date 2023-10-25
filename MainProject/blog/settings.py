@@ -16,7 +16,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 import sys # new
-from elasticsearch_dsl import connections
+#from elasticsearch_dsl import connections
 from decouple import config
 
 
@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'django_elasticsearch_dsl',
+ #   'django_elasticsearch_dsl',
     'taggit',
     'apps.users',
     'apps.core',
@@ -206,11 +206,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 sys.path.append(os.path.join(BASE_DIR, 'apps')) # at the bottom of the file
 
 
-ELASTICSEARCH_DSL={
-     'default': {
-        'hosts': 'http://localhost:9200',
-    },
-}
+#ELASTICSEARCH_DSL={
+ #    'default': {
+  #      'hosts': 'http://localhost:9200',
+  #  },
+#}
 
 # Define an Elasticsearch connection
 #connections.create_connection(
