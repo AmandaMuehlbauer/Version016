@@ -123,7 +123,7 @@
         <span>Trending</span>
      </a>
 
-
+     {% if user.is_authenticated %}
       <a class="nav-link" href="/Recommendations" {% block Recommendationsactive %}{% endblock Recommendationsactive %} > 
       <span>
           <i class="material-icons">done</i> Recommendations </span>
@@ -134,7 +134,7 @@
       <span>
           <i class="material-icons">subscriptions</i> Subscriptions </span>
       </a> 
-
+{% endif %}
       <hr>
 
      
@@ -142,11 +142,11 @@
           class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">
             <i class="material-icons">subscriptions</i> Forum </span></a>
    
-          
+            {% if user.is_authenticated %}
             <span><a href="{% url 'core:post_create' %}"
               class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">
               <i class="material-icons">post_add</i>Create a Post</span></a>
-
+            {% endif %}
         <a class="nav-link" href="/YourPosts" {% block YourPostsactive %}{% endblock YourPostsactive %}> 
           <span>
               <i class="material-icons">local_post_office</i> Your Posts </span>
@@ -156,7 +156,7 @@
         <hr>
 
       
-         
+        {% if user.is_authenticated %}
           <span>
             <a  href="{% url 'URLsub:urlsub' %}"
               class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">
@@ -170,7 +170,7 @@
               <i class="material-icons">contact_page</i> Contact Us </span></a>
         <hr>
              
-
+        {% endif %}
 
    
       <a class="nav-link" href="/About" > 
@@ -185,7 +185,7 @@
           <i class="material-icons">history</i> History
         </span>
       </a>
-    {% endif %}
+   
 
       
 
@@ -202,7 +202,7 @@
       <span>
           <i class="material-icons">thumb_up</i> Liked </span>
       </a>
-      
+      {% endif %}
         </div>
 
       

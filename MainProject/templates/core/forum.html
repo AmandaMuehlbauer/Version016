@@ -11,19 +11,6 @@
 <link rel="stylesheet" type= "text/css" href="/static/css/index.css" />
 {% endblock css%}
 
-{% if user.is_authenticated %}
-<div class="navbar-nav ml-auto">
-  <a href="{% url 'core:post_create' %}"
-    class="nav-item nav-link {% if request.path == '/post/create/' %}active{% endif %}">
-    Create a post
-  </a></div>
-  {% else %}
-  <div class="navbar-nav ml-auto">
-
-    <a href="{% url 'users:signup' %}"
-      class="nav-item nav-link {% if request.path == '/users/signup/' %}active{% endif %}">Sign up</a>
-      <a href="{% url 'users:login' %}">Log In</a>
-{% endif %}
 
 
 <div class="row">
