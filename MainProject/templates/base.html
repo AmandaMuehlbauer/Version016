@@ -142,7 +142,10 @@
           class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">
             <i class="material-icons">subscriptions</i> Forum </span></a>
    
-
+          
+            <span><a href="{% url 'core:post_create' %}"
+              class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">
+              <i class="material-icons">post_add</i>Create a Post</span></a>
 
         <a class="nav-link" href="/YourPosts" {% block YourPostsactive %}{% endblock YourPostsactive %}> 
           <span>
@@ -151,6 +154,24 @@
     
   
         <hr>
+
+      
+         
+          <span>
+            <a  href="{% url 'URLsub:urlsub' %}"
+              class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">
+              <i class="material-icons">dataset</i> Add a Blog </span></a>
+          
+
+
+          <span>
+            <a  href="{% url 'ContactUs:contact' %}"
+              class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">
+              <i class="material-icons">contact_page</i> Contact Us </span></a>
+        <hr>
+             
+
+
    
       <a class="nav-link" href="/About" > 
       <span>
