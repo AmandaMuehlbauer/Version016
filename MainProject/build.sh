@@ -33,16 +33,6 @@ echo "you are here 2"
 echo "yes" | poetry run python3 manage.py collectstatic
 poetry run python3 manage.py migrate
 
-#Verify that the css file is accessible
-CSS_URL="https://your-website-url.com/path-to-your-css-file.css"
-HTTP_RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" $CSS_URL)
-
-if [ "$HTTP_RESPONSE" = "200" ]; then
-  echo "CSS file is accessible and returns a 200 OK status."
-else
-  echo "Error: CSS file is not accessible. HTTP Status: $HTTP_RESPONSE"
-  exit 1
-fi
 
 
 
