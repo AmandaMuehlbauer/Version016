@@ -16,7 +16,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 import sys # new
-from elasticsearch_dsl import connections
+#from elasticsearch_dsl import connections
 from decouple import config
 
 
