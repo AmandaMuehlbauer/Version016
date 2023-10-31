@@ -1,8 +1,10 @@
-#URLsub/views.py
+#apps/URLsub/views.py
 from django.shortcuts import render
 from django.http import  HttpResponseRedirect
 from .forms import URLSubForm
 from django.contrib.auth.decorators import login_required
+from .models import URLsub
+from django.db.models.functions import Random
 
 # Create your views here.
 @login_required()
@@ -14,6 +16,8 @@ def urlsub(request):
           #Set the username field of the form instance with the logged in user's name
           form.instance.username=request.user
           form.save()
+        else: 
+            print(form.errors)
         return HttpResponseRedirect('thanks_url')
     else:
   # this must be a GET request, so create an empty form
@@ -26,3 +30,4 @@ def urlsub(request):
 @login_required()
 def url_thanks(request):
     return render(request, 'URLsub/thanks_url.html', {})
+

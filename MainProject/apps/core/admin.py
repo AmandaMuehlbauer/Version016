@@ -5,7 +5,7 @@ from .models import Post, Tag, BlogFullRecommend, Comment
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created_on', 'updated_on', 'display_tags')
+    list_display = ('title', 'author_username', 'author_email','created_on', 'updated_on', 'display_tags')
     list_filter = ('tags', 'created_on', 'updated_on')
     search_fields = ('title','tags__name')
     prepopulated_fields = {'slug': ('title',)} # this create the slug field from the title field
@@ -36,7 +36,7 @@ admin.site.register(BlogFullRecommend, BlogFullRecommendAdmin)
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('author', 'post', 'created')
+    list_display = ('author_username', 'author_email', 'post', 'created')
     list_filter = ('created', 'post')
     search_fields = ('author__username', 'post__title', 'content')
     date_hierarchy = 'created'

@@ -25,10 +25,12 @@ from apps.users.models import User
 
 
 
+
 class HomeView(ListView):
     template_name = 'core/home.html'
     queryset = Post.objects.all()
     paginate_by = 10
+    
 
 
 class ForumView(ListView):

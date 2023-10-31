@@ -37,6 +37,12 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('core:post', args=[str(self.id), self.slug])
     
+    def author_username(self):
+        return self.author.username
+
+    def author_email(self):
+        return self.author.email
+    
 
 class Comment(models.Model):
     #name = models.CharField(max_length=50)
@@ -51,6 +57,12 @@ class Comment(models.Model):
 
     def __str__(self):
        return 'Comment by {}'.format(self.author.username)
+    
+    def author_username(self):
+        return self.author.username
+
+    def author_email(self):
+        return self.author.email
     
 
 #This model stores full blog recommendations
