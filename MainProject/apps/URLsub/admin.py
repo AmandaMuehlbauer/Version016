@@ -11,6 +11,8 @@ class URLsubAdmin(admin.ModelAdmin):
     search_fields = ('username__username', 'description', 'tags__name', 'url')
     date_hierarchy = 'timestamp'
     
+    verbose_name="URL Submission"
+
     fieldsets = (
         ('User Info', {'fields': ('username',)}),
         ('URL Info', {'fields': ('description', 'tags', 'url')}),
