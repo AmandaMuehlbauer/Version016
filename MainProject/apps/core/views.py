@@ -15,21 +15,20 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.text import slugify
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
-from .forms import CommentForm, SubmitURL
+from .forms import CommentForm
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponseRedirect
 from django.views import generic
 from django.core.mail import send_mail
-from apps.users.models import User
-
+from ..URLsub.models import URLsub
 
 
 
 
 class HomeView(ListView):
     template_name = 'core/home.html'
-    queryset = Post.objects.all()
-    paginate_by = 10
+    queryset=URLsub.objects.all()
+    context_object_name='blogs'
     
 
 
@@ -135,15 +134,15 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
         return self.model.objects.filter(author=self.request.user)
 
 
-def SubmitURLView(request):
+#def SubmitURLView(request):
 
-    context ={}
-    form = SubmitURL()
-    context['form']= form
-    if request.POST:
-        temp = request.POST['urlsubmission']
-        print(temp)
-    return render(request, "core/submit_url.html", {"form":form})
+ #   context ={}
+  #  form = SubmitURL()
+   # context['form']= form
+    #if request.POST:
+     #   temp = request.POST['urlsubmission']
+      #  print(temp)
+    #return render(request, "core/submit_url.html", {"form":form})
 
 def AboutView(request):
     return render(request, 'core/about.html', {})

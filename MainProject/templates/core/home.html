@@ -12,12 +12,26 @@
 <link rel="stylesheet" type= "text/css" href="/static/css/index.css" />
 {% endblock css%}
 
-<ul>
+<div class="card-list">
   {% for blog in blogs %}
-      <li>{{ blog.description }}</li>
+  <div class="card">
+      <div class="card-content">
+        
+        <a href="{{ blog.url }}">{{ blog.url }}</a>
+          <p class="card-description">{{ blog.description|slice:"200"  }}</p>
+          <div>
+            {% for tag in blog.tags.all %}
+            <span class="badge badge-dark">{{ tag }}</span>
+            {% endfor %}
+          </div>
+      </div>
+     
+  </div> <br>
   {% endfor %}
-</ul>
+</div>
+
 
 </div>
 
 {% endblock content %}
+

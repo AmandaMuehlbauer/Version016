@@ -83,30 +83,3 @@ class BlogFullRecommend(models.Model):
         return self.title
     
 
-#This model stores blog posts that have been scraped
-#class BlogPostScraped(model.Model):
- #   parent_title = models.CharField(max_length=200, db_index=True)
-  #  title=models.CharField(max_length=200, db_index=True)
-   # url = models.URLField(db_index=True)
-    #author = models.ForeignKey(max_length=200, db_index=True)
-    #content = models.TextField(max_length=500, blank=True)
-    #image = models.ImageField(upload_to='', blank=True, null=True)
-    #tags = models.ManyToManyField(Tag, blank=True)
-    #created_on = models.DateTimeField(blank=True)
-    #updated_on = models.DateTimeField()
-
-    #class Meta:
-     #   ordering = ['-created_on']
-
-   # def __str__(self):
-    #    return self.title
-
-
-#User interaction tracking
-#class UserPostInteraction(models.Model):
- #   user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE)
-  #  post = models.ForeignKey(Post, on_delete=models.CASCADE)
-   # interaction_type = models.CharField(max_length=255)  # e.g., "Click", "Like", "Comment"
-    #timestamp = models.DateTimeField(auto_now_add=True)
-    #comment_text = models.TextField(blank=True, null=True)  # For tracking text for comments
-    # Other fields for additional data as needed
