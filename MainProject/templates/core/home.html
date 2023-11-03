@@ -17,15 +17,15 @@
   <div class="card">
       <a href="{{ blog.url }}">{{ blog.url }}</a>
       <p>Description: {{ blog.description }}</p>
+      <p>Recommends: {{ blog.submission_count }}</p>
       {% for tag in blog.tags %}
       <div><span class="badge badge-dark">{{ tag }}</span>
+      
 
     </div>
     {% endfor %}
 
-    </p>
-     </p>
-     </p>
+ 
      
      
      
