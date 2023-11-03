@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'apps.core',
    # 'scraping',
     'apps.Search',
+    'apps.SubjectTags',
     'apps.ContactUs',
     'apps.URLsub',
     'widget_tweaks',

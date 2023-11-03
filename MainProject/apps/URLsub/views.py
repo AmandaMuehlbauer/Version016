@@ -4,30 +4,46 @@ from django.http import  HttpResponseRedirect
 from .forms import URLSubForm
 from django.contrib.auth.decorators import login_required
 from .models import URLsub
-from django.db.models.functions import Random
 
-# Create your views here.
-@login_required()
+
+
+@login_required
 def urlsub(request):
     if request.method == 'POST':
-      # create an instance of our form, and fill it with the POST data
         form = URLSubForm(request.POST)
         if form.is_valid():
-          #Set the username field of the form instance with the logged in user's name
-          form.instance.username=request.user
-          form.save()
-        else: 
-            print(form.errors)
-        return HttpResponseRedirect('thanks_url')
+            url = form.cleaned_data['url']
+            user = request.user
+            description = form.cleaned_data['description']
+            tags = form.cleaned_data['tags']  # Retrieve tags from the form
+
+            # Check if a URLsub entry with the same URL already exists
+            submission, created = URLsub.objects.get_or_create(
+                user=user,
+                url=url,
+                defaults={
+                    'description': description,
+                }
+            )
+
+            if not created:
+                # The URL submission already exists, increment the recommendations count
+                submission.recommendations_count += 1
+            else:
+                # Set the description if a new submission is created
+                submission.description = description
+
+            # Handle tags for the submission
+            submission.tags.set(tags)
+
+            submission.save()
+
+            return HttpResponseRedirect('thanks_url')
     else:
-  # this must be a GET request, so create an empty form
         form = URLSubForm()
 
-    return render(request,
-         'URLsub/urlsub.html',
-         {'form': form})
+    return render(request, 'URLsub/urlsub.html', {'form': form})
 
-@login_required()
+@login_required
 def url_thanks(request):
     return render(request, 'URLsub/thanks_url.html', {})
-

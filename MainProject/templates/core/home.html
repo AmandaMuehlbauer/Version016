@@ -15,19 +15,26 @@
 <div class="card-list">
   {% for blog in blogs %}
   <div class="card">
-      <div class="card-content">
-        
-        <a href="{{ blog.url }}">{{ blog.url }}</a>
-          <p class="card-description">{{ blog.description|slice:"200"  }}</p>
-          <div>
-            {% for tag in blog.tags.all %}
-            <span class="badge badge-dark">{{ tag }}</span>
-            {% endfor %}
-          </div>
-      </div>
+      <a href="{{ blog.url }}">{{ blog.url }}</a>
+      <p>{{ blog.description }}</p>
+      <p>Tags:
+        {% for tag in blog.tags %}
+        <span class="badge badge-dark">{{ tag }}</span>
+        {% endfor %}
+    </p>
+     </p>
+     </p>
      
-  </div> <br>
-  {% endfor %}
+     
+     
+     
+     
+     
+
+      <p>Submissions: {{ blog.submission_count }}</p>
+
+  </div>
+{% endfor %}
 </div>
 
 

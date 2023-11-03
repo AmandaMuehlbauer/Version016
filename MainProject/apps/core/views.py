@@ -21,15 +21,47 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.views import generic
 from django.core.mail import send_mail
 from ..URLsub.models import URLsub
+from django.db.models import Max, Count
+from django.views.generic import ListView
+from taggit.models import Tag
 
-
-
+from django.db.models import Max, Count, F
+from django.views.generic import ListView
+from taggit.models import Tag
 
 class HomeView(ListView):
     template_name = 'core/home.html'
-    queryset=URLsub.objects.all()
-    context_object_name='blogs'
-    
+    context_object_name = 'blogs'
+
+    def get_queryset(self):
+        # Aggregate the data for unique URLs
+        unique_urls = URLsub.objects.values('url').annotate(
+            description=Max('description'),
+            submission_count=Count('url'),
+        )
+
+        # Create a list of dictionaries for each unique URL with tags
+        unique_entries = []
+        for entry in unique_urls:
+            url = entry['url']
+            tags = URLsub.objects.filter(url=url).values('tags__name').annotate(
+                tag_count=Count('tags'),
+            ).order_by('-tag_count', 'tags__name').values_list('tags__name', flat=True)
+
+            unique_entries.append({
+                'url': url,
+                'description': entry['description'],
+                'submission_count': entry['submission_count'],
+                'tags': tags,
+            })
+
+        return unique_entries
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tags'] = Tag.objects.all()
+        return context
+
 
 
 class ForumView(ListView):
