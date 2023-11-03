@@ -16,11 +16,13 @@
   {% for blog in blogs %}
   <div class="card">
       <a href="{{ blog.url }}">{{ blog.url }}</a>
-      <p>{{ blog.description }}</p>
-      <p>Tags:
-        {% for tag in blog.tags %}
-        <span class="badge badge-dark">{{ tag }}</span>
-        {% endfor %}
+      <p>Description: {{ blog.description }}</p>
+      {% for tag in blog.tags %}
+      <div><span class="badge badge-dark">{{ tag }}</span>
+
+    </div>
+    {% endfor %}
+
     </p>
      </p>
      </p>
@@ -31,7 +33,7 @@
      
      
 
-      <p>Submissions: {{ blog.submission_count }}</p>
+    
 
   </div>
 {% endfor %}

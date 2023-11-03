@@ -6,14 +6,14 @@ from .models import URLsub
 
 
 class URLsubAdmin(admin.ModelAdmin):
-    list_display = ('author_username', 'author_email', 'description', 'tags_list', 'url', 'timestamp', 'recommendations_count')
+    list_display = ('author_username', 'author_email', 'description', 'tags_list', 'url', 'timestamp')
     list_filter = ('user', 'tags')
     search_fields = ('user__username', 'description', 'tags__name', 'url')
     date_hierarchy = 'timestamp'
 
     fieldsets = (
         ('User Info', {'fields': ('user',)}),
-        ('URL Info', {'fields': ('description', 'tags', 'url', 'recommendations_count')}),
+        ('URL Info', {'fields': ('description', 'tags', 'url')}),
     )
 
     filter_horizontal = ('tags',)

@@ -21,46 +21,50 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.views import generic
 from django.core.mail import send_mail
 from ..URLsub.models import URLsub
-from django.db.models import Max, Count
-from django.views.generic import ListView
+from django.db.models import Max, Count, Subquery, OuterRef, F
 from taggit.models import Tag
+from django.db import models
+import random
 
-from django.db.models import Max, Count, F
-from django.views.generic import ListView
-from taggit.models import Tag
+
+from random import sample
 
 class HomeView(ListView):
     template_name = 'core/home.html'
     context_object_name = 'blogs'
 
     def get_queryset(self):
-        # Aggregate the data for unique URLs
-        unique_urls = URLsub.objects.values('url').annotate(
-            description=Max('description'),
-            submission_count=Count('url'),
-        )
+        # Create a subquery to get unique tags for each URL
+        unique_tags_subquery = URLsub.objects.filter(url=OuterRef('url'))
+        unique_tags_subquery = unique_tags_subquery.values('url').annotate(
+            tag_count=Count('tags')
+        ).values('url', 'tag_count')
 
         # Create a list of dictionaries for each unique URL with tags
-        unique_entries = []
+        unique_urls = URLsub.objects.values('url').annotate(
+            submission_count=Count('url')
+        )
+
         for entry in unique_urls:
             url = entry['url']
             tags = URLsub.objects.filter(url=url).values('tags__name').annotate(
-                tag_count=Count('tags'),
+                tag_count=Count('tags')
             ).order_by('-tag_count', 'tags__name').values_list('tags__name', flat=True)
 
-            unique_entries.append({
-                'url': url,
-                'description': entry['description'],
-                'submission_count': entry['submission_count'],
-                'tags': tags,
-            })
+            # Limit tags to 20 randomly selected tags
+            # Convert the tags to a list and limit them to 2 randomly selected tags
+            tags_list = list(tags)
+            entry['tags'] = sample(tags_list, 20) if len(tags_list) > 20 else tags_list
 
-        return unique_entries
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tags'] = Tag.objects.all()
-        return context
+                    # Select a randomly chosen description (if available)
+            descriptions = URLsub.objects.filter(url=url).values_list('description', flat=True)
+            if descriptions:
+                entry['description'] = random.choice(descriptions)
+            else:
+                entry['description'] = ""  # Set a default value if no descriptions are available
+
+        return unique_urls
 
 
 

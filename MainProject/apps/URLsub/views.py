@@ -28,7 +28,7 @@ def urlsub(request):
 
             if not created:
                 # The URL submission already exists, increment the recommendations count
-                submission.recommendations_count += 1
+                pass
             else:
                 # Set the description if a new submission is created
                 submission.description = description
