@@ -16,7 +16,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 import sys # new
-from elasticsearch_dsl import connections
+#from elasticsearch_dsl import connections
 from decouple import config
 
 
@@ -63,7 +63,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'django_elasticsearch_dsl',
+ #   'django_elasticsearch_dsl',
     'taggit',
     'apps.users',
     'apps.core',
