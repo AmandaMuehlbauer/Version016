@@ -1,5 +1,5 @@
 from django.db import models
-from ..core.models import Tag  # Check if the import path is correct
+#from ..core.models import Tag  # Check if the import path is correct
 from taggit.managers import TaggableManager
 from django.conf import settings
 
