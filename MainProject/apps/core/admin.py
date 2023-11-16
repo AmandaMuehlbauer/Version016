@@ -1,6 +1,6 @@
 # core/admin.py
 from django.contrib import admin
-from .models import Post, Tag, BlogFullRecommend, Comment
+from .models import Post, BlogFullRecommend, Comment
 
 
 
@@ -21,10 +21,10 @@ class PostAdmin(admin.ModelAdmin):
 admin.site.register(Post, PostAdmin)
 
 # TagAdmin must define "search_fields", because it's referenced by PostAdmin.autocomplete_fields.
-class TagAdmin(admin.ModelAdmin):
-    search_fields = ('name',)
+#class TagAdmin(admin.ModelAdmin):
+ #   search_fields = ('name',)
 
-admin.site.register(Tag, TagAdmin)
+#admin.site.register(Tag, TagAdmin)
 
 
 class BlogFullRecommendAdmin(admin.ModelAdmin):
