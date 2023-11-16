@@ -5,15 +5,15 @@ from django.conf import settings
 from taggit.managers import TaggableManager
 from apps.users.models import User
 
-class Tag(models.Model):
+#class Tag(models.Model):
     # Remove the 'name' field, as django-taggit handles tags internally
-    tags = TaggableManager()
+#    tags = TaggableManager()
 
-    class Meta:
-        app_label = 'core'
+ #   class Meta:
+  #      app_label = 'core'
 
-    def __str__(self):
-        return ', '.join(self.tags.names())  # Return a comma-separated list of tag names
+   # def __str__(self):
+    #    return ', '.join(self.tags.names())  # Return a comma-separated list of tag names
 
 
 
