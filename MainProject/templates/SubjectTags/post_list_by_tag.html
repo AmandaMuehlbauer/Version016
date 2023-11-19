@@ -1,0 +1,27 @@
+<!-- templates/core/post_list_by_tag.html -->
+{% extends 'base.html' %}
+
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/static/home/css/index.css' %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- Additional CSS specific to this template if needed -->
+{% endblock css %}
+
+{% block head_title %}
+    <!-- Set the page title -->
+    Your Page Title Here
+{% endblock head_title %}
+
+{% block content %}
+    <!-- Your content goes here -->
+    {% for post in posts %}
+        <div class="post-item">
+            <h2>{{ post.title }}</h2>
+            <!-- Other post details or content -->
+        </div>
+    {% empty %}
+        <p>No posts found.</p>
+    {% endfor %}
+    <!-- Pagination or additional content -->
+{% endblock content %}

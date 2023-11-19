@@ -1,6 +1,7 @@
 # core/forms.py
 from django import forms
 from .models import Comment, Post
+from taggit.forms import TagField
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -26,7 +27,7 @@ class SubmitURL(forms.Form):
 
 
 class PostForumForm(forms.ModelForm):
-    tags = forms.CharField(initial='')
+    tags = TagField()
     class Meta:
         model = Post
         fields = ["title", "content", "image", "tags"]

@@ -18,23 +18,15 @@
       <a href="{{ blog.url }}">{{ blog.url }}</a>
       <p>Description: {{ blog.description }}</p>
       <p>Recommends: {{ blog.submission_count }}</p>
-      {% for tag in blog.tags %}
-      <div><span class="badge badge-dark">{{ tag }}</span>
-      
-
+      <div>
+      <div>
+        <p>Tags</p>
+        {% for tag in blog.tags.all %}
+        <a href="{% url 'SubjectTags:blogs_list_by_tag' tag.slug %}" class="badge badge-dark">{{ tag }}</a>
+      {% endfor %}
     </div>
-    {% endfor %}
-
+    </div>
  
-     
-     
-     
-     
-     
-     
-
-    
-
   </div>
 {% endfor %}
 </div>

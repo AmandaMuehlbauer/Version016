@@ -41,9 +41,8 @@
           </div>
           <div>
             {% for tag in post.tags.all %}
-            <span class="badge badge-dark">{{ tag }}</span> 
+              <a href="{% url 'SubjectTags:post_list_by_tag' tag.slug %}" class="badge badge-dark">{{ tag }}</a>
             {% endfor %}
-   
           </div>
         </div>
 

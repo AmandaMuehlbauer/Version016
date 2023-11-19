@@ -21,11 +21,14 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.views import generic
 from django.core.mail import send_mail
 from ..URLsub.models import URLsub
-from django.db.models import Max, Count, Subquery, OuterRef, F
+from django.db.models import Max, Subquery, OuterRef, F
 from taggit.models import Tag
 from django.db import models
 import random
 
+from django.db.models import OuterRef, Count
+from django.db.models.functions import Concat
+from django.db.models import Value
 
 from random import sample
 
@@ -34,37 +37,33 @@ class HomeView(ListView):
     context_object_name = 'blogs'
 
     def get_queryset(self):
-        # Create a subquery to get unique tags for each URL
-        unique_tags_subquery = URLsub.objects.filter(url=OuterRef('url'))
-        unique_tags_subquery = unique_tags_subquery.values('url').annotate(
-            tag_count=Count('tags')
-        ).values('url', 'tag_count')
+        blogs = URLsub.objects.all()  # Fetch your blogs or posts queryset
+        for blog in blogs:
+            blog.tags_list = blog.tags.all()  # Fetch and assign tags to each blog
 
-        # Create a list of dictionaries for each unique URL with tags
-        unique_urls = URLsub.objects.values('url').annotate(
-            submission_count=Count('url')
-        )
-
-        for entry in unique_urls:
-            url = entry['url']
-            tags = URLsub.objects.filter(url=url).values('tags__name').annotate(
-                tag_count=Count('tags')
-            ).order_by('-tag_count', 'tags__name').values_list('tags__name', flat=True)
-
-            # Limit tags to 20 randomly selected tags
-            # Convert the tags to a list and limit them to 2 randomly selected tags
-            tags_list = list(tags)
-            entry['tags'] = sample(tags_list, 20) if len(tags_list) > 20 else tags_list
+        return blogs
 
 
-                    # Select a randomly chosen description (if available)
-            descriptions = URLsub.objects.filter(url=url).values_list('description', flat=True)
-            if descriptions:
-                entry['description'] = random.choice(descriptions)
-            else:
-                entry['description'] = ""  # Set a default value if no descriptions are available
 
-        return unique_urls
+   # def get_queryset(self):
+        # Fetch unique URLs with their respective tags
+    #    unique_urls = URLsub.objects.values('url').annotate(
+     #       submission_count=Count('url')        
+      #      )
+
+        # Process each URL entry
+       # for entry in unique_urls:
+        #    url = entry['url']
+
+            # Fetch descriptions for the URL
+         #   descriptions = URLsub.objects.filter(url=url).values_list('description', flat=True)
+          #  entry['description'] = random.choice(descriptions) if descriptions else ""
+
+            # Fetch tags for the URL
+           # tags = URLsub.objects.filter(url=url).values_list('tags__name', flat=True)
+            #entry['tags'] = list(tags) if tags else []
+
+        #return unique_urls
 
 
 

@@ -12,6 +12,8 @@ class URLsub(models.Model):
 
     class Meta:
         unique_together = ('url', 'user')  # Add this unique constraint
+       # fields = ['url', 'description', 'tags']  # Specify the fields for forms
+
 
     def author_username(self):
         return self.user.username  # Access the username of the user

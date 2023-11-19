@@ -7,9 +7,6 @@ class URLSubForm(forms.ModelForm):
     tags = TagField()
     class Meta:
         model = URLsub
-        #Exclude username from the form
-     #   exclude = ('username',)
-      #  fields =('username', 'description', 'tags', 'url')
         fields = ('url', 'description', 'tags')  # Include all relevant fields
 
     # Define custom labels

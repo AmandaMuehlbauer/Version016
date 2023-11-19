@@ -1,0 +1,33 @@
+<!-- templates/SubjectTags/blogs_list_by_tag.html -->
+{% extends 'base.html' %}
+
+{% block css %}
+    {% load static %}
+    <!-- Additional CSS specific to this template if needed -->
+    <link rel="stylesheet" type="text/css" href="{% static '/static/home/css/index.css' %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+{% endblock css %}
+
+{% block head_title %}
+    <!-- Set the page title -->
+    Your Page Title Here
+{% endblock head_title %}
+
+{% block content %}
+    <!-- Your content goes here -->
+    <h1>Blogs tagged with "{{ tag }}"</h1>
+
+    {% if blogs %}
+        <ul>
+            {% for blog in blogs %}
+                <li>
+                    <h2>{{ blog.title }}</h2>
+                    <!-- Display other blog details -->
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No blogs found for this tag.</p>
+    {% endif %}
+    <!-- Pagination or additional content -->
+{% endblock content %}
