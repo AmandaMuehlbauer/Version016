@@ -3,28 +3,32 @@
 
 {% block css %}
     {% load static %}
-    <!-- Additional CSS specific to this template if needed -->
     <link rel="stylesheet" type="text/css" href="{% static '/static/home/css/index.css' %}" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 {% endblock css %}
 
-{% block head_title %}
-    <!-- Set the page title -->
-    Your Page Title Here
-{% endblock head_title %}
-
 {% block content %}
-    <!-- Your content goes here -->
     <h1>Blogs tagged with "{{ tag }}"</h1>
+    <br>
 
     {% if blogs %}
         <ul>
             {% for blog in blogs %}
-                <li>
-                    <h2>{{ blog.title }}</h2>
-                    <!-- Display other blog details -->
-                </li>
-            {% endfor %}
+            <div class="card">
+                <a href="{{ blog.url }}">{{ blog.url }}</a>
+                <p>Description: {{ blog.description }}</p>
+                <p>Recommends: {{ blog.submission_count }}</p>
+                <div>
+                <div>
+                  <p>Tags</p>
+                  {% for tag in blog.tags.all %}
+                  <a href="{% url 'SubjectTags:blogs_list_by_tag' tag.slug %}" class="badge badge-dark">{{ tag }}</a>
+                {% endfor %}
+              </div>
+            </div>
+           
+          </div>
+          {% endfor %}
         </ul>
     {% else %}
         <p>No blogs found for this tag.</p>

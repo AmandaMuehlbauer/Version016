@@ -14,14 +14,39 @@
 {% endblock head_title %}
 
 {% block content %}
+<h1>Posts tagged with "{{ tag }}"</h1>
+<br>
+<div class="post-grid">
     <!-- Your content goes here -->
     {% for post in posts %}
-        <div class="post-item">
-            <h2>{{ post.title }}</h2>
-            <!-- Other post details or content -->
-        </div>
+    <a href="{% url 'core:post' post.id post.slug %}">
+        <div class="entry">
+        
+          <div class="thumbnail">
+            {% if post.image %}
+            
+            
+           
+            <img  src="{{ post.image.url }}"  alt="{{ post.title }}">
+            {% else %}
+            <img src="/static/img/default.png">
+      
+            {% endif %}
+      
+          </div>
+        
+           
+      
+            <div class="card-title">{{ post.title| truncatechars:100 }} </div>
+            <div class="author"> {{ post.author.username }}</div>
+            <div class="card-text">{{ post.content| truncatechars:100 }}</div>
+          </div>
+            <div class="text-muted mb-3"></div>
+      
+        </a>
     {% empty %}
         <p>No posts found.</p>
     {% endfor %}
+    </div>
     <!-- Pagination or additional content -->
 {% endblock content %}

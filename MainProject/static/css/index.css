@@ -362,3 +362,17 @@
   height: 300px;
   border-radius: 50%;
 }
+
+/*Styling for blogs on home page and for blogs in submitted tags category*/
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.post-item {
+  /* Additional styles for each post item */
+  border: 1px solid #ccc;
+  padding: 20px;
+  /* Other styling properties */
+}
