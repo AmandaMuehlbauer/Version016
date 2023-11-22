@@ -390,18 +390,11 @@
 
 .card a {
   text-decoration: none;
-  color: #333;
   font-weight: bold;
 }
 
-.card p {
-  margin: 5px 0;
-}
 
-.card .tags {
-  margin-top: 8px;
-}
 
-.badge {
-  margin-right: 5px;
-}
+
+
+
