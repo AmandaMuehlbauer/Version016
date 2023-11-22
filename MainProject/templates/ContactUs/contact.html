@@ -1,4 +1,19 @@
+<!-- templates/ContactUs/contact.html -->
+{% extends 'base.html' %}
 
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/static/home/css/index.css' %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- Additional CSS specific to this template if needed -->
+{% endblock css %}
+
+{% block head_title %}
+    <!-- Set the page title -->
+    Your Page Title Here
+{% endblock head_title %}
+
+{% block content %}
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -11,10 +26,10 @@
 {{ form.as_p }}
 <input type="submit" value="Submit">
 </form>
-{% block content %} {% endblock %}
+
 
 
 
 
 </body>
-
+{% endblock %}

@@ -376,3 +376,32 @@
   padding: 20px;
   /* Other styling properties */
 }
+
+/*Homepage cards*/
+.card {
+  width: 300px; /* Adjust the width as needed */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.card a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.card p {
+  margin: 5px 0;
+}
+
+.card .tags {
+  margin-top: 8px;
+}
+
+.badge {
+  margin-right: 5px;
+}
