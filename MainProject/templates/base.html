@@ -94,7 +94,8 @@
   
             <p><a href="{% url 'users:logout'  %}">Log Out</a></p>
             {% else %}
-            <a href="{% url 'users:login' %}">Log In</a>
+            <a href="{% url 'users:login' %}">Log In</a><br>
+            <a href="{% url 'users:signup' %}">Sign up</a>
 
 {% endif %}
 </div>
