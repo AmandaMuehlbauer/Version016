@@ -5,7 +5,7 @@
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
   <!-- Bootstrap and CSS files -->
@@ -48,16 +48,10 @@
     class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">Jidder</a>
     </div>
 
-    <div class="navbar-nav">
-     
-    </div>
+
    
     
-
-    <nav class="navbar navbar-expand-sm">
-      <div class="container">
-
-     
+    <div class="container">
 
 
       <div class="search center">
@@ -66,13 +60,9 @@
           <input type="text" placeholder="Search" name="query">
           <button><i class="material-icons">search</i></button>
         </form>
-      </div>
-
-        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-          
-
-   
- 
+        
+    
+         
 
     <div class="dropdown">
       <div class="icons right">
@@ -97,8 +87,10 @@
             <a href="{% url 'users:login' %}">Log In</a><br>
             <a href="{% url 'users:signup' %}">Sign up</a>
 
-{% endif %}
-</div>
+            {% endif %}
+          </div>
+          </div>
+          </div>
 
 </header>         
   
@@ -135,7 +127,7 @@
       <span>
           <i class="material-icons">subscriptions</i> Subscriptions </span>
       </a> 
-{% endif %}
+      {% endif %}
       <hr>
 
      
@@ -204,10 +196,10 @@
           <i class="material-icons">thumb_up</i> Liked </span>
       </a>
       {% endif %}
-        </div>
+    </div>
 
       
-</div>
+    </div>
 
 
 
