@@ -17,11 +17,7 @@
 
   {% for blog in blogs %}
   <div class="card">
-    {% if post.title == 'Default Title' %}
-    <a href="{{ post.url }}">{{ post.url }}</a>
-{% else %}
-    <a href="{{ post.url }}">{{ post.title }}</a>
-{% endif %}
+      <a href="{{ blog.url }}">{{ blog.title }}</a>
       <p>Description: {{ blog.description }}</p>
       <p>Recommends: {{ blog.submission_count }}</p>
       <div>
