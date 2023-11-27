@@ -46,3 +46,4 @@ def urlsub(request):
 @login_required
 def url_thanks(request):
     return render(request, 'URLsub/thanks_url.html', {})
+

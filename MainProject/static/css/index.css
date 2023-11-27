@@ -385,20 +385,17 @@
 }
 
 /*Homepage cards*/
+/* index.css */
 .card {
-  width: 300px; /* Adjust the width as needed */
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  margin: 10px;
-  display: inline-block;
-  vertical-align: top;
+  /* Define your card styles here */
+  width: 300px; /* Adjust as needed */
+  height: 300px; /* Adjust as needed */
+  border: 1px solid #ccc; /* Add borders or other styles */
+  border-radius: 10px; /* Add border radius or other styles */
+  margin: 10px; /* Add margin between cards */
+  padding: 15px; /* Add padding inside cards */
 }
 
-.card a {
-  text-decoration: none;
-  font-weight: bold;
-}
 
 
 

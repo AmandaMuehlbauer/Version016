@@ -1,42 +1,27 @@
 <!-- templates/core/home.html -->
 {% extends 'base.html' %}
 
-
-
-
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/static/css/index.css' %}" />
+    <!-- Link to the index.css file -->
+{% endblock css %}
 
 {% block content %}
-
-{% block css %}
-{% load static %}
-<link rel="stylesheet" type= "text/css" href="/static/css/index.css" />
-{% endblock css%}
-
-<div class="row">
-  <div class="wrapper">
-
-  {% for blog in blogs %}
-  <div class="card">
-      <a href="{{ blog.url }}">{{ blog.title }}</a>
-      <p>Description: {{ blog.description }}</p>
-      <p>Recommends: {{ blog.submission_count }}</p>
-      <div>
-      <div class="tags">
-        <p>Tags:</p>
-        {% for tag in blog.tags.all %}
-        <a href="{% url 'SubjectTags:blogs_list_by_tag' tag.slug %}" class="badge badge-dark">{{ tag }}</a>
-      {% endfor %}
+    <div class="row">
+        {% for blog in blogs %}
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="{{ blog.url }}">{{ blog.title }}</a>
+                    <p>Description: {{ blog.description }}</p>
+                    <div class="tags">
+                        <p>Tags:</p>
+                        {% for tag in blog.tags.all %}
+                            <a href="{% url 'SubjectTags:blogs_list_by_tag' tag.slug %}" class="badge badge-dark">{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
-  </div>
-  <div class="text-muted mb-3"></div>
-</div>
-
-{% endfor %}
-</div>
-</div>
-
-
-
-
 {% endblock content %}
-
