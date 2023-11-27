@@ -6,6 +6,7 @@ from django.conf import settings
 class URLsub(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     url = models.URLField()
+    title = models.TextField()
     description = models.TextField()
     tags = TaggableManager()  # Specify the through parameter
     timestamp = models.DateTimeField(auto_now_add=True)

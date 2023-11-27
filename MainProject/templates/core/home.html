@@ -17,12 +17,16 @@
 
   {% for blog in blogs %}
   <div class="card">
-      <a href="{{ blog.url }}">{{ blog.url }}</a>
+    {% if post.title == 'Default Title' %}
+    <a href="{{ post.url }}">{{ post.url }}</a>
+{% else %}
+    <a href="{{ post.url }}">{{ post.title }}</a>
+{% endif %}
       <p>Description: {{ blog.description }}</p>
       <p>Recommends: {{ blog.submission_count }}</p>
       <div>
       <div class="tags">
-        <p>Tags</p>
+        <p>Tags:</p>
         {% for tag in blog.tags.all %}
         <a href="{% url 'SubjectTags:blogs_list_by_tag' tag.slug %}" class="badge badge-dark">{{ tag }}</a>
       {% endfor %}
