@@ -2,7 +2,8 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from .forms import SearchForm
-from apps.core.models import Post, BlogFullRecommend  # Replace with your model
+from apps.core.models import Post, BlogFullRecommend   # Replace with your model
+from apps.URLsub.models import URLsub
 from elasticsearch import Elasticsearch
 #from elasticsearch_dsl import Search
 from .documents import PostDocument
@@ -29,36 +30,66 @@ def remove_stop_words(query):
 
     return clean_query
 
-def parse_boolean_query(query):
-    # Split the query into individual words
+
+def parse_post_query(query):
     words = query.split()
-
-    # Define a mapping of boolean operators to their Q object equivalents
-    operators = {
-        "AND": Q.AND,
-        "OR": Q.OR,
-    }
-
-    # Initialize a list to store Q objects
+    operators = {"AND": Q.AND, "OR": Q.OR}
     q_objects = []
 
-    # Iterate through the words and construct the query
+    post_fields = [field.name for field in Post._meta.get_fields()]
+
     for word in words:
         if word.upper() in operators:
             operator = operators[word.upper()]
             q_objects.append(operator)
         else:
-            # Remove common stop words from individual words
             cleaned_word = remove_stop_words(word)
-            q_objects.append(
-                Q(title__icontains=cleaned_word) |
-                Q(content__icontains=cleaned_word) |
-                Q(author__username__icontains=cleaned_word) |
-                Q(tags__name__icontains=cleaned_word)
-            )
+            post_query = None
 
-    # Combine the Q objects using logical operators
-    boolean_query = q_objects[0]
+            if all(field in post_fields for field in ['title', 'content', 'tags']):
+                post_query = (
+                    Q(title__icontains=cleaned_word) |
+                    Q(content__icontains=cleaned_word) |
+                    Q(tags__name__icontains=cleaned_word)
+                )
+
+            if post_query is not None:
+                q_objects.append(post_query)
+
+    boolean_query = q_objects[0] if q_objects else Q()
+    for i in range(1, len(q_objects), 2):
+        if i + 1 < len(q_objects):
+            boolean_query = boolean_query & q_objects[i + 1]
+
+    return boolean_query
+
+
+def parse_urlsub_query(query):
+    words = query.split()
+    operators = {"AND": Q.AND, "OR": Q.OR}
+    q_objects = []
+
+    urlsub_fields = [field.name for field in URLsub._meta.get_fields()]
+
+    for word in words:
+        if word.upper() in operators:
+            operator = operators[word.upper()]
+            q_objects.append(operator)
+        else:
+            cleaned_word = remove_stop_words(word)
+            urlsub_query = None
+
+            if all(field in urlsub_fields for field in ['title', 'description', 'tags']):
+                urlsub_query = (
+                    Q(title__icontains=cleaned_word) |
+                    Q(description__icontains=cleaned_word) |
+                    Q(tags__name__icontains=cleaned_word)
+                )
+
+            if urlsub_query is not None:
+                q_objects.append(urlsub_query)
+
+    boolean_query = q_objects[0] if q_objects else Q()
     for i in range(1, len(q_objects), 2):
         if i + 1 < len(q_objects):
             boolean_query = boolean_query & q_objects[i + 1]
@@ -67,48 +98,29 @@ def parse_boolean_query(query):
 
 def search_view(request):
     form = SearchForm()
-    results = []
-    objects = []
+    results_post = []
+    results_urlsub = []
 
     if request.method == 'GET':
         form = SearchForm(request.GET)
         if form.is_valid():
             query = form.cleaned_data['query']
 
-            # Parse the boolean query
-            boolean_query = parse_boolean_query(query)
-            print("boolean_query:")
-            print(boolean_query)
+            boolean_query_post = parse_post_query(query)
+            boolean_query_urlsub = parse_urlsub_query(query)
 
-            # Perform the search using the boolean query
-            results = Post.objects.filter(boolean_query).distinct()
+            results_post = Post.objects.filter(boolean_query_post).distinct()
+            results_urlsub = URLsub.objects.filter(boolean_query_urlsub).distinct()
 
-            print("results:")
-            print(results)
-
-            # Extract primary keys (id) from the Post objects
-            pk_values = [post.id for post in results]
-
-            if pk_values:
-                objects = Post.objects.filter(id__in=pk_values)
-
-                # Generate URLs for each retrieved Post object
-                for post in objects:
-                    post.url = reverse('core:post', args=[str(post.id), post.slug])
-                    print(post.url)
-
-            # Save the search history to the database
             if request.user.is_authenticated:
                 search_history = SearchHistory(user=request.user, query=query)
                 search_history.save()
 
-        context = {
-            'form': form,
-            'results': results,
-            'objects': objects
-        }
-        print("context:")
-        print(context)
+    context = {
+        'form': form,
+        'results_post': results_post,
+        'results_urlsub': results_urlsub,
+    }
 
     return render(request, 'Search/search_results.html', context)
 
