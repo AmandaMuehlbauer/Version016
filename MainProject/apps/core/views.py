@@ -45,27 +45,6 @@ class HomeView(ListView):
 
 
 
-   # def get_queryset(self):
-        # Fetch unique URLs with their respective tags
-    #    unique_urls = URLsub.objects.values('url').annotate(
-     #       submission_count=Count('url')        
-      #      )
-
-        # Process each URL entry
-       # for entry in unique_urls:
-        #    url = entry['url']
-
-            # Fetch descriptions for the URL
-         #   descriptions = URLsub.objects.filter(url=url).values_list('description', flat=True)
-          #  entry['description'] = random.choice(descriptions) if descriptions else ""
-
-            # Fetch tags for the URL
-           # tags = URLsub.objects.filter(url=url).values_list('tags__name', flat=True)
-            #entry['tags'] = list(tags) if tags else []
-
-        #return unique_urls
-
-
 
 class ForumView(ListView):
     template_name = 'core/forum.html'

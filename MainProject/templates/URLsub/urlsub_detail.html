@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block css %} 
+    <link rel="stylesheet" type="text/css" href="{% static '/static/home/css/index.css' %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/input-tags/tagsinput.css' %}" />
+{% endblock css %}
+
+{% block head_title %}{{ urlsub.title }}{% endblock %}
+
+{% block content %}
+    <div>
+        <h1>{{ urlsub.title }}</h1>
+        <p>{{ urlsub.description }}</p>
+        <p>URL: <a href="{{ urlsub.url }}">{{ urlsub.url }}</a></p>
+        <p>Tags: {% for tag in urlsub.tags.all %}{{ tag }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+        <p>Author: {{ urlsub.author_username }}</p>
+        <p>Contact: {{ urlsub.author_email }}</p>
+        <p>Timestamp: {{ urlsub.timestamp }}</p>
+    </div>
+    <!-- Include any additional content or formatting specific to the URLsub details -->
+{% endblock %}

@@ -4,6 +4,8 @@ from django.http import  HttpResponseRedirect, HttpResponseNotFound
 from .forms import URLSubForm
 from django.contrib.auth.decorators import login_required
 from .models import URLsub
+from django.views.generic import DetailView
+
 
 
 @login_required
@@ -47,3 +49,9 @@ def urlsub(request):
 def url_thanks(request):
     return render(request, 'URLsub/thanks_url.html', {})
 
+
+##View to see individual blogs and their descriptions, reviews authors etc
+class URLsubDetailView(DetailView):
+    model = URLsub
+    template_name = 'URLsub/urlsub_detail.html'  # Create a template for the detail view
+    context_object_name = 'urlsub'
