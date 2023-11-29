@@ -16,9 +16,7 @@
         <p>{{ urlsub.description }}</p>
         <p>URL: <a href="{{ urlsub.url }}">{{ urlsub.url }}</a></p>
         <p>Tags: {% for tag in urlsub.tags.all %}{{ tag }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-        <p>Author: {{ urlsub.author_username }}</p>
-        <p>Contact: {{ urlsub.author_email }}</p>
-        <p>Timestamp: {{ urlsub.timestamp }}</p>
+
     </div>
     <!-- Include any additional content or formatting specific to the URLsub details -->
 {% endblock %}

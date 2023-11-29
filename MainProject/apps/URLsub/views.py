@@ -5,6 +5,8 @@ from .forms import URLSubForm
 from django.contrib.auth.decorators import login_required
 from .models import URLsub
 from django.views.generic import DetailView
+from django.shortcuts import get_object_or_404
+
 
 
 
@@ -55,3 +57,9 @@ class URLsubDetailView(DetailView):
     model = URLsub
     template_name = 'URLsub/urlsub_detail.html'  # Create a template for the detail view
     context_object_name = 'urlsub'
+
+    def get_object(self, queryset=None):
+        # Retrieve the object based on both primary key and slug
+        pk = self.kwargs.get('pk')
+        slug = self.kwargs.get('slug')
+        return get_object_or_404(URLsub, pk=pk, slug=slug)
