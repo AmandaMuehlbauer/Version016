@@ -13,10 +13,14 @@
 {% block content %}
     <div>
         <h1>{{ urlsub.title }}</h1>
-        <p>{{ urlsub.description }}</p>
+        <p>Description: {{ urlsub.description }}</p>
         <p>URL: <a href="{{ urlsub.url }}">{{ urlsub.url }}</a></p>
-        <p>Tags: {% for tag in urlsub.tags.all %}{{ tag }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-
+        <p>Tags:
+            {% for tag in urlsub.tags.all %}
+                <a href="{% url 'SubjectTags:blogs_list_by_tag' tag.slug %}" class="badge badge-dark">{{ tag }}</a>
+                {% if not forloop.last %} {% endif %}
+            {% endfor %}
+        </p>
     </div>
     <!-- Include any additional content or formatting specific to the URLsub details -->
 {% endblock %}
