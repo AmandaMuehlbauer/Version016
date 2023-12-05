@@ -21,8 +21,14 @@
                             <a href="{% url 'SubjectTags:blogs_list_by_tag' tag.slug %}" class="badge badge-dark">{{ tag }}</a>
                         {% endfor %}
                     </div>
-                    <a href="{% url 'URLsub:urlsub_detail' blog.id blog.slug %}">View Details</a>
-                </div>
+                    <div class="button-container">
+                    <a href="{% url 'URLsub:urlsub_detail' blog.id blog.slug %}">
+                      <button class="styled-button">View Details</button>
+                    </a>     
+                    <a href="{{ blog.url }}">
+                      <button class="styled-button">Go to Blog</button>
+                    </a>             
+                  </div></div>
             </div>
         {% endfor %}
     </div>
