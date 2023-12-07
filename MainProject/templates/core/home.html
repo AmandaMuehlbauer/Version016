@@ -8,28 +8,37 @@
 {% endblock css %}
 
 {% block content %}
-    <div class="row">
-        {% for blog in blogs %}
-            <div class="col-md-4">
-                <div class="card">
-                    <a href="{{ blog.url }}">{{ blog.title }}</a>
+<div class="row">
+  {% for blog in blogs %}
+      <div class="col-md-4">
+          <div class="card">
+              <a href="{{ blog.url }}" style="font-size: 24px; color: rgb(100,100,100);">{{ blog.title }}</a>
 
-                    <p>Description: {{ blog.description }}</p>
-                    <div class="tags">
-                        <p>Tags:</p>
-                        {% for tag in blog.tags.all %}
-                            <a href="{% url 'SubjectTags:blogs_list_by_tag' tag.slug %}" class="badge badge-dark">{{ tag }}</a>
-                        {% endfor %}
-                    </div>
-                    <div class="button-container">
-                    <a href="{% url 'URLsub:urlsub_detail' blog.id blog.slug %}">
-                      <button class="styled-button">View Details</button>
-                    </a>     
-                    <a href="{{ blog.url }}">
-                      <button class="styled-button">Go to Blog</button>
-                    </a>             
-                  </div></div>
-            </div>
-        {% endfor %}
-    </div>
+              <p>Description: {{ blog.description }}</p>
+
+ 
+
+              <!-- Tags section moved below the buttons -->
+              <div class="tags">
+                <span class="tags-label">Tags:</span>
+                <div class="badge-container">
+                  {% for tag in blog.tags.all %}
+                    <a href="{% url 'SubjectTags:blogs_list_by_tag' tag.slug %}" class="badge badge-dark">{{ tag }}</a>
+                  {% endfor %}
+                </div>
+              </div>
+
+                           <!-- Button container -->
+                           <div class="button-container">
+                            <a href="{% url 'URLsub:urlsub_detail' blog.id blog.slug %}">
+                                <button class="styled-button">View Details</button>
+                            </a>     
+                            <a href="{{ blog.url }}">
+                                <button class="styled-button">Go to Blog</button>
+                            </a>             
+                        </div>
+          </div>
+      </div>
+  {% endfor %}
+</div>
 {% endblock content %}

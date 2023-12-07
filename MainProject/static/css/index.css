@@ -10,6 +10,8 @@
   body {
     font-family: 'Roboto', sans-serif;
   }
+
+
  
 
   /* header section*/
@@ -345,7 +347,17 @@
   outline: none; /* Remove default outline */
 }
 
-/* Basic styling for the submit button */
+/* Basic styling for the buttons */
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Adjust alignment as needed */
+}
+
+.button-link {
+  margin-right: 10px; /* Adjust spacing between buttons */
+}
+
+
 .styled-button {
   display: inline-block;
   padding: 10px 20px;
@@ -444,4 +456,27 @@
 .post-card .card-text {
   flex: 1;
 }
+
+/* Change the styling of the tags */
+
+.badge {
+  background-color: rgb(100,100,100);
+}
+
+.tags {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.tags-label {
+  margin-right: 10px; /* Adjust margin between label and badges */
+}
+
+.badge-container {
+  display: flex;
+  flex-wrap: wrap; /* Enable wrapping for badges */
+  align-items: center; /* Align badges vertically */
+  gap: 5px; /* Adjust spacing between badges */
+}
+
 

@@ -24,34 +24,38 @@
 
 <main>
 <section>
+    <div class="about-content">
     <h1>About Jidder</h1>
     <p>
-        Welcome to our website! Jidder is an experimental 
+        Welcome to Jidder! Jidder is an experimental 
         project that aims to make it easier to find independent 
         blogs from amateur content creators. </p>
-        <br>
 
-        <p>Jidder is for the curious.</p>
-        <br>
 
-    <p>At Jidder we have implemented a fuzzy search algorithm. 
+
+        <p>Jidder is for people who are looking for an internet experience that is fun and serendipitious.
+        At Jidder we have implemented a very fuzzy search algorithm. 
         The goal is to make a tool that is more conducive to exploration and finding random, new things.
         
         Think of it like an old-fashioned card catalog. </p>
 
-        <br>
+        <p>
+            This is a user-curated community. 
+            We encourage users to recommend blogs they find interesting and tag your recommendations by subject. 
+        </p>
+    
 
-    <p>
-        This is a user-curated community. 
-        We encourage users to recommend blogs they find interesting and tag your recommendations by subject. 
-    </p>
+ 
+    <p>Are you the owner of a blog? Add it to our catalog! 
+        We do not copy your content or present it as our own.  </p>
+
     <br>
-    <p>Recommend a blog here!</p>
+    <p>Recommend a blog  <a href="{% url 'URLsub:urlsub' %}"  >here</a>
     <br>
-    <p>Leave us a comment or suggestion!</p>
+    <p>Leave us a  <a href="{% url 'ContactUs:contact' %}" >question, comment or suggestion</a>
 </section>
 
-
+</div>
 </main>
 </body>
 </html>
