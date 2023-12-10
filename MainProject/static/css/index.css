@@ -257,6 +257,10 @@
  
 /*Dropdown menu section */
 
+
+
+
+
   .dropdown {
     position: relative;
     display: inline-block;
@@ -440,7 +444,7 @@
   height: 200px;
     /* Ensure the container can contain the image without overflow */
   overflow: hidden;
-  border
+  
 }
 
 .post-card .card-img {
