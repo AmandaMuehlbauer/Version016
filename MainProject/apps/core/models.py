@@ -4,6 +4,7 @@ from django.db import models
 from django.conf import settings
 from taggit.managers import TaggableManager
 from apps.users.models import User
+from apps.URLsub.models import URLsub
 
 #class Tag(models.Model):
     # Remove the 'name' field, as django-taggit handles tags internally
@@ -27,6 +28,8 @@ class Post(models.Model):
     tags = TaggableManager(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now= True)
+    urlsub = models.ForeignKey(URLsub, on_delete=models.CASCADE, related_name='related_posts', blank=True, null=True)
+
 
     class Meta:
         ordering = ['-created_on']
