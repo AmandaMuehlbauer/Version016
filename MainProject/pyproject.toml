@@ -345,6 +345,7 @@ zipp = "3.17.0"
 zope-interface = "6.0"
 dj-database-url = "^2.1.0"
 gunicorn = "^21.2.0"
+stripe = "^7.10.0"
 
 
 [build-system]

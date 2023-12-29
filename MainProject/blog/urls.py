@@ -33,7 +33,8 @@ urlpatterns = [
     path('', include(('apps.URLsub.urls', 'URLsub'), namespace='URLsub')),  
     path('', include(('apps.Search.urls', 'Search'), namespace='Search')),
     path('', include(('SubjectTags.urls', 'SubjectTags'), namespace='SubjectTags')),
-    
+    path('', include(('StripePayment.urls', 'StripePayment'), namespace='StripePayment')),
+
 ]
 
 #urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
