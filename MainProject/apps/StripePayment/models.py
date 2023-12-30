@@ -1,4 +1,6 @@
+#apps/StripePayment/models.py
 from django.db import models
+from decimal import Decimal
  
  
 class Product(models.Model):
@@ -12,7 +14,7 @@ class Product(models.Model):
 class Price(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     stripe_price_id = models.CharField(max_length=100)
-    price = models.IntegerField(default=0)  # cents
-    
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'))
+
     def get_display_price(self):
-        return "{0:.2f}".format(self.price / 100)
+        return "{0:.2f}".format(self.price)
