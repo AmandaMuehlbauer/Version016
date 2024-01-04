@@ -1,10 +1,11 @@
 #apps/StripePayment/views.py
 import stripe
+from .models import Price, Product
 from django.conf import settings
 from django.http import JsonResponse
+from django.http import HttpResponseRedirect
 from django.views import View
-from .models import Price, Product
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.core.mail import send_mail
@@ -37,14 +38,6 @@ class CreateCheckoutSessionView(View):
 
 
 
- 
-class SuccessView(TemplateView):
-    template_name = "StripePayment/success.html"
- 
-class CancelView(TemplateView):
-    template_name = "StripePayment/cancel.html"
-
-
 class ProductLandingPageView(TemplateView):
     template_name = "StripePayment/landing.html"
  
@@ -58,7 +51,62 @@ class ProductLandingPageView(TemplateView):
             "prices": prices
         })
         return context
-    
+
+class SuccessView(TemplateView):
+    template_name = "StripePayment/success.html"
+ 
+class CancelView(TemplateView):
+    template_name = "StripePayment/cancel.html"
+
+
+
+class DonationView(View):
+    template_name = "StripePayment/donation.html"
+
+    def get(self, request, *args, **kwargs):
+        # Logic to render the donation form
+        return render(request, self.template_name, context={})
+
+    def post(self, request, *args, **kwargs):
+        # Logic to process the donation payment
+        try:
+            amount = int(request.POST.get('amount'))  # Assuming a form field for donation amount
+            domain = "https://jidder.onrender.com"
+            if settings.DEBUG:
+                domain = "http://127.0.0.1:8000"
+                
+            checkout_session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=[
+                    {
+                        'price_data': {
+                            'currency': 'usd',
+                            'unit_amount': amount * 100,  # Stripe uses amount in cents
+                            'product_data': {
+                                'name': 'Donation',  # Change as needed
+                            },
+                        },
+                        'quantity': 1,
+                    },
+                ],
+                mode='payment',
+                success_url=domain + '/donation-success/',
+                cancel_url=domain + '/donation-cancel/',
+            )
+            return HttpResponseRedirect(checkout_session.url)
+        except Exception as e:
+            # Handle the exception appropriately (e.g., show an error message)
+            return render(request, self.template_name, context={'error_message': str(e)})
+
+
+
+
+
+class DonationSuccessView(TemplateView):
+    template_name = "StripePayment/donation_success.html"
+ 
+class DonationCancelView(TemplateView):
+    template_name = "StripePayment/donation_cancel.html"
 
 
 @csrf_exempt
