@@ -19,9 +19,15 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 class CreateCheckoutSessionView(View):
     def post(self, request, *args, **kwargs):
         price = Price.objects.get(id=self.kwargs["pk"])
-        domain = "https://jidder.onrender.com"
+        domain = "https://thewildernet.com"  # Default to thewildernet.com
+
+            # Redirect www version to non-www if accessing through www
+        if 'www.' in request.META.get('HTTP_HOST'):
+            return redirect("https://thewildernet.com" + request.get_full_path(), permanent=True)
+
+            # Adjust domain if in debug mode
         if settings.DEBUG:
-            domain = "http://127.0.0.1:8000"
+            domain = "http://127.0.0.1:8000"  # Replace with your debug domain
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[
@@ -60,6 +66,7 @@ class CancelView(TemplateView):
 
 
 
+
 class DonationView(View):
     template_name = "StripePayment/donation.html"
 
@@ -71,9 +78,15 @@ class DonationView(View):
         # Logic to process the donation payment
         try:
             amount = int(request.POST.get('amount'))  # Assuming a form field for donation amount
-            domain = "https://jidder.onrender.com"
+            domain = "https://thewildernet.com"  # Default to thewildernet.com
+
+            # Redirect www version to non-www if accessing through www
+            if 'www.' in request.META.get('HTTP_HOST'):
+                return redirect("https://thewildernet.com" + request.get_full_path(), permanent=True)
+
+            # Adjust domain if in debug mode
             if settings.DEBUG:
-                domain = "http://127.0.0.1:8000"
+                domain = "http://127.0.0.1:8000"  # Replace with your debug domain
                 
             checkout_session = stripe.checkout.Session.create(
                 payment_method_types=['card'],
@@ -114,7 +127,7 @@ def stripe_webhook(request):
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
- 
+
     try:
         event = stripe.Webhook.construct_event(
             payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
@@ -125,27 +138,129 @@ def stripe_webhook(request):
     except stripe.error.SignatureVerificationError as e:
         # Invalid signature
         return HttpResponse(status=400)
- 
-    # Handle the checkout.session.completed event
+
+    # Handle the different event types
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
-        customer_email = session["customer_details"]["email"]
-        line_items = stripe.checkout.Session.list_line_items(session["id"])
- 
-        stripe_price_id = line_items["data"][0]["price"]["id"]
-        price = Price.objects.get(stripe_price_id=stripe_price_id)
-        product = price.product
-
-        send_mail(
-            subject="Here is your product",
-            message=f"Thanks for your purchase.",
+        # Check if it's a one-time payment (donation)
+        if 'payment_intent' in session:
+            amount_paid = session['amount_total']
+            customer_email = session['customer_details']['email']
+            # Handle donation logic (e.g., send a thank-you email)
+            send_mail(
+                subject="Thank You for Your Donation",
+                message=f"Thank you for donating ${amount_paid / 100}. Your support is appreciated!",
                 recipient_list=[customer_email],
                 from_email="your@email.com"
-        )
+            )
+        else:
+            # It's a subscription payment
+            customer_email = session["customer_details"]["email"]
+            line_items = stripe.checkout.Session.list_line_items(session["id"])
+            stripe_price_id = line_items["data"][0]["price"]["id"]
+            price = Price.objects.get(stripe_price_id=stripe_price_id)
+            product = price.product
+            # Handle subscription logic (e.g., send subscription confirmation email)
+         
 
-    
-        
- 
     return HttpResponse(status=200)
 
 
+
+#This handles the subscription views
+
+class SubscriptionView(View):
+    template_name = "StripePayment/subscription.html"
+
+    def get(self, request, *args, **kwargs):
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+
+        try:
+            # Retrieve the prices using the Stripe API
+            prices = stripe.Price.list(active=True, limit=10)
+            price_ids = [price.id for price in prices.data]
+
+            context = {
+                'price_ids': price_ids,
+            }
+
+            return render(request, self.template_name, context)
+        except stripe.error.StripeError as e:
+            return render(request, self.template_name, {'error': str(e)})
+
+    def post(self, request, *args, **kwargs):
+        stripe.api_key = settings.STRIPE_SECRET_KEY  # Set the Stripe secret key
+
+        try:
+            plan_id = request.POST.get('plan_id')  # Assuming a form field for subscription plan selection
+
+            # Retrieve the prices using the Stripe API
+            prices = stripe.Price.list(active=True, limit=10)  # Limit can be adjusted as needed
+            price_ids = [price.id for price in prices.data]
+
+            if plan_id not in price_ids:
+                raise ValueError("Invalid plan selected")
+
+            domain = "https://thewildernet.com"  # Default to thewildernet.com
+
+            # Redirect www version to non-www if accessing through www
+            if 'www.' in request.META.get('HTTP_HOST'):
+                return redirect("https://thewildernet.com" + request.get_full_path(), permanent=True)
+
+            # Adjust domain if in debug mode
+            if settings.DEBUG:
+                domain = "http://127.0.0.1:8000"  # Replace with your debug domain
+
+            checkout_session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                subscription_data={
+                    'items': [{
+                        'price': plan_id,  # Use the selected price ID directly
+                    }]
+                },
+                mode='subscription',
+                success_url=domain + '/subscription-success/',
+                cancel_url=domain + '/subscription-cancel/',
+            )
+            return redirect(checkout_session.url)
+        except stripe.error.StripeError as e:
+            # Handle Stripe errors
+            return render(request, self.template_name, {'error': str(e)})
+        except ValueError as e:
+            # Handle invalid plan ID error
+            return render(request, self.template_name, {'error': str(e)})
+        
+class CreateSubscriptionCheckoutSessionView(View):
+    def post(self, request, *args, **kwargs):
+        plan_id = request.POST.get('plan_id')  # Assuming the plan_id is sent from the form
+        domain = "https://thewildernet.com"  # Default to thewildernet.com
+
+            # Redirect www version to non-www if accessing through www
+        if 'www.' in request.META.get('HTTP_HOST'):
+            return redirect("https://thewildernet.com" + request.get_full_path(), permanent=True)
+
+            # Adjust domain if in debug mode
+        if settings.DEBUG:
+            domain = "http://127.0.0.1:8000"  # Replace with your debug domain
+
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[
+                {
+                    'price': plan_id,
+                    'quantity': 1,
+                },
+            ],
+            mode='subscription',
+            success_url=domain + '/subscription-success/',
+            cancel_url=domain + '/subscription-cancel/',
+        )
+        return redirect(checkout_session.url)
+    
+
+
+class SubscriptionSuccessView(TemplateView):
+    template_name = "StripePayment/subscription_success.html"
+ 
+class SubscriptionCancelView(TemplateView):
+    template_name = "StripePayment/subscription_cancel.html"

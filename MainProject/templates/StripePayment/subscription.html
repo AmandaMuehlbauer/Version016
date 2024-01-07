@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subscribe</title>
+</head>
+<body>
+    <section>
+        <div class="subscription-form">
+            <h2>Subscribe Now</h2>
+            <form action="/create-subscription-session/" method="POST">
+                {% csrf_token %}
+                <label>
+                    <input type="radio" name="plan_id" value="price_1OV18KAKSIZ6blYwzqnBHeyG" required>
+                    Subscription (Basic Donation Plan)
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="plan_id" value="price_1OV18dAKSIZ6blYwG15aqU0T" required>
+                    Subscription (Premium Donation Plan)
+                </label>
+                <br>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>
+

@@ -46,7 +46,7 @@ DEBUG=True
 print(DEBUG)
 print("made it here")
 
-ALLOWED_HOSTS = [ 'jidder.onrender.com']
+ALLOWED_HOSTS = [ 'jidder.onrender.com', 'thewildernet.com', 'www.thewildernet.com']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
@@ -74,6 +74,8 @@ INSTALLED_APPS = [
     'apps.URLsub',
     'widget_tweaks',
     'timezone_field',
+    'apps.StripePayment',
+
 
 
 
@@ -168,7 +170,14 @@ MEDIA_ROOT = '/opt/render/project/src/MainProject/media'
 MEDIA_URL = '/media/'
 #MEDIA_URL='/opt/render/project/src/MainProject/media/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587  # Gmail SMTP port
+EMAIL_USE_TLS = True  # TLS encryption is required by Gmail
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+
 
 LOGIN_URL = "/users/login"
 
@@ -245,6 +254,10 @@ sys.path.append(os.path.join(BASE_DIR, 'apps')) # at the bottom of the file
 # Debugging Elasticsearch configuration
 #print(f"ELASTICSEARCH_DSL: {ELASTICSEARCH_DSL}")
 
+#stripe configuration
+STRIPE_PUBLIC_KEY=os.getenv('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY=os.getenv('STRIPE_SECRET_KEY')
+STRIPE_WEBHOOK_SECRET=os.getenv('DJSTRIPE_WEBHOOK_SECRET')
 
 
 print("Using production settings")
