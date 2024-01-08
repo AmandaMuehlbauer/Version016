@@ -9,18 +9,16 @@
             <h2>Subscribe Now</h2>
             <form action="/create-subscription-session/" method="POST">
                 {% csrf_token %}
+                {% for subscription in subscription_info %}
                 <label>
-                    <input type="radio" name="plan_id" value="price_1OV18KAKSIZ6blYwzqnBHeyG" required>
-                    Subscription (Basic Donation Plan)
+                    <input type="radio" name="plan_id" value="{{ subscription.id }}" required>
+                    {{ subscription.name }} - $ {{ subscription.price }} USD
                 </label>
-                <br>
-                <label>
-                    <input type="radio" name="plan_id" value="price_1OV18dAKSIZ6blYwG15aqU0T" required>
-                    Subscription (Premium Donation Plan)
-                </label>
-                <br>
+                    <br>
+                {% endfor %}
                 <button type="submit">Subscribe</button>
             </form>
+
         </div>
     </section>
 </body>

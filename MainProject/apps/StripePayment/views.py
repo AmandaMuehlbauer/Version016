@@ -167,26 +167,35 @@ def stripe_webhook(request):
 
 
 
-#This handles the subscription views
+#This
 
 class SubscriptionView(View):
     template_name = "StripePayment/subscription.html"
 
     def get(self, request, *args, **kwargs):
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-
         try:
-            # Retrieve the prices using the Stripe API
-            prices = stripe.Price.list(active=True, limit=10)
-            price_ids = [price.id for price in prices.data]
+            subscription_info = []
 
-            context = {
-                'price_ids': price_ids,
-            }
+            prices = stripe.Price.list(active=True, limit=10).data  # Retrieve subscription prices
 
-            return render(request, self.template_name, context)
+            for price in prices:
+                if price.type == 'recurring':
+                    product = stripe.Product.retrieve(price.product)
+                    if hasattr(product, 'name'):
+                        price_amount = float(price.unit_amount_decimal) / 100  # Convert to integer and then divide by 100
+
+                        subscription_info.append({
+                            'id': price.id,  # Include the price ID
+                            'name': product.name,
+                            'price': "{:.2f}".format(price_amount)
+                        })
+
+            return render(request, self.template_name, {'subscription_info': subscription_info})
+
         except stripe.error.StripeError as e:
+        # Handle Stripe API errors
             return render(request, self.template_name, {'error': str(e)})
+
 
     def post(self, request, *args, **kwargs):
         stripe.api_key = settings.STRIPE_SECRET_KEY  # Set the Stripe secret key
@@ -216,6 +225,7 @@ class SubscriptionView(View):
                 subscription_data={
                     'items': [{
                         'price': plan_id,  # Use the selected price ID directly
+                        'quantity': 1,
                     }]
                 },
                 mode='subscription',
