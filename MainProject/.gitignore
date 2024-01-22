@@ -1,6 +1,6 @@
 #environment file
 .env
-
+.envrc
 #Also ignore media files inside media directories
 media/Post_image/*
 media/avatars/*
