@@ -1,6 +1,6 @@
 #apps/StripePayment/views.py
 import stripe
-from .models import Price, Product
+from .models import Price, Product, Donation
 from django.conf import settings
 from django.http import JsonResponse
 from django.http import HttpResponseRedirect
@@ -15,56 +15,6 @@ from django.views.generic import TemplateView
  
 stripe.api_key = settings.STRIPE_SECRET_KEY
  
- 
-class CreateCheckoutSessionView(View):
-    def post(self, request, *args, **kwargs):
-        price = Price.objects.get(id=self.kwargs["pk"])
-        domain = "https://thewildernet.com"  # Default to thewildernet.com
-
-            # Redirect www version to non-www if accessing through www
-        if 'www.' in request.META.get('HTTP_HOST'):
-            return redirect("https://thewildernet.com" + request.get_full_path(), permanent=True)
-
-            # Adjust domain if in debug mode
-        if settings.DEBUG:
-            domain = "http://127.0.0.1:8000"  # Replace with your debug domain
-        checkout_session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            line_items=[
-                {
-                    'price': price.stripe_price_id,
-                    'quantity': 1,
-                },
-            ],
-            mode='payment',
-            success_url=domain + '/success/',
-            cancel_url=domain + '/cancel/',
-        )
-        return redirect(checkout_session.url)
-
-
-
-class ProductLandingPageView(TemplateView):
-    template_name = "StripePayment/landing.html"
- 
-    def get_context_data(self, **kwargs):
-        product = Product.objects.get(name="Test Product")
-        prices = Price.objects.filter(product=product)
-        context = super(ProductLandingPageView,
-                        self).get_context_data(**kwargs)
-        context.update({
-            "product": product,
-            "prices": prices
-        })
-        return context
-
-class SuccessView(TemplateView):
-    template_name = "StripePayment/success.html"
- 
-class CancelView(TemplateView):
-    template_name = "StripePayment/cancel.html"
-
-
 
 
 class DonationView(View):
@@ -106,6 +56,15 @@ class DonationView(View):
                 success_url=domain + '/donation-success/',
                 cancel_url=domain + '/donation-cancel/',
             )
+                # Create and save a Donation instance
+            donation = Donation(
+                amount=amount,
+                donation_type="one-off", 
+                stripe_checkout_session_id=checkout_session.id,
+
+            )
+            donation.save()
+
             return HttpResponseRedirect(checkout_session.url)
         except Exception as e:
             # Handle the exception appropriately (e.g., show an error message)
@@ -210,6 +169,7 @@ class SubscriptionView(View):
             if plan_id not in price_ids:
                 raise ValueError("Invalid plan selected")
 
+
             domain = "https://thewildernet.com"  # Default to thewildernet.com
 
             # Redirect www version to non-www if accessing through www
@@ -232,6 +192,8 @@ class SubscriptionView(View):
                 success_url=domain + '/subscription-success/',
                 cancel_url=domain + '/subscription-cancel/',
             )
+            
+
             return redirect(checkout_session.url)
         except stripe.error.StripeError as e:
             # Handle Stripe errors
@@ -253,6 +215,10 @@ class CreateSubscriptionCheckoutSessionView(View):
         if settings.DEBUG:
             domain = "http://127.0.0.1:8000"  # Replace with your debug domain
 
+        price = stripe.Price.retrieve(plan_id)
+        subscription_amount = float(price.unit_amount_decimal) / 100  # Convert to integer and then divide by 100
+
+
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[
@@ -265,6 +231,17 @@ class CreateSubscriptionCheckoutSessionView(View):
             success_url=domain + '/subscription-success/',
             cancel_url=domain + '/subscription-cancel/',
         )
+
+            # Create a new Donation instance with subscription-related information
+        donation = Donation(
+            amount=subscription_amount,  # Set the amount as needed, it can be 0 for subscription
+            donation_type='monthly',  # Set the donation type as needed
+            subscription_plan_id=plan_id,  # Store the subscription plan ID
+            stripe_checkout_session_id=checkout_session.id,
+
+                # Add more subscription-related fields as needed
+            )
+        donation.save()
         return redirect(checkout_session.url)
     
 
@@ -274,3 +251,5 @@ class SubscriptionSuccessView(TemplateView):
  
 class SubscriptionCancelView(TemplateView):
     template_name = "StripePayment/subscription_cancel.html"
+
+

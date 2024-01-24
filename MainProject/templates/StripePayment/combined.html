@@ -1,0 +1,29 @@
+<!-- apps/StripePayment/templates/StripePayment/combined.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Page</title>
+</head>
+<body>
+
+    <!-- Donation Section -->
+    <div>
+        <h2>Donation Section</h2>
+        {% for donation in donation_info %}
+            <p>Donation ID: {{ donation.id }}, Amount: {{ donation.amount }}, Type: {{ donation.type }}</p>
+        {% endfor %}
+    </div>
+
+    <!-- Subscription Section -->
+    <div>
+        <h2>Subscription Section</h2>
+        {% for subscription in subscription_info %}
+            <p>Subscription ID: {{ subscription.id }}, Name: {{ subscription.name }}, Price: {{ subscription.price }}</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
