@@ -1,0 +1,49 @@
+<!-- apps/StripePayment/templates/StripePayment/donate.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation and Subscription Page</title>
+</head>
+<body>
+    <!-- Donation Form Section -->
+    <div>
+        <h2>Make a Donation</h2>
+        <form action="{% url 'StripePayment:donation-view' %}" method="POST" id="donation-form">
+            {% csrf_token %}
+            <label for="amount">Amount (in dollars):</label>
+            <input type="text" id="amount" name="amount" required>
+            <button type="submit">Donate</button>
+        </form>
+    </div>
+
+    <!-- Subscription Form Section -->
+    <div>
+        <h2>Subscribe Now</h2>
+        <form action="{% url 'StripePayment:create-subscription-session' %}" method="POST">
+            {% csrf_token %}
+            {% for subscription in subscription_info %}
+                <label>
+                    <input type="radio" name="plan_id" value="{{ subscription.id }}" required>
+                    {{ subscription.name }} - $ {{ subscription.price }} USD
+                </label>
+                <br>
+            {% endfor %}
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
+
+
+
+
+        </div>
+    </section>
+
+
+
+
+
+</body>
+</html>

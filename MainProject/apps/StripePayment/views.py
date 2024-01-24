@@ -10,6 +10,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
  
 
  
@@ -70,7 +72,8 @@ class DonationView(View):
             # Handle the exception appropriately (e.g., show an error message)
             return render(request, self.template_name, context={'error_message': str(e)})
 
-
+    def get_donation_info(self):
+        return {}  
 
 
 
@@ -131,7 +134,7 @@ def stripe_webhook(request):
 class SubscriptionView(View):
     template_name = "StripePayment/subscription.html"
 
-    def get(self, request, *args, **kwargs):
+    def get_subscription_info(self, request, *args, **kwargs):
         try:
             subscription_info = []
 
@@ -149,11 +152,16 @@ class SubscriptionView(View):
                             'price': "{:.2f}".format(price_amount)
                         })
 
-            return render(request, self.template_name, {'subscription_info': subscription_info})
+            return subscription_info
 
         except stripe.error.StripeError as e:
         # Handle Stripe API errors
-            return render(request, self.template_name, {'error': str(e)})
+            return []    
+        
+    def get(self, request, *args, **kwargs):
+        subscription_info = self.get_subscription_info()
+
+        return render(request, self.template_name, {'subscription_info': subscription_info})
 
 
     def post(self, request, *args, **kwargs):
@@ -201,6 +209,8 @@ class SubscriptionView(View):
         except ValueError as e:
             # Handle invalid plan ID error
             return render(request, self.template_name, {'error': str(e)})
+        
+
         
 class CreateSubscriptionCheckoutSessionView(View):
     def post(self, request, *args, **kwargs):
@@ -253,3 +263,37 @@ class SubscriptionCancelView(TemplateView):
     template_name = "StripePayment/subscription_cancel.html"
 
 
+
+class CombinedView(View):
+    template_name = "StripePayment/donate.html"
+    
+
+    def get_donation_info(self):
+        # Fetch donation information
+        # This assumes DonationView has a method get_donation_info()
+        donation_view = DonationView()
+        return donation_view.get_donation_info()
+
+    def get_subscription_info(self, request):
+        # Fetch subscription information
+        # This assumes SubscriptionView has a method get_subscription_info()
+        subscription_view = SubscriptionView()
+        return subscription_view.get_subscription_info(request)
+
+    def get(self, request, *args, **kwargs):
+        donation_info = self.get_donation_info()
+        subscription_info = self.get_subscription_info(request)
+
+        # Check if subscription_info is not empty before rendering the template
+        if not subscription_info:
+            subscription_info = []  # Set it to an empty list to avoid template errors
+
+
+        context = {
+            'donation_info': donation_info,
+            'subscription_info': subscription_info,
+        }
+
+        return render(request, self.template_name, context)
+    
+ 
