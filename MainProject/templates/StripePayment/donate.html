@@ -21,18 +21,22 @@
 
     <!-- Subscription Form Section -->
     <div>
-        <h2>Subscribe Now</h2>
-        <form action="{% url 'StripePayment:create-subscription-session' %}" method="POST">
-            {% csrf_token %}
-            {% for subscription in subscription_info %}
-                <label>
-                    <input type="radio" name="plan_id" value="{{ subscription.id }}" required>
-                    {{ subscription.name }} - $ {{ subscription.price }} USD
-                </label>
-                <br>
-            {% endfor %}
-            <button type="submit">Subscribe</button>
-        </form>
+        {% if user.is_authenticated %}
+            <h2>Subscribe Now</h2>
+            <form action="{% url 'StripePayment:create-subscription-session' %}" method="POST">
+                {% csrf_token %}
+                {% for subscription in subscription_info %}
+                    <label>
+                        <input type="radio" name="plan_id" value="{{ subscription.id }}" required>
+                        {{ subscription.name }} - $ {{ subscription.price }} USD
+                    </label>
+                    <br>
+                {% endfor %}
+                <button type="submit">Subscribe</button>
+            </form>
+        {% else %}
+            <p>Please log in to see subscription options.</p>
+        {% endif %}
     </div>
 
 
