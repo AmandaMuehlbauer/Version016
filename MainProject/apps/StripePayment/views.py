@@ -1,6 +1,6 @@
 #apps/StripePayment/views.py
 import stripe
-from .models import Price, Product, Donation
+from .models import Price, Product, Donation, Subscription
 from django.conf import settings
 from django.http import JsonResponse
 from django.http import HttpResponseRedirect
@@ -58,11 +58,15 @@ class DonationView(View):
                 success_url=domain + '/donation-success/',
                 cancel_url=domain + '/donation-cancel/',
             )
+
+            # Check if the user is authenticated before associating with the donation
+            user = request.user if request.user.is_authenticated else None
+                 
                 # Create and save a Donation instance
             donation = Donation(
                 amount=amount,
-                donation_type="one-off", 
                 stripe_checkout_session_id=checkout_session.id,
+                user=user,  # Add the logged-in user to the donation
 
             )
             donation.save()
@@ -243,15 +247,15 @@ class CreateSubscriptionCheckoutSessionView(View):
         )
 
             # Create a new Donation instance with subscription-related information
-        donation = Donation(
+        subscription = Subscription(
+            user=request.user,  # Assuming request.user represents the authenticated user
             amount=subscription_amount,  # Set the amount as needed, it can be 0 for subscription
-            donation_type='monthly',  # Set the donation type as needed
             subscription_plan_id=plan_id,  # Store the subscription plan ID
             stripe_checkout_session_id=checkout_session.id,
 
                 # Add more subscription-related fields as needed
             )
-        donation.save()
+        subscription.save()
         return redirect(checkout_session.url)
     
 
