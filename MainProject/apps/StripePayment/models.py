@@ -30,7 +30,8 @@ class Donation(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'))
     #donation_type = models.CharField(max_length=10, choices=DONATION_TYPES)
     stripe_checkout_session_id = models.CharField(max_length=100, blank=True, null=True)
-
+    completed = models.BooleanField(default=False)
+    checkout_status = models.CharField(max_length=20, blank=True, null=True)  # New field
 
    # subscription_plan_id = models.CharField(max_length=100, blank=True, null=True)
    # subscription_start_date = models.DateField(blank=True, null=True)
@@ -42,9 +43,14 @@ class Subscription(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'))
 
-    subscription_plan_id = models.CharField(max_length=100)
+    subscription_plan_id = models.CharField(max_length=100, unique=True)
     stripe_checkout_session_id = models.CharField(max_length=100)
+    stripe_subscription_id = models.CharField(max_length=100, blank=True, null=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+    completed = models.BooleanField(default=False)
+    checkout_status = models.CharField(max_length=20, blank=True, null=True)  # New field
 
     def __str__(self):
         return f"{self.user.username} - {self.subscription_plan_id}"

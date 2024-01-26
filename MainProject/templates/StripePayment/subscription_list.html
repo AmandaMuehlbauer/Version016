@@ -1,0 +1,12 @@
+<!-- subscription_list.html -->
+
+{% for subscription in subscriptions %}
+    <p>{{ subscription.subscription_plan_id }} - {{ subscription.amount }}</p>
+    {% if subscription.is_active %}
+        <p>Status: Active</p>
+        <a href="{% url 'StripePayment:unsubscribe_subscription' subscription.id %}">Unsubscribe</a>
+    {% else %}
+        <p>Status: Inactive</p>
+        <p>Unsubscribed</p>
+    {% endif %}
+{% endfor %}

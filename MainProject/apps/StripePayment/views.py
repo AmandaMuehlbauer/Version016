@@ -11,6 +11,8 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+from apps.users.models import User
 
  
 
@@ -88,52 +90,10 @@ class DonationCancelView(TemplateView):
     template_name = "StripePayment/donation_cancel.html"
 
 
-@csrf_exempt
-def stripe_webhook(request):
-    payload = request.body
-    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-    event = None
-
-    try:
-        event = stripe.Webhook.construct_event(
-            payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
-        )
-    except ValueError as e:
-        # Invalid payload
-        return HttpResponse(status=400)
-    except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
-        return HttpResponse(status=400)
-
-    # Handle the different event types
-    if event['type'] == 'checkout.session.completed':
-        session = event['data']['object']
-        # Check if it's a one-time payment (donation)
-        if 'payment_intent' in session:
-            amount_paid = session['amount_total']
-            customer_email = session['customer_details']['email']
-            # Handle donation logic (e.g., send a thank-you email)
-            send_mail(
-                subject="Thank You for Your Donation",
-                message=f"Thank you for donating ${amount_paid / 100}. Your support is appreciated!",
-                recipient_list=[customer_email],
-                from_email="your@email.com"
-            )
-        else:
-            # It's a subscription payment
-            customer_email = session["customer_details"]["email"]
-            line_items = stripe.checkout.Session.list_line_items(session["id"])
-            stripe_price_id = line_items["data"][0]["price"]["id"]
-            price = Price.objects.get(stripe_price_id=stripe_price_id)
-            product = price.product
-            # Handle subscription logic (e.g., send subscription confirmation email)
-         
-
-    return HttpResponse(status=200)
 
 
 
-#This
+#This view handles the subscriptions
 
 class SubscriptionView(View):
     template_name = "StripePayment/subscription.html"
@@ -141,6 +101,21 @@ class SubscriptionView(View):
     def get_subscription_info(self, request, *args, **kwargs):
         try:
             subscription_info = []
+
+            # Check if the user already has an active subscription
+            if request.user.is_authenticated:
+                existing_subscription = Subscription.objects.filter(user=User.objects.get(pk=request.user.pk), is_active=True).first()
+
+                if existing_subscription:
+                    subscription_info.append({
+                        'id': existing_subscription.subscription_plan_id,
+                        'name': existing_subscription.subscription_plan_id,
+                        'price': "{:.2f}".format(existing_subscription.amount),
+                        'is_active': True,
+                    })
+                
+                else:
+                    print("user is not authemticated")
 
             prices = stripe.Price.list(active=True, limit=10).data  # Retrieve subscription prices
 
@@ -153,7 +128,8 @@ class SubscriptionView(View):
                         subscription_info.append({
                             'id': price.id,  # Include the price ID
                             'name': product.name,
-                            'price': "{:.2f}".format(price_amount)
+                            'price': "{:.2f}".format(price_amount),
+                            'is_active': False,
                         })
 
             return subscription_info
@@ -173,6 +149,15 @@ class SubscriptionView(View):
 
         try:
             plan_id = request.POST.get('plan_id')  # Assuming a form field for subscription plan selection
+
+
+            # Check if the user already has an active subscription
+            existing_subscription = Subscription.objects.filter(user=request.user, is_active=True).first()
+
+            if existing_subscription:
+                # User wants to switch the plan
+                existing_subscription.is_active = False
+                existing_subscription.save()
 
             # Retrieve the prices using the Stripe API
             prices = stripe.Price.list(active=True, limit=10)  # Limit can be adjusted as needed
@@ -213,10 +198,27 @@ class SubscriptionView(View):
         except ValueError as e:
             # Handle invalid plan ID error
             return render(request, self.template_name, {'error': str(e)})
-        
+
+    def unsubscribe(self, request, subscription_id):
+        try:
+            subscription = Subscription.objects.get(id=subscription_id, user=request.user, is_active=True)
+
+            if subscription.stripe_subscription_id:
+                # Make API call to Stripe to cancel the subscription
+                stripe.Subscription.delete(subscription.stripe_subscription_id)
+
+            subscription.is_active = False
+            subscription.save()
+            messages.success(request, 'Subscription unsubscribed successfully.')
+        except Subscription.DoesNotExist:
+            messages.error(request, 'Subscription not found or already unsubscribed.')
+        return redirect('your_subscription_list_view')
 
         
+
+
 class CreateSubscriptionCheckoutSessionView(View):
+    @csrf_exempt
     def post(self, request, *args, **kwargs):
         plan_id = request.POST.get('plan_id')  # Assuming the plan_id is sent from the form
         domain = "https://thewildernet.com"  # Default to thewildernet.com
@@ -252,6 +254,7 @@ class CreateSubscriptionCheckoutSessionView(View):
             amount=subscription_amount,  # Set the amount as needed, it can be 0 for subscription
             subscription_plan_id=plan_id,  # Store the subscription plan ID
             stripe_checkout_session_id=checkout_session.id,
+            is_active=True,
 
                 # Add more subscription-related fields as needed
             )
@@ -300,4 +303,71 @@ class CombinedView(View):
 
         return render(request, self.template_name, context)
     
- 
+
+#View for user to check their subscription
+class SubscriptionListView(View):
+    template_name = "StripePayment/subscription_list.html"
+
+    def get(self, request, *args, **kwargs):
+        subscriptions = Subscription.objects.filter(user=request.user, is_active=True)
+        context = {'subscriptions': subscriptions}
+        return render(request, self.template_name, context)
+    
+
+@csrf_exempt
+def stripe_webhook(request):
+    print("Webhook triggered!")  # Add this print statement
+
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, settings.DJSTRIPE_WEBHOOK_SECRET
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+
+    # Handle the different event types
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+        # Check if it's a one-time payment (donation)
+        if 'payment_intent' in session:
+            amount_paid = session['amount_total']
+            customer_email = session['customer_details']['email']
+            # Handle donation logic (e.g., send a thank-you email)
+            send_mail(
+                subject="Thank You for Your Donation",
+                message=f"Thank you for donating ${amount_paid / 100}. Your support is appreciated!",
+                recipient_list=[customer_email],
+                from_email="contact.jidder@gmail.com"
+            )
+        else:
+            # It's a subscription payment
+            customer_email = session["customer_details"]["email"]
+            line_items = stripe.checkout.Session.list_line_items(session["id"])
+            stripe_checkout_session_id = session["subscription"]
+
+
+            stripe_price_id = line_items["data"][0]["price"]["id"]
+            price = Price.objects.get(stripe_price_id=stripe_price_id)
+            existing_subscription = Subscription.objects.filter(
+                stripe_checkout_session_id=stripe_checkout_session_id
+            )
+            if existing_subscription:
+                # Handle subscription logic
+                send_mail(
+                    subject="Thank You for Your Subscription",
+                    message=f"Thank you for subscribing ${price}/month. Your support is appreciated!",
+                    recipient_list=[customer_email],
+                    from_email="contact.jidder@gmail.com"
+                )
+                existing_subscription.completed = True
+                existing_subscription.save()
+
+    return HttpResponse(status=200)

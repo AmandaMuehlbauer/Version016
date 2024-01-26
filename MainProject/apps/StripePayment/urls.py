@@ -32,7 +32,9 @@ urlpatterns = [
     path('subscription-success/', SubscriptionSuccessView.as_view(), name='subscription_success'),
     path('subscription-cancel/', SubscriptionCancelView.as_view(), name='subscription_cancel'),
 
-    path('donate/',  CombinedView.as_view(), name='combined-donation')
+    path('donate/',  CombinedView.as_view(), name='combined-donation'),
+    path('unsubscribe/<int:subscription_id>/', SubscriptionView.as_view(), name='unsubscribe_subscription'),
+
  #   path('create-payment-intent/<pk>/', StripeIntentView.as_view(), name='create-payment-intent'),
   #  path('custom-payment/', CustomPaymentView.as_view(), name='custom-payment'),
   #  path('combined/', CombinedView.as_view(), name='combined_view'),
