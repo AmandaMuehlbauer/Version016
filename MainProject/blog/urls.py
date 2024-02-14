@@ -34,6 +34,8 @@ urlpatterns = [
     path('', include(('apps.Search.urls', 'Search'), namespace='Search')),
     path('', include(('SubjectTags.urls', 'SubjectTags'), namespace='SubjectTags')),
     path('', include(('StripePayment.urls', 'StripePayment'), namespace='StripePayment')),
+    path('legal/', include('apps.legal.urls')),  # Include legal app URLs
+
 
 ]
 

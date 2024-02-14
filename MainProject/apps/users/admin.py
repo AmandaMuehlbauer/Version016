@@ -12,9 +12,10 @@ class UserAdmin(BaseUserAdmin):
         (None, {'fields': ('email', 'password')}),
         ('Personal Info', {'fields': ('username',)}),  # Exclude 'first_name' and 'last_name'
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser')}),
+        ('Stripe Info', {'fields': ('stripe_customer_id',)}),
         ('Important Dates', {'fields': ('last_login',)}),  # Exclude 'date_joined'
     )
-    list_display = ('email', 'username', 'is_active', 'is_staff')
+    list_display = ('email', 'username', 'is_active', 'is_staff', 'stripe_customer_id')
 
 
 admin.site.register(User, UserAdmin)

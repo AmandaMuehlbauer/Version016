@@ -39,7 +39,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+#ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','87e5-2601-447-c782-2060-f4c0-1a97-c983-982b.ngrok-free.app']
 
 
 # Application definition
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'timezone_field',
     'apps.StripePayment',
+    'apps.legal'
     
 
 
@@ -239,5 +241,12 @@ sys.path.append(os.path.join(BASE_DIR, 'apps')) # at the bottom of the file
 STRIPE_PUBLIC_KEY=os.getenv('STRIPE_TEST_PUBLIC_KEY')
 STRIPE_SECRET_KEY=os.getenv('STRIPE_TEST_SECRET_KEY')
 STRIPE_WEBHOOK_SECRET=os.getenv('DJSTRIPE_WEBHOOK_SECRET')
+if DEBUG:
+    # Use localhost for development
+    STRIPE_BILLING_RETURN_URL = 'http://localhost:8000/'
+else:
+    # Use the production URL for other environments
+    STRIPE_BILLING_RETURN_URL = 'https://www.thewildernet.com/'
+
 
 print("Using dev settings")

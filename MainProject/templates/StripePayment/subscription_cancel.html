@@ -1,14 +1,16 @@
-<!--templates/StripePaymemt/subscription_cancel.html-->
+<!-- apps/StripePayment/templates/StripePayment/subscription_cancelled.html -->
 
-<html>
- 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Checkout canceled</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Cancelled</title>
 </head>
- 
 <body>
-    <section>
-<p>Checkout canceled</p>    </section>
+    <h2>Your subscription has been cancelled.</h2>
+    <p>
+        <a href="{% url 'StripePayment:combined-donation' %}">Go back to Donate</a>
+    </p>
 </body>
- 
 </html>

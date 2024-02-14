@@ -12,6 +12,7 @@
     <!-- Donation Section -->
     <div>
         <h2>Donation Section</h2>
+
         {% for donation in donation_info %}
             <p>Donation ID: {{ donation.id }}, Amount: {{ donation.amount }}, Type: {{ donation.type }}</p>
         {% endfor %}
@@ -20,9 +21,21 @@
     <!-- Subscription Section -->
     <div>
         <h2>Subscription Section</h2>
-        {% for subscription in subscription_info %}
-            <p>Subscription ID: {{ subscription.id }}, Name: {{ subscription.name }}, Price: {{ subscription.price }}</p>
-        {% endfor %}
+        {% if user_has_active_subscription %}
+            <!-- Display information about the user's current subscription -->
+            <p>You are currently subscribed to the {{ user_subscription_name }} plan.</p>
+            <p>Price: ${{ user_subscription_price }}</p>
+            <!-- Additional details about the subscription -->
+        {% else %}
+            <!-- Display subscription options for users without an active subscription -->
+            <label for="subscriptionOptions">Choose a subscription:</label>
+            <select id="subscriptionOptions">
+                <option value="price_1OdPwPAKSIZ6blYwGuqwrjKa">Premium Subscription - $5.00 USD</option>
+                <option value="price_another_id">Another Subscription - $X.XX USD</option>
+                <!-- Add other subscription options as needed -->
+            </select>
+            <button onclick="subscribe()">Subscribe</button>
+        {% endif %}
     </div>
 
 </body>

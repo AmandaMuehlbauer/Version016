@@ -32,7 +32,7 @@ echo "you are here 2"
 # Run other necessary commands
 echo "yes" | poetry run python3 manage.py collectstatic
 poetry run python3 manage.py migrate
-
+poetry run python3 manage.py import_products
 
 
 

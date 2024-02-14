@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'timezone_field',
     'apps.StripePayment',
+    'apps.legal'
 
 
 

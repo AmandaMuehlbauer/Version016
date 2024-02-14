@@ -10,9 +10,11 @@ from StripePayment.views import (
     SubscriptionCancelView,
     CreateSubscriptionCheckoutSessionView,
     CombinedView,
-    
-
-
+    SubscriptionListView,
+    CancelSubscriptionView,
+    SubscriptionCancelledView,
+    ManageSubscriptionView,
+    error_view,
 )
 
 app_name = 'StripePayment'  # Namespace for the app's URLs
@@ -32,12 +34,17 @@ urlpatterns = [
     path('subscription-success/', SubscriptionSuccessView.as_view(), name='subscription_success'),
     path('subscription-cancel/', SubscriptionCancelView.as_view(), name='subscription_cancel'),
 
+    path('subscription_list/', SubscriptionListView.as_view(), name='subscription_list'),
+
     path('donate/',  CombinedView.as_view(), name='combined-donation'),
     path('unsubscribe/<int:subscription_id>/', SubscriptionView.as_view(), name='unsubscribe_subscription'),
 
- #   path('create-payment-intent/<pk>/', StripeIntentView.as_view(), name='create-payment-intent'),
-  #  path('custom-payment/', CustomPaymentView.as_view(), name='custom-payment'),
-  #  path('combined/', CombinedView.as_view(), name='combined_view'),
+    path('cancel-subscription/', CancelSubscriptionView.as_view(), name='cancel_subscription'),
+    path('subscription-cancelled/', SubscriptionCancelledView.as_view(), name='subscription_cancelled'),
+    path('manage-subscription/', ManageSubscriptionView.as_view(), name='manage_subscription'),
+    path('error/', error_view, name='error'),
+
+
 
 
 ]

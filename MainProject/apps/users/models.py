@@ -31,7 +31,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=30, unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-
+    stripe_customer_id = models.CharField(max_length=100, blank=True, null=True)  # The line manages the payment id
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'username'

@@ -1,0 +1,14 @@
+<!-- templates/error.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+</head>
+<body>
+    <h1>Oops! An error occurred.</h1>
+    <p>{{ error_message }}</p>
+    <p><a href="{% url 'core:home' %}">Go back to home</a></p>
+</body>
+</html>

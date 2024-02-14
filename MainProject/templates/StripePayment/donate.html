@@ -1,16 +1,21 @@
-<!-- apps/StripePayment/templates/StripePayment/donate.html -->
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donation and Subscription Page</title>
+    <style>
+
+    </style>
 </head>
+
 <body>
+
     <!-- Donation Form Section -->
     <div>
         <h2>Make a Donation</h2>
+
         <form action="{% url 'StripePayment:donation-view' %}" method="POST" id="donation-form">
             {% csrf_token %}
             <label for="amount">Amount (in dollars):</label>
@@ -22,32 +27,42 @@
     <!-- Subscription Form Section -->
     <div>
         {% if user.is_authenticated %}
-            <h2>Subscribe Now</h2>
-            <form action="{% url 'StripePayment:create-subscription-session' %}" method="POST">
-                {% csrf_token %}
-                {% for subscription in subscription_info %}
-                    <label>
-                        <input type="radio" name="plan_id" value="{{ subscription.id }}" required>
-                        {{ subscription.name }} - $ {{ subscription.price }} USD
-                    </label>
-                    <br>
-                {% endfor %}
-                <button type="submit">Subscribe</button>
-            </form>
+            {% if user_subscribed %}
+                <!-- Content for users who are subscribed -->
+                <h2>Manage Your Subscription</h2>
+                <p>You are currently subscribed to: {{ user_subscription.product_name }} - ${{ user_subscription.price }} USD per month.</p>
+
+                <p>
+                    <a href="{% url 'StripePayment:manage_subscription' %}">Manage Subscription</a> |
+
+                    <a href="{% url 'StripePayment:subscription_list' %}">View Subscription Details</a> |
+                    <a href="{% url 'StripePayment:subscription_list' %}">Change Subscription</a> |
+                    <form action="{% url 'StripePayment:cancel_subscription' %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Cancel Subscription</button>
+                    </form>
+                </p>
+            {% else %}
+                <!-- Content for users who are not subscribed -->
+                <h2>Subscribe Now</h2>
+                <form action="{% url 'StripePayment:create-subscription-session' %}" method="POST">
+                    {% csrf_token %}
+                    {% for subscription in subscription_info %}
+                        <label>
+                            <input type="radio" name="plan_id" value="{{ subscription.id }}" required>
+                            {{ subscription.product_name }} - ${{ subscription.price|floatformat:2 }} USD/month
+                        </label>
+                        <br>
+                    {% endfor %}
+                    <button type="submit">Subscribe</button>
+                </form>
+            {% endif %}
         {% else %}
-            <p>Please log in to see subscription options.</p>
+            <!-- Content for users who are not logged in -->
+            <p>Please <a href="{% url 'users:login' %}">log in</a> to see subscription options.</p>
         {% endif %}
     </div>
 
-
-
-
-        </div>
-    </section>
-
-
-
-
-
 </body>
+
 </html>
