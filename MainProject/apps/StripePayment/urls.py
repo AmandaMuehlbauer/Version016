@@ -45,6 +45,4 @@ urlpatterns = [
     path('error/', error_view, name='error'),
 
 
-
-
 ]
