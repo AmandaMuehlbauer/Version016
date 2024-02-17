@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <p>The WilderNet relies on donations from users like you to stay online. Please consider donating to keep this a service useable by all.</p>
 
     <!-- Donation Form Section -->
     <div>
@@ -39,7 +40,6 @@
                     <a href="{% url 'StripePayment:subscription_list' %}">Change Subscription</a> |
                     <form action="{% url 'StripePayment:cancel_subscription' %}" method="POST" style="display:inline;">
                         {% csrf_token %}
-                        <button type="submit">Cancel Subscription</button>
                     </form>
                 </p>
             {% else %}

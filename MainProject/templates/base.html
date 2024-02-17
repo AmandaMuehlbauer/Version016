@@ -65,11 +65,11 @@
          
         <div class="dropdown">
           <div class="icons right">
-              {% if user.is_authenticated %}
+            {% if user.is_authenticated %}
               {% if user.profile.avatar %}
-              <div class="avatar-icon-dropdown-container" style="width: 40px; height: 40px; overflow: hidden; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
-                <img src="{{ user.profile.avatar.url }}" style="object-fit: cover; width: 100%; height: 100%;" alt="Avatar">
-              </div>
+                <div class="avatar-icon-dropdown-container">
+                  <div class="avatar-icon" style="background-image: url('{{ user.profile.avatar.url }}');"></div>
+                </div>
            
                   {% else %}
                       <i class="material-icons">account_circle</i>
@@ -97,13 +97,17 @@
                   {% endif %}
               </div>
           </div>
+
+          <div class="donation-button">
+            <a href="{% url 'StripePayment:combined-donation' %}">
+              <button>Donate Now!</button>
+            </a>
+          </div>
       </div>
 
 
-      <div class="donation-button right">
-        <a href="{% url 'StripePayment:combined-donation' %}" class="btn-placeholder">Donate!</a>
 
-      </div>
+
 
 </header>         
   

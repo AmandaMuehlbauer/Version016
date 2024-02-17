@@ -9,8 +9,12 @@
 
   body {
     font-family: 'Roboto', sans-serif;
+    cursor: pointer;
   }
 
+  .no-click {
+    cursor: default; /* or any other cursor value you want */
+  }
 
  
 
@@ -69,7 +73,9 @@
    .search {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    height: 60px;
+    padding-top: 20px;
   }
 
    
@@ -351,6 +357,36 @@
   outline: none; /* Remove default outline */
 }
 
+
+
+/* Style for the donation button */
+
+
+.donation-button button {
+  display: inline-flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  padding: 10px 20px;
+  min-width: 150px; /* Set a minimum width as needed */
+  background-color: #4CAF50; /* Green color, you can change it */
+  color: white; /* Text color */
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box; /* Include padding and border in total width and height */
+  width: auto; /* Allow the button to expand based on content */
+}
+
+.donation-button button:hover {
+  background-color: #45a049; /* Darker green color on hover, you can change it */
+  
+}
+
+
+
+
 /* Basic styling for the buttons */
 .button-container {
   display: flex;
@@ -361,31 +397,103 @@
   margin-right: 10px; /* Adjust spacing between buttons */
 }
 
-
+/*buttons for View details and Go to Blog */
 .styled-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
 }
 
 /* Change background color on hover for interactive feel */
 .styled-button:hover {
-  background-color: #0056b3;
+  background-color: #F3F4F6;
+  text-decoration: none;
+  transition-duration: 0.1s;
 }
+.styled-button:disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+.styled-button:active {
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.styled-button:focus {
+  outline: 1px transparent;
+}
+
+.styled-button:before {
+  display: none;
+}
+
+.styled-button:-webkit-details-marker {
+  display: none;
+}
+/*Styling for avatar icon*/
+
+.avatar-icon-dropdown-container {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px; /* Add margin to the right */
+
+}
+
+.avatar-icon {
+
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background-size: cover;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  padding: 10px; /* Add padding around the icon */
+}
+.avatar-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
 
 
 /* Styling for small user avatar */
 /* Increase specificity */
 .user-avatar {
-  width: 300px;
-  height: 300px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
+
 }
 
 /*Styling for blogs on home page and for blogs in submitted tags category*/
@@ -464,6 +572,10 @@
 
 .badge {
   background-color: rgb(100,100,100);
+  max-width: 150px; /* Set the maximum width for each tag */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Display an ellipsis (...) for overflow */
+  white-space: nowrap; /* Prevent wrapping to the next line */
 }
 
 .tags {
@@ -473,11 +585,13 @@
 
 .tags-label {
   margin-right: 10px; /* Adjust margin between label and badges */
+  font-weight: bold;
+  flex-wrap: wrap;
 }
 
 .badge-container {
   display: flex;
-  flex-wrap: wrap; /* Enable wrapping for badges */
+  /* Enable wrapping for badges */
   align-items: center; /* Align badges vertically */
   gap: 5px; /* Adjust spacing between badges */
 }
