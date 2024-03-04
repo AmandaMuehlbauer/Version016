@@ -98,13 +98,14 @@
               </div>
           </div>
 
+          {% block donate_button %}
           <div class="donation-button">
             <a href="{% url 'StripePayment:combined-donation' %}">
               <button>Donate Now!</button>
             </a>
           </div>
       </div>
-
+      {% endblock donate_button %}
 
 
 

@@ -44,13 +44,13 @@ class Subscription(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'))
 
-    subscription_plan_id = models.CharField(max_length=100, unique=True)
+    subscription_plan_id = models.CharField(max_length=100)
     stripe_checkout_session_id = models.CharField(max_length=100)
     stripe_subscription_id = models.CharField(max_length=100, blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
-    is_active = models.BooleanField(default=True)
-    completed = models.BooleanField(default=False)
+    is_active = models.CharField(max_length=20, blank=True, null=True)  
+    completed = models.CharField(max_length=20, blank=True, null=True)  
     checkout_status = models.CharField(max_length=20, blank=True, null=True)  
 
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)

@@ -20,7 +20,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
-
+#from apps.StripePayment.views import stripe_webhook
 
 
 
@@ -35,6 +35,8 @@ urlpatterns = [
     path('', include(('SubjectTags.urls', 'SubjectTags'), namespace='SubjectTags')),
     path('', include(('StripePayment.urls', 'StripePayment'), namespace='StripePayment')),
     path('legal/', include('apps.legal.urls')),  # Include legal app URLs
+  # path('StripePayment/stripe-webhook/', stripe_webhook, name='stripe_webhook'),
+
 
 
 ]

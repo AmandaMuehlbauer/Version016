@@ -240,7 +240,7 @@ sys.path.append(os.path.join(BASE_DIR, 'apps')) # at the bottom of the file
 
 STRIPE_PUBLIC_KEY=os.getenv('STRIPE_TEST_PUBLIC_KEY')
 STRIPE_SECRET_KEY=os.getenv('STRIPE_TEST_SECRET_KEY')
-STRIPE_WEBHOOK_SECRET=os.getenv('DJSTRIPE_WEBHOOK_SECRET')
+STRIPE_WEBHOOK_SECRET=os.getenv('STRIPE_WEBHOOK_SECRET')
 if DEBUG:
     # Use localhost for development
     STRIPE_BILLING_RETURN_URL = 'http://localhost:8000/'

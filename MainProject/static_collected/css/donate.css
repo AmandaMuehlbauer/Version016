@@ -1,0 +1,26 @@
+body.donate-page .section-container {
+    margin-bottom: 20px;
+    /* Add more styles as needed */
+}
+
+body.donate-page label {
+    margin-bottom: 10px;
+}
+
+body.donate-page input {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+body.donate-page button {
+    padding: 10px;
+    background-color: #4CAF50 !important;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+body.donate-page button:hover {
+    background-color: #45a049;
+}

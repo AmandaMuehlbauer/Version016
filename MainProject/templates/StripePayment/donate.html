@@ -1,3 +1,10 @@
+{% extends 'base.html' %}
+
+{% block donate_button %}
+    {# This block is intentionally left empty to remove the donate button on the donate page #}
+{% endblock donate_button %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,64 +12,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donation and Subscription Page</title>
-    <style>
-
-    </style>
+    {% load static %}
+    {% block css %}{% endblock css %}
+        
+    <link rel="stylesheet" type="text/css" href="{% static 'css/donate.css' %}">
+    
 </head>
 
-<body>
-    <p>The WilderNet relies on donations from users like you to stay online. Please consider donating to keep this a service useable by all.</p>
+<body class="donate-page">
 
-    <!-- Donation Form Section -->
-    <div>
-        <h2>Make a Donation</h2>
 
-        <form action="{% url 'StripePayment:donation-view' %}" method="POST" id="donation-form">
-            {% csrf_token %}
-            <label for="amount">Amount (in dollars):</label>
-            <input type="text" id="amount" name="amount" required>
-            <button type="submit">Donate</button>
-        </form>
-    </div>
 
-    <!-- Subscription Form Section -->
-    <div>
-        {% if user.is_authenticated %}
-            {% if user_subscribed %}
-                <!-- Content for users who are subscribed -->
-                <h2>Manage Your Subscription</h2>
-                <p>You are currently subscribed to: {{ user_subscription.product_name }} - ${{ user_subscription.price }} USD per month.</p>
+    <!-- Donation and Subscription Sections Container -->
+    <div class="donation-container custom-wrapper">
 
-                <p>
-                    <a href="{% url 'StripePayment:manage_subscription' %}">Manage Subscription</a> |
+        <!-- Donation Form Section -->
+        <div class="section-container donate-section-container custom-post-grid">
+            <h2>Make a Donation</h2>
+            <form action="{% url 'StripePayment:donation-view' %}" method="POST" id="donation-form">
+                {% csrf_token %}
+                <label for="amount">Amount (in dollars):</label>
+                <input type="text" id="amount" name="amount" required>
+                <button type="submit">Donate</button>
+            </form>
+        </div>
 
-                    <a href="{% url 'StripePayment:subscription_list' %}">View Subscription Details</a> |
-                    <a href="{% url 'StripePayment:subscription_list' %}">Change Subscription</a> |
-                    <form action="{% url 'StripePayment:cancel_subscription' %}" method="POST" style="display:inline;">
+        <!-- Subscription Form Section -->
+       <!-- <div class="section-container donate-section-container custom-post-grid">
+            {% if user.is_authenticated %}
+                {% if user_subscribed %}-->
+                    <!-- Content for users who are subscribed -->
+                  <!--  <h2>Manage Your Subscription</h2>
+                    <p>You are currently subscribed to: {{ user_subscription.product_name }} - ${{ user_subscription.price }} USD per month.</p>
+                    <p>
+                        <a href="{% url 'StripePayment:manage_subscription' %}">Manage Subscription</a> |
+                        <a href="{% url 'StripePayment:subscription_list' %}">View Subscription Details</a>
+                    </p>
+                {% else %}-->
+                    <!-- Content for users who are not subscribed -->
+                <!--  <h2>Subscribe Now</h2>
+                    <form action="{% url 'StripePayment:create-subscription-session' %}" method="POST">
                         {% csrf_token %}
+                        {% for subscription in subscription_info %}
+                            <label>
+                                <input type="radio" name="plan_id" value="{{ subscription.id }}" required>
+                                {{ subscription.product_name }} - ${{ subscription.price|floatformat:2 }} USD/month
+                            </label>
+                            <br>
+                        {% endfor %}
+                        <button type="submit">Subscribe</button>
                     </form>
-                </p>
-            {% else %}
-                <!-- Content for users who are not subscribed -->
-                <h2>Subscribe Now</h2>
-                <form action="{% url 'StripePayment:create-subscription-session' %}" method="POST">
-                    {% csrf_token %}
-                    {% for subscription in subscription_info %}
-                        <label>
-                            <input type="radio" name="plan_id" value="{{ subscription.id }}" required>
-                            {{ subscription.product_name }} - ${{ subscription.price|floatformat:2 }} USD/month
-                        </label>
-                        <br>
-                    {% endfor %}
-                    <button type="submit">Subscribe</button>
-                </form>
-            {% endif %}
-        {% else %}
-            <!-- Content for users who are not logged in -->
-            <p>Please <a href="{% url 'users:login' %}">log in</a> to see subscription options.</p>
-        {% endif %}
+                {% endif %}
+            {% else %}-->
+                <!-- Content for users who are not logged in -->
+              <!--  <p>Please <a href="{% url 'users:login' %}">log in</a> to see subscription options.</p>
+            {% endif %}-->
+        </div>
     </div>
 
 </body>
 
 </html>
+{% endblock %}
