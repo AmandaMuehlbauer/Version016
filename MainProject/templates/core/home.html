@@ -1,4 +1,3 @@
-<!-- templates/core/home.html -->
 {% extends 'base.html' %}
 
 {% block css %}
@@ -7,47 +6,38 @@
 {% endblock css %}
 
 {% block content %}
-<div class="fluid-container">
+<div class="container">
+  <div class="row">
+    {% for blog in blogs %}
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card p-3">
+          <a href="{{ blog.url }}" class="blog-title">{{ blog.title }}</a>
+          <p class="blog-description">Description: {{ blog.description }}</p>
 
-<div class="row">
-  <div class="wrapper">
-  {% for blog in blogs %}
-    <div class="col-md-4 mb-4">
-      <div class="card p-3"> <!-- Added padding classes p-3 -->
-        <a href="{{ blog.url }}" style="font-size: 24px; color: rgb(100,100,100); display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{ blog.title }}</a>
-        <p style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Description: {{ blog.description }}</p>
+          <!-- Button container -->
+          <div class="button-container">
+            <a href="{% url 'URLsub:urlsub_detail' blog.id blog.slug %}">
+              <button class="styled-button">View Details</button>
+            </a>     
+            <a href="{{ blog.url }}">
+              <button class="styled-button">Go to Blog</button>
+            </a>             
+          </div>
 
-
-    <!-- Button container -->
-    <div class="button-container">
-      <a href="{% url 'URLsub:urlsub_detail' blog.id blog.slug %}">
-          <button class="styled-button">View Details</button>
-      </a>     
-      <a href="{{ blog.url }}">
-          <button class="styled-button">Go to Blog</button>
-      </a>             
-    </div>
-
-        <!-- Tags section moved below the buttons -->
-        <div class="tags">
-          <span class="tags-label">Tags:</span>
-          <div class="badge-container">
-            {% for tag in blog.tags.all %}
-            {% if forloop.counter <= 6 %} {# Display up to 6 tags (2 lines) #}
-              <a href="{% url 'SubjectTags:blogs_list_by_tag' tag.slug %}" class="badge badge-dark">{{ tag }}</a>
-              {% endif %}
+          <!-- Tags section moved below the buttons -->
+          <div class="tags">
+            <span class="tags-label">Tags:</span>
+            <div class="badge-container">
+              {% for tag in blog.tags.all %}
+                {% if forloop.counter <= 6 %} {# Display up to 6 tags (2 lines) #}
+                  <a href="{% url 'SubjectTags:blogs_list_by_tag' tag.slug %}" class="badge badge-dark">{{ tag }}</a>
+                {% endif %}
               {% endfor %}
+            </div>
           </div>
         </div>
-
-    
       </div>
-    </div>
-    {% if forloop.counter|divisibleby:3 and not forloop.last %}
-      <div class="w-100"></div> <!-- Add a clearing div after every three cards -->
-    {% endif %}
-  {% endfor %}
-</div>
-</div>
+    {% endfor %}
+  </div>
 </div>
 {% endblock content %}

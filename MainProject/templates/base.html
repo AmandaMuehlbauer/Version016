@@ -11,13 +11,12 @@
   <!-- Bootstrap and CSS files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  <link rel="stylesheet" type= "text/css" href="/static/css/index_20240215.css" />
+  <link rel="stylesheet" type= "text/css" href="/static/css/index_20240305.css" />
 
   <!--Font-->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="{% static 'plugins/input-tags/tagsinput.js' %}"></script>
   
   <script>
@@ -41,11 +40,11 @@
 
   <header class="header">
     <div class="logo left">
-    <i id="menu" class="material-icons">menu</i>
+   <!-- <i id="menu" class="material-icons">menu</i>-->
     <a class="logo" href="{% url 'core:home' %}"><span>
     <img id="logo" src="{% static '/img/cat.png' %}" width="60" height="60"></span></a>
     <a href="{% url 'core:home' %}"
-    class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">The WilderNet</a>
+    class="site-title {% if request.path == '/' %}active{% endif %}">The WilderNet</a>
     </div>
 
 
@@ -98,6 +97,17 @@
               </div>
           </div>
 
+       <!--sign up login button-->
+       {% block login_button %}
+       {% if not user.is_authenticated %}
+       <div class="login-button">
+         <a href="{% url 'users:login' %}">
+           <button>Login</button>
+         </a>
+       </div>
+        {% endif %}
+        {% endblock login_button %}
+
           {% block donate_button %}
           <div class="donation-button">
             <a href="{% url 'StripePayment:combined-donation' %}">
@@ -128,7 +138,7 @@
           class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">
          <i class="material-icons">home</i> Home </span></a>             
  
-
+<!-- Someday I will have enough data to implement the below elements. For now it is commented out:
        <a class="nav-link" href="/Trending" {% block Trendingactive %}{% endblock Trendingactive %} >
         <i class="material-icons">local_fire_department</i>
         <span>Trending</span>
@@ -145,9 +155,24 @@
       <span>
           <i class="material-icons">subscriptions</i> Subscriptions </span>
       </a> 
-      {% endif %}
+      {% endif %}-->
       <hr>
 
+      {% if user.is_authenticated %}
+      <span>
+        <a  href="{% url 'URLsub:urlsub' %}"
+          class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">
+          <i class="material-icons">dataset</i> Add a Blog </span></a>
+      
+
+
+      <span>
+        <a  href="{% url 'ContactUs:contact' %}"
+          class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">
+          <i class="material-icons">contact_page</i> Contact Us </span></a>
+    <hr>
+         
+    {% endif %}
      
         <span>  <a href="{% url 'core:forum' %}"
           class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">
@@ -167,21 +192,7 @@
         <hr>
 
       
-        {% if user.is_authenticated %}
-          <span>
-            <a  href="{% url 'URLsub:urlsub' %}"
-              class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">
-              <i class="material-icons">dataset</i> Add a Blog </span></a>
-          
 
-
-          <span>
-            <a  href="{% url 'ContactUs:contact' %}"
-              class="nav-item nav-link  {% if request.path == '/' %}active{% endif %}">
-              <i class="material-icons">contact_page</i> Contact Us </span></a>
-        <hr>
-             
-        {% endif %}
 
    
       <a class="nav-link" href="/About" > 

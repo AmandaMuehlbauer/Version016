@@ -36,7 +36,7 @@
 
 .donate-section-container button {
     padding: 8px;
-    background-color: #4CAF50;
+    background-color: #6C9536;
     color: white;
     border: none;
     border-radius: 5px;
@@ -44,7 +44,7 @@
 }
 
 .donate-section-container button:hover {
-    background-color: #45a049;
+    background-color: #506E29;
 }
 
 .donation-container {
@@ -69,4 +69,5 @@
         grid-template-columns: 1fr 1fr; /* Two columns for donate and subscribe */
     }
 }
+
 

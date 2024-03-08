@@ -1,0 +1,663 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+/* updated sidebar and content sections with weird colors to check css loading*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+  }
+
+  .no-click {
+    cursor: default; /* or any other cursor value you want */
+  }
+
+.site-title {
+    /* Your specific styling for The WilderNet link goes here */
+    color: rgb(100,100,100); /* Change the color to your desired style */
+    font-weight: normal;
+    font-size: 20px;
+    transition: font-weight 0.3s ease; 
+    /* Add more styles as needed */
+  }
+
+.site-title:hover {
+    font-weight: bold; /* Change the font weight on hover */
+    text-decoration: none;
+  }
+
+
+  /* header section*/
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 15px;
+  }
+
+  main {
+    height: calc(100vh - 70px);
+    display: flex;
+    background-color:white;
+  }
+  
+  
+
+
+  /* Sidebar */ 
+.side-bar {
+    height: 100%;
+    width: 17%;
+    /*background-color: white;*/
+    background-color: white;
+    overflow-y: scroll;
+
+  } 
+
+
+  @media (max-width: 768px) {
+    
+    .side-bar {
+      display: none;
+      
+    }
+  }
+
+  .left {
+    display: flex;
+    align-items: center;
+   }
+   
+   .left #menu {
+    padding: 0 7px;
+    cursor: pointer;
+   }
+
+
+/*Search bar section*/
+.container img {
+  width: 900px;
+  flex-shrink: 0;
+}
+   .search {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 60px;
+    padding-top: 20px;
+  }
+
+   
+   .search form {
+    display: flex;
+    align-items: center; /* Align items vertically centered */
+    justify-content: flex-start; /* Align items to the left */
+    border: 1px solid#ddd;
+    height: 45px;
+    border-radius: 25px;
+    max-width: 800px;
+    width: 80%;
+   }
+
+   .search input[type="text"] {
+    flex: 1; /* Allow the input to take up remaining space */
+    padding: 10px;
+    border: 0;
+    border-radius: 25px;
+  }
+
+  .search button {
+    height: 100%;
+    width: 60px;
+    border: none;
+    border-radius: 25px;
+  }
+   
+  
+  input:focus {
+    outline: none;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    
+  }
+
+
+
+/* Icon section */
+  .material-icons {
+    position: relative;
+    color: rgb(100, 100, 100);
+    padding: 0 7px;
+    cursor: pointer;
+    top: 5px;
+    left: 5px;
+  }
+
+
+
+  .nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    margin-top: 15px;  
+  }
+
+
+  hr {
+    height: 1px;
+    background-color: #e5e5e5;
+    border: none;
+  }
+
+  .content {
+    background-color: #f9f9f9;
+    width: 100%;
+    height: 100%;
+    padding: 15px 15px;
+    border-top: 1px solid #ddd;
+    overflow-y: scroll;
+  }
+
+
+  
+  .thumbnail img {
+    object-fit: cover;
+    height: 200px;
+    width: 300px;
+    border-radius: 15px;
+     
+  }
+  .thumbnail img:hover {
+    opacity: 0.5;
+
+  }
+
+  .author img {
+    object-fit: cover;
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    margin-right: 10px;
+  }
+  
+
+  .details {
+    display: flex;
+  }
+   
+  .title {
+    display: flex;
+    flex-direction: column;
+
+  }
+  
+  .entry{
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+
+  
+  }
+
+
+  .entry:hover{
+    text-decoration: none;
+    font-weight: bold;
+    border-color: rgb(100,100,100);
+  }
+
+
+
+  .card-title{
+    font-weight: bold;
+    font-size: 24px;
+    color: rgb(100, 100, 100);
+    padding-bottom: 0px;
+
+
+  }
+  
+  .author {
+    text-decoration: none;
+    text-decoration-color: rgb(100,100,100);
+    color: rgb(100, 100, 100);
+    font-size: 15px;
+   
+  }
+
+  .card-text{
+    text-decoration: none;
+    color: rgb(100, 100, 100);
+
+    font-size: 18px;
+    width: 300px;
+  }
+
+  .card-title:hover{
+    text-decoration:none;
+    
+  }
+
+
+
+
+
+  
+  /* Styles for .nav-link */
+  .nav-link {
+    text-decoration: none;
+    color: rgb(100, 100, 100);
+    font-size: 15px;
+  }
+
+
+  
+
+   .nav-link:hover{
+    background-color: rgb(225, 225, 225);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: rgb(100, 100, 100);
+    font-weight: bold;
+   
+  }
+
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    flex-wrap: wrap;
+  
+
+  }
+
+ 
+/*Dropdown menu section */
+
+
+
+
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    width: 125px;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    color: rgb(100, 100, 100);
+    border-radius: 25px;
+  
+
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content a{
+    color:rgb(100, 100, 100);
+    text-decoration: none;
+  }
+
+  .dark-mode {
+    background-color: black;
+    color: white;
+  }
+
+  .form-section {
+    margin-top: 20px; /* Add space between message and form */
+  }
+
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+/*  align-items: center; /* Center content horizontally */
+  margin-left: 50px;
+  color: rgb(100,100,100);
+}
+
+.message-section, .form-section {
+  width: 100%;
+  max-width: 800px; /* Adjust as needed */
+  padding: 20px; /* Add some spacing around sections */
+  box-sizing: border-box;
+  
+}
+
+.form-group {
+  margin-bottom: 15px; /* Add vertical spacing between form groups */
+
+}
+
+/* Apply styles to the label */
+.form-group label {
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(100,100,100);
+  margin-bottom: 5px;
+}
+
+/* Apply styles to the input */
+.form-group input[type="description"],
+.form-group input[type="url"],
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  color: rgb(100,100,100);
+}
+
+
+/* Apply additional styles to the input when focused */
+.form-group input[type="description"]:focus,
+.form-group input[type="url"]:focus,
+.form-group textarea:focus {
+
+}
+
+*:focus {
+    outline: none; /* Remove default focus outline for all elements */
+  }
+
+
+
+/* Style for the donation button */
+
+
+.donation-button button {
+  display: inline-flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  padding: 10px 10px;
+  min-width: 130px; /* Set a minimum width as needed */
+  background-color: #ff6600; /* Green color, you can change it */
+  color: white; /* Text color */
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box; /* Include padding and border in total width and height */
+  width: auto; /* Allow the button to expand based on content */
+  border: 2px solid transparent; /* Set an initial transparent border */
+
+}
+
+.donation-button button:hover {
+  background-color: #B30000; /* Darker green color on hover, you can change it */
+  
+}
+
+.donation-button button:focus {
+    outline: none;
+    border-color: #8C0000;
+}
+
+
+/* Basic styling for the buttons */
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Adjust alignment as needed */
+}
+
+.button-link {
+  margin-right: 10px; /* Adjust spacing between buttons */
+}
+
+/*buttons for View details and Go to Blog */
+.styled-button {
+  appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+/* Change background color on hover for interactive feel */
+.styled-button:hover {
+  background-color: #F3F4F6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+.styled-button:disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+.styled-button:active {
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.styled-button:focus {
+  outline: 1px transparent;
+}
+
+.styled-button:before {
+  display: none;
+}
+
+.styled-button:-webkit-details-marker {
+  display: none;
+}
+/*Styling for avatar icon*/
+
+.avatar-icon-dropdown-container {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px; /* Add margin to the right */
+
+}
+
+.avatar-icon {
+
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background-size: cover;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  padding: 10px; /* Add padding around the icon */
+}
+.avatar-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+
+/* Styling for small user avatar */
+/* Increase specificity */
+.user-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+
+}
+
+/*Styling for blogs on home page and for blogs in submitted tags category*/
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.post-item {
+  /* Additional styles for each post item */
+  border: 1px solid #ccc;
+  padding: 20px;
+  /* Other styling properties */
+}
+
+/*Homepage cards*/
+.card {
+  /* Define your card styles here */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 15px;
+  width: 300px;
+  height: 200px;
+
+}
+
+
+
+/*This is the css styling for the post */
+
+.post-card {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-card .card-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.post-card .card-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.post-card .image-container {
+    /* Set a specific width and height for the container */
+  width: 300px;
+  height: 200px;
+    /* Ensure the container can contain the image without overflow */
+  overflow: hidden;
+  
+}
+
+.post-card .card-img {
+    /* Adjust the image size to fit the container */
+  width: 100%;
+  height: 100%;
+    /* Prevent the image from stretching */
+  object-fit: cover; /* This property maintains aspect ratio */
+  
+}
+
+
+.post-card .card-text {
+  flex: 1;
+}
+
+/* Change the styling of the tags */
+
+.badge {
+  background-color: rgb(100,100,100);
+  max-width: 150px; /* Set the maximum width for each tag */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Display an ellipsis (...) for overflow */
+  white-space: nowrap; /* Prevent wrapping to the next line */
+}
+
+.tags {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.tags-label {
+  margin-right: 10px; /* Adjust margin between label and badges */
+  font-weight: bold;
+  flex-wrap: wrap;
+}
+
+.badge-container {
+  display: flex;
+  /* Enable wrapping for badges */
+  align-items: center; /* Align badges vertically */
+  gap: 5px; /* Adjust spacing between badges */
+}
+
+
+/* Add this code to your existing CSS or within the <style> tag in your HTML */
+.login-button {
+  margin-left: 10px; /* Adjust the margin as needed for spacing */
+  margin-right:10px;
+}
+
+.login-button a {
+  text-decoration: none;
+}
+
+.login-button button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #6c9536; /* Set text color to your desired color */
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px; /* Adjust the border-radius for a rounded shape */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add a smooth transition effect */
+    box-sizing: border-box; /* Include padding and border in total width and height */
+    width: auto; /* Allow the button to expand based on content */
+    border: 2px solid transparent; /* Set an initial transparent border */
+
+  }
+  
+  .login-button button:hover {
+    background-color: #506E29; /* Change background color on hover if needed */
+    color: #ffffff; /* Change text color on hover if needed */
+  }
+
+
+.login-button button:focus{
+    outline: none;
+    border-color: #3A4D1D;
+}

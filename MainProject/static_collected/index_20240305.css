@@ -16,7 +16,20 @@
     cursor: default; /* or any other cursor value you want */
   }
 
- 
+.site-title {
+    /* Your specific styling for The WilderNet link goes here */
+    color: rgb(100,100,100); /* Change the color to your desired style */
+    font-weight: normal;
+    font-size: 20px;
+    transition: font-weight 0.3s ease; 
+    /* Add more styles as needed */
+  }
+
+.site-title:hover {
+    font-weight: bold; /* Change the font weight on hover */
+    text-decoration: none;
+  }
+
 
   /* header section*/
 .header {
@@ -32,6 +45,7 @@
     display: flex;
     background-color:white;
   }
+  
   
 
 
@@ -234,11 +248,17 @@
 
 
 
-  .title a, .nav-link{
+
+  
+  /* Styles for .nav-link */
+  .nav-link {
     text-decoration: none;
     color: rgb(100, 100, 100);
     font-size: 15px;
   }
+
+
+  
 
    .nav-link:hover{
     background-color: rgb(225, 225, 225);
@@ -352,10 +372,12 @@
 .form-group input[type="description"]:focus,
 .form-group input[type="url"]:focus,
 .form-group textarea:focus {
-  border-color: #007bff; /* Change border color when focused */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a box shadow when focused */
-  outline: none; /* Remove default outline */
+
 }
+
+*:focus {
+    outline: none; /* Remove default focus outline for all elements */
+  }
 
 
 
@@ -366,9 +388,9 @@
   display: inline-flex;
   align-items: center; /* Center vertically */
   justify-content: center; /* Center horizontally */
-  padding: 10px 20px;
-  min-width: 150px; /* Set a minimum width as needed */
-  background-color: #4CAF50; /* Green color, you can change it */
+  padding: 10px 10px;
+  min-width: 130px; /* Set a minimum width as needed */
+  background-color: #ff6600; /* Green color, you can change it */
   color: white; /* Text color */
   border: none;
   border-radius: 5px;
@@ -377,14 +399,19 @@
   transition: background-color 0.3s ease;
   box-sizing: border-box; /* Include padding and border in total width and height */
   width: auto; /* Allow the button to expand based on content */
+  border: 2px solid transparent; /* Set an initial transparent border */
+
 }
 
 .donation-button button:hover {
-  background-color: #45a049; /* Darker green color on hover, you can change it */
+  background-color: #B30000; /* Darker green color on hover, you can change it */
   
 }
 
-
+.donation-button button:focus {
+    outline: none;
+    border-color: #8C0000;
+}
 
 
 /* Basic styling for the buttons */
@@ -597,3 +624,40 @@
 }
 
 
+/* Add this code to your existing CSS or within the <style> tag in your HTML */
+.login-button {
+  margin-left: 10px; /* Adjust the margin as needed for spacing */
+  margin-right:10px;
+}
+
+.login-button a {
+  text-decoration: none;
+}
+
+.login-button button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #6c9536; /* Set text color to your desired color */
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px; /* Adjust the border-radius for a rounded shape */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add a smooth transition effect */
+    box-sizing: border-box; /* Include padding and border in total width and height */
+    width: auto; /* Allow the button to expand based on content */
+    border: 2px solid transparent; /* Set an initial transparent border */
+
+  }
+  
+  .login-button button:hover {
+    background-color: #506E29; /* Change background color on hover if needed */
+    color: #ffffff; /* Change text color on hover if needed */
+  }
+
+
+.login-button button:focus{
+    outline: none;
+    border-color: #3A4D1D;
+}
