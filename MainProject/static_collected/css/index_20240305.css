@@ -16,10 +16,11 @@
     cursor: default; /* or any other cursor value you want */
   }
 
+
 .site-title {
     /* Your specific styling for The WilderNet link goes here */
     color: rgb(100,100,100); /* Change the color to your desired style */
-    font-weight: normal;
+    font-weight: bold;
     font-size: 20px;
     transition: font-weight 0.3s ease; 
     /* Add more styles as needed */
@@ -28,6 +29,7 @@
 .site-title:hover {
     font-weight: bold; /* Change the font weight on hover */
     text-decoration: none;
+    color:rgb(100, 100, 100);
   }
 
 
@@ -39,6 +41,8 @@
     height: 60px;
     padding: 15px;
   }
+
+
 
   main {
     height: calc(100vh - 70px);
@@ -83,6 +87,7 @@
 .container img {
   width: 900px;
   flex-shrink: 0;
+
 }
    .search {
     display: flex;
@@ -90,6 +95,7 @@
     align-items: flex-start;
     height: 60px;
     padding-top: 20px;
+    margin-left: 20px;
   }
 
    
@@ -102,12 +108,13 @@
     border-radius: 25px;
     max-width: 800px;
     width: 80%;
+  
    }
 
    .search input[type="text"] {
     flex: 1; /* Allow the input to take up remaining space */
     padding: 10px;
-    border: 0;
+    border: none;
     border-radius: 25px;
   }
 
@@ -191,11 +198,7 @@
     display: flex;
   }
    
-  .title {
-    display: flex;
-    flex-direction: column;
 
-  }
   
   .entry{
     padding-top: 20px;
@@ -272,13 +275,7 @@
   }
 
 
-  .wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    flex-wrap: wrap;
-  
 
-  }
 
  
 /*Dropdown menu section */
@@ -624,7 +621,7 @@
 }
 
 
-/* Add this code to your existing CSS or within the <style> tag in your HTML */
+/* Styling for the login button */
 .login-button {
   margin-left: 10px; /* Adjust the margin as needed for spacing */
   margin-right:10px;
@@ -660,4 +657,32 @@
 .login-button button:focus{
     outline: none;
     border-color: #3A4D1D;
+}
+
+
+/* styles for the grid*/
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust card width as needed */
+    gap: 20px; /* Adjust the gap between cards */
+}
+
+/*styles for blog cards on homepage*/
+
+.blog-title {
+    font-size: 24px;
+    color: rgb(100, 100, 100);
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: 10px; /* Adjust margin as needed */
+
+}
+
+.blog-description {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 15px;
 }
