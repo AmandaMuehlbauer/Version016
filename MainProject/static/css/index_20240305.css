@@ -676,10 +676,13 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    margin-bottom: 10px; /* Adjust margin as needed */
+
 }
 
 .blog-description {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-size: 15px;
 }

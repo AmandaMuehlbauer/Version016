@@ -6,13 +6,13 @@
 {% endblock css %}
 
 {% block content %}
-<div class="container">
+<div class="container mt-4">
   <div class="row">
     {% for blog in blogs %}
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card p-3">
-          <a href="{{ blog.url }}" class="blog-title">{{ blog.title }}</a>
-          <p class="blog-description">Description: {{ blog.description }}</p>
+    <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card p-3">
+          <a href="{{ blog.url }}" class="blog-title d-block overflow-hidden text-truncate">{{ blog.title }}</a>
+          <p class="blog-description card-text overflow-hidden text-truncate">Description: {{ blog.description }}</p>
 
           <!-- Button container -->
           <div class="button-container">
