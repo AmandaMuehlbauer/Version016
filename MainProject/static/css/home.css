@@ -98,7 +98,7 @@
     color: #ffffff; /* Change text color on hover if needed */
 }
 
-/* Change button style on focus */
+/* Change button style on focus  */
 .homepage-buttons button:focus {
     outline: none;
     border-color: #3A4D1D;
