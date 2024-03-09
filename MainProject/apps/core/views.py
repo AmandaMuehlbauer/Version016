@@ -31,7 +31,7 @@ from random import sample
 class HomeView(ListView):
     template_name = 'core/home.html'
     context_object_name = 'blogs'
-    paginate_by = 3  # Set the number of items per page
+    paginate_by = 12  # Set the number of items per page
 
 
     def get_queryset(self):
