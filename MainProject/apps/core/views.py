@@ -6,9 +6,9 @@ from django.views.generic import (
     CreateView,
     UpdateView,
     DeleteView, 
-    View
+
 )
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import  redirect, render
 from .models import Post, Comment
 #from scraping.models import News
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -17,33 +17,36 @@ from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from .forms import CommentForm
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse, HttpResponseRedirect
-from django.views import generic
 from django.core.mail import send_mail
 from ..URLsub.models import URLsub
-from django.db.models import Max, Subquery, OuterRef, F
-from taggit.models import Tag
-from django.db import models
-import random
+from django.db.models import F
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
+from django.core import serializers 
 
-from django.db.models import OuterRef, Count
-from django.db.models.functions import Concat
-from django.db.models import Value
+
 
 from random import sample
 
 class HomeView(ListView):
     template_name = 'core/home.html'
     context_object_name = 'blogs'
+    paginate_by = 3  # Set the number of items per page
+
 
     def get_queryset(self):
-        blogs = URLsub.objects.all()  # Fetch your blogs or posts queryset
+        return URLsub.objects.all().order_by('-timestamp')  # Assuming 'timestamp' is the field representing the timestamp
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        blogs = context['blogs']
+
+        # Fetch and assign tags to each blog
         for blog in blogs:
-            blog.tags_list = blog.tags.all()  # Fetch and assign tags to each blog
+            blog.tags_list = blog.tags.all()
 
-        return blogs
-
-
+        context['blogs'] = blogs
+        return context
 
 
 class ForumView(ListView):

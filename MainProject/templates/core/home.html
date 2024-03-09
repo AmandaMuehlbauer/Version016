@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-
-
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -12,45 +10,67 @@
     <title>The WilderNet Home</title>
     {% load static %}
     {% block css %}{% endblock css %}
-        
     <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
-    
 </head>
+
 <div class="container mt-4">
-  <div class="row">
-    {% for blog in blogs %}
-    <div class="col-lg-4 col-md-6 mb-4">
+    <div class="row">
+        {% for blog in blogs %}
+        <div class="col-lg-4 col-md-6 mb-4">
             <div class="card p-3">
-          <a href="{{ blog.url }}" class="blog-title d-block overflow-hidden text-truncate">{{ blog.title }}</a>
-          <p class="blog-description card-text overflow-hidden text-truncate"> {{ blog.description }}</p>
+                <a href="{{ blog.url }}" class="blog-title d-block overflow-hidden text-truncate">{{ blog.title }}</a>
+                <p class="blog-description card-text overflow-hidden text-truncate">{{ blog.description }}</p>
 
                 <!-- Button container with spacing below -->
-              <div class="button-container homepage-buttons">
-                <a href="{% url 'URLsub:urlsub_detail' blog.id blog.slug %}">
-                  <div class="button-wrapper">
-                    <button class="styled-button">View Details</button>
-              </div>
-                </a>     
-                <a href="{{ blog.url }}">
-                  <div class="button-wrapper">
-                    <button class="styled-button">Go to Blog</button>
-                  </div>
-                </a>             
-              </div>
-          <!-- Tags section moved below the buttons -->
-          <div class="tags">
-            <span class="tags-label">Tags:</span>
-            <div class="badge-container">
-              {% for tag in blog.tags.all %}
-                {% if forloop.counter <= 6 %} {# Display up to 6 tags (2 lines) #}
-                  <a href="{% url 'SubjectTags:blogs_list_by_tag' tag.slug %}" class="badge badge-dark">{{ tag }}</a>
-                {% endif %}
-              {% endfor %}
+                <div class="button-container homepage-buttons">
+                    <a href="{% url 'URLsub:urlsub_detail' blog.id blog.slug %}">
+                        <div class="button-wrapper">
+                            <button class="styled-button">View Details</button>
+                        </div>
+                    </a>
+                    <a href="{{ blog.url }}">
+                        <div class="button-wrapper">
+                            <button class="styled-button">Go to Blog</button>
+                        </div>
+                    </a>
+                </div>
+                <!-- Tags section moved below the buttons -->
+                <div class="tags">
+                    <span class="tags-label">Tags:</span>
+                    <div class="badge-container">
+                        {% for tag in blog.tags.all %}
+                            {% if forloop.counter <= 6 %} {# Display up to 6 tags (2 lines) #}
+                                <a href="{% url 'SubjectTags:blogs_list_by_tag' tag.slug %}" class="badge badge-dark">{{ tag }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+        {% endfor %}
+    </div>
+    <!-- Pagination Controls -->
+<!-- Pagination Controls -->
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="current"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
     {% endfor %}
-  </div>
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
 </div>
 {% endblock content %}
