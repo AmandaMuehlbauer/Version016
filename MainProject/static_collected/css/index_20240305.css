@@ -669,20 +669,3 @@
 
 /*styles for blog cards on homepage*/
 
-.blog-title {
-    font-size: 24px;
-    color: rgb(100, 100, 100);
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    margin-bottom: 10px; /* Adjust margin as needed */
-
-}
-
-.blog-description {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-size: 15px;
-}

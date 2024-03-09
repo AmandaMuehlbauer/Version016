@@ -534,17 +534,7 @@
   /* Other styling properties */
 }
 
-/*Homepage cards*/
-.card {
-  /* Define your card styles here */
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  margin: 10px;
-  padding: 15px;
-  width: 300px;
-  height: 200px;
 
-}
 
 
 
@@ -669,20 +659,3 @@
 
 /*styles for blog cards on homepage*/
 
-.blog-title {
-    font-size: 24px;
-    color: rgb(100, 100, 100);
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    margin-bottom: 10px; /* Adjust margin as needed */
-
-}
-
-.blog-description {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-size: 15px;
-}

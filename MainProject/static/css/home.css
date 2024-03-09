@@ -1,0 +1,112 @@
+.blog-title {
+    font-size: 24px;
+    color: rgb(100, 100, 100);
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: 10px; /* Adjust margin as needed */
+    text-decoration: none; /* Remove default underline */
+    transition: font-weight 0.3s ease; /* Add transition for font-weight */
+
+}
+
+.blog-title:hover {
+    font-weight: bold; /* Change the font weight on hover */
+    color: rgb(100, 100, 100);
+    text-decoration: none;
+}
+
+
+
+.blog-description {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 15px;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the gap between cards */
+    padding: 20px; /* Add padding to create space between cards and container */
+  }
+  
+
+
+/*Homepage cards*/
+.card {
+    /* Define your card styles here */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 15px;
+    width: 350px;
+    height: 250px;
+    overflow: hidden;
+  
+  }
+
+  .card .badge-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow tags to wrap to the next line */
+    gap: 5px; /* Adjust the gap between tags */
+    max-width: 100%; /* Ensure the tags don't overflow to the next line */
+  }
+
+  .card .badge {
+    background-color: rgb(100, 100, 100);
+    padding: 5px 10px;
+    margin: 0 5px 5px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+/*button styling*/
+.homepage-buttons .button-wrapper {
+    margin-bottom: 10px; /* Adjust the margin as needed */
+    margin-right: 50px; /* Horizontal margin */
+
+}
+
+/* Add a class for spaced buttons */
+.homepage-buttons button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #fff; /* Set background color to white */
+    color: #6c9536; /* Set text color to green */
+    font-weight: bold;
+    border-radius: 5px; /* Adjust the border-radius for a rounded shape */
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Add a smooth transition effect for background color and text color */
+    box-sizing: border-box; /* Include padding and border in total width and height */
+    width: auto; /* Allow the button to expand based on content */
+    box-shadow: 0 0 0 2px #6c9536 inset; /* Add a green outline */
+    border: none; /* Remove default border */
+    margin-bottom: 10px; /* Vertical margin */
+    margin-right: 5px; /* Horizontal margin */
+}
+
+/* Change button style on hover */
+.homepage-buttons button:hover {
+    background-color: #506E29; /* Change background color on hover if needed */
+    color: #ffffff; /* Change text color on hover if needed */
+}
+
+/* Change button style on focus */
+.homepage-buttons button:focus {
+    outline: none;
+    border-color: #3A4D1D;
+}
+
+  /* Media query for smaller screens */
+@media (max-width: 768px) {
+    .card {
+      width: 100%; /* Make the card take up 100% of the container width */
+    }
+  }
