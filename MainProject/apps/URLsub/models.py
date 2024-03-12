@@ -3,6 +3,14 @@ from taggit.managers import TaggableManager
 from django.conf import settings
 from django.utils.text import slugify
 
+class Tag(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    tags = TaggableManager()
+
+    def __str__(self):
+        return self.name
+
+
 class URLsub(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     url = models.URLField()
@@ -25,3 +33,13 @@ class URLsub(models.Model):
         # Generate a slug before saving
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+
+class Description(models.Model):
+    urlsub = models.ForeignKey(URLsub, on_delete=models.CASCADE, related_name='additional_descriptions')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # Add the user field
+    description = models.TextField()
+    tags = TaggableManager()
+
+    class Meta:
+        unique_together = ('urlsub', 'description')

@@ -1,0 +1,73 @@
+/* Shared styles for donation cards */
+.donate-section-container {
+    margin: 20px 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    max-width: 400px;
+    max-height: 200px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.donate-section-container h2 {
+    font-size: 24px;
+    color: rgb(100, 100, 100);
+}
+
+.donate-section-container form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.donate-section-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+.donate-section-container input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.donate-section-container button {
+    padding: 8px;
+    background-color: #6C9536;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.donate-section-container button:hover {
+    background-color: #506E29;
+}
+
+.donation-container {
+    margin-top: 20px;
+    display: grid;
+    grid-template-rows: auto 1fr; /* Two rows: one for message, one for donate and subscribe */
+    grid-template-columns: 1fr; /* One column for both donate and subscribe */
+    gap: 20px;
+}
+
+.subscribe-section-container {
+    /* Styles for subscribe container, same as donate-section-container */
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) {
+    .donation-container {
+        grid-template-rows: auto; /* Single row for message */
+        grid-template-columns: 1fr 1fr; /* Two columns for donate and subscribe */
+    }
+}
+
+

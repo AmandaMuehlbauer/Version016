@@ -10,7 +10,7 @@
     <title>The WilderNet Home</title>
     {% load static %}
     {% block css %}{% endblock css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/home.css' %}">
 </head>
 
 <div class="container mt-4">
@@ -25,18 +25,18 @@
                 <div class="button-container homepage-buttons">
                     <a href="{% url 'URLsub:urlsub_detail' blog.id blog.slug %}">
                         <div class="button-wrapper">
-                            <button class="styled-button">View Details</button>
+                            <button class="styled-button"> Details</button>
                         </div>
                     </a>
-                    <a href="{{ blog.url }}">
+                    <a>
                         <div class="button-wrapper">
-                            <button class="styled-button">Go to Blog</button>
+                            <button class="styled-button"> Discussion</button>
                         </div>
                     </a>
                 </div>
                 <!-- Tags section moved below the buttons -->
                 <div class="tags">
-                    <span class="tags-label">Tags:</span>
+                    <span class="tags-label"></span>
                     <div class="badge-container">
                         {% for tag in blog.tags.all %}
                             {% if forloop.counter <= 6 %} {# Display up to 6 tags (2 lines) #}

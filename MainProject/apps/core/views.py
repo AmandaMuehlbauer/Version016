@@ -35,7 +35,7 @@ class HomeView(ListView):
 
 
     def get_queryset(self):
-        return URLsub.objects.all().order_by('-timestamp')  # Assuming 'timestamp' is the field representing the timestamp
+        return URLsub.objects.all().order_by('-timestamp')  # Set 'timestamp' as the field to sort by
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
