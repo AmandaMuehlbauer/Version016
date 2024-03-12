@@ -2,6 +2,8 @@ from django.db import models
 from taggit.managers import TaggableManager
 from django.conf import settings
 from django.utils.text import slugify
+from django.utils import timezone
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -40,6 +42,9 @@ class Description(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # Add the user field
     description = models.TextField()
     tags = TaggableManager()
+    timestamp = models.DateTimeField(default=timezone.now)  # Add the timestamp field
+
 
     class Meta:
         unique_together = ('urlsub', 'description')
+        ordering = ['-timestamp']  # Sort by URLsub's timestamp in descending order

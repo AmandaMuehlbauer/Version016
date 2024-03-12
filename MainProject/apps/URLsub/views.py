@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import URLsub, Description, Tag
 from django.views.generic import DetailView
 from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
 
@@ -59,10 +60,24 @@ class URLsubDetailView(DetailView):
     model = URLsub
     template_name = 'URLsub/urlsub_detail.html'  # Create a template for the detail view
     context_object_name = 'urlsub'
-    paginate_by = 10 #set number of items per page
+    paginate_by = 2 # set number of items per page
 
     def get_object(self, queryset=None):
         # Retrieve the object based on both primary key and slug
         pk = self.kwargs.get('pk')
         slug = self.kwargs.get('slug')
         return get_object_or_404(URLsub, pk=pk, slug=slug)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Paginate additional descriptions
+        additional_descriptions = self.object.additional_descriptions.order_by('timestamp')
+        paginator = Paginator(additional_descriptions, self.paginate_by)
+        page_number = self.request.GET.get('page')
+        additional_descriptions_page = paginator.get_page(page_number)
+        
+        # Add paginated additional descriptions to the context
+        context['additional_descriptions_page'] = additional_descriptions_page
+        
+        return context
