@@ -16,10 +16,23 @@
 </head>
 
 <body>
+
     <div class="container-fluid mt-4">
-        <div class="row">
+        <div class="row justify-content-center">
+                                <!-- Create post and discussion buttons -->
+                                <div class="button-container urlsub-detail-buttons">
+                                    <a href="{% url 'core:urlsub_post_create' pk=urlsub.pk slug=urlsub.slug %}">
+                                        <button class="styled-button">Create Post</button>
+                                    </a>
+                                    <a href="#">
+                                        <button class="styled-button">Discussion</button>
+                                    </a>
+                                </div>
             <div class="col-12">
-                <!-- Main URLsub card -->
+      
+
+
+             
  <!-- Main URL description -->
 <div class="urlsub-card">
     <h1><a href="{{ urlsub.url }}" target="_blank" class="urlsub-title">{{ urlsub.title }}</a></h1>
@@ -48,7 +61,7 @@
         </div>
     {% endfor %}
 </div>
-
+            </div>
 <!-- Pagination links -->
 {% if additional_descriptions_page.has_other_pages %}
     <ul class="pagination">
@@ -71,9 +84,9 @@
         {% endif %}
     </ul>
 {% endif %}
-    </div>
-
-</body>
+   
+</div>
+</body> 
 
 </html>
 

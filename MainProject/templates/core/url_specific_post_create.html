@@ -1,0 +1,15 @@
+<!-- url_specific_post_create.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Create a post for {{ urlsub_title }}</h1>
+
+<br>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="urlsub_id" value="{{ urlsub_id }}">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

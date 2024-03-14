@@ -10,6 +10,7 @@
     margin-bottom: 10px;
     text-decoration: none;
     transition: font-weight 0.3s ease;
+    text-align: center;
 }
 
 .urlsub-title:hover {
@@ -23,6 +24,19 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     font-size: 15px;
+    color: rgb(100, 100, 100);
+}
+
+.urlsub-username {
+    color: rgb(100, 100, 100);
+    transition: font-weight 0.3s ease;
+
+}
+
+.urlsub-username:hover {
+    font-weight: bold;
+    color: rgb(100, 100, 100);
+
 }
 
 .urlsub-container {
@@ -37,9 +51,8 @@
     border: 1px solid #ccc;
     border-radius: 10px;
     margin: 10px;
-    padding: 15px;
-    width: 350px;
-    height: 250px;
+    padding: 20px;
+    width: 98%; /* Take up all horizontal space */
     overflow: hidden;
 }
 
@@ -59,7 +72,60 @@
     text-overflow: ellipsis;
 }
 
-/* Add any additional styles specific to the URLsub details */
+/* URLsub description card styles */
+.urlsub-description-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.urlsub-description-card p {
+    margin-bottom: 8px;
+}
+
+.urlsub-description-card strong {
+    font-weight: bold;
+}
+
+.urlsub-description-card a {
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    text-decoration: none;
+}
+
+
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+  }
+  
+  .pagination li {
+    margin: 0 5px;
+  }
+  
+  .pagination a,
+  .pagination span {
+    color: rgb(100, 100, 100);
+    text-decoration: none;
+    padding: 8px;
+    border: 1px solid rgb(100, 100, 100);
+    border-radius: 4px;
+  }
+  
+  .pagination a:hover {
+    background-color: rgb(100, 100, 100);
+    color: #fff;
+  }
+  
+  .pagination .current {
+    font-weight: bold;
+  
+  }
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {

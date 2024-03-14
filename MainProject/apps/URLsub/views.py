@@ -12,6 +12,8 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 @login_required
 def urlsub(request):
+    description_tags = None  # Define description_tags outside of the conditional blocks
+
     if request.method == 'POST':
         form = URLSubForm(request.POST)
         if form.is_valid():
@@ -37,7 +39,7 @@ def urlsub(request):
 
             description_text = form.cleaned_data['description']
             description = Description.objects.create(urlsub=submission, description=description_text, user=user)
-            description_tags = description.tags.all()
+            description_tags = description.tags.all()  # Update description_tags here
 
             description.tags.set(tags)
 
@@ -60,7 +62,7 @@ class URLsubDetailView(DetailView):
     model = URLsub
     template_name = 'URLsub/urlsub_detail.html'  # Create a template for the detail view
     context_object_name = 'urlsub'
-    paginate_by = 2 # set number of items per page
+    paginate_by = 10 # set number of items per page
 
     def get_object(self, queryset=None):
         # Retrieve the object based on both primary key and slug

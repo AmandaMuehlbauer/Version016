@@ -8,14 +8,14 @@ from django.views.generic import (
     DeleteView, 
 
 )
-from django.shortcuts import  redirect, render
+from django.shortcuts import  redirect, render, get_object_or_404
 from .models import Post, Comment
 #from scraping.models import News
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.text import slugify
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
-from .forms import CommentForm
+from .forms import CommentForm, URLSpecificPostForm
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from ..URLsub.models import URLsub
@@ -151,15 +151,7 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
         return self.model.objects.filter(author=self.request.user)
 
 
-#def SubmitURLView(request):
 
- #   context ={}
-  #  form = SubmitURL()
-   # context['form']= form
-    #if request.POST:
-     #   temp = request.POST['urlsubmission']
-      #  print(temp)
-    #return render(request, "core/submit_url.html", {"form":form})
 
 def AboutView(request):
     return render(request, 'core/about.html', {})
@@ -181,16 +173,44 @@ def SavedForLaterView(request):
 
 def LikedView(request):
     return render(request, 'core/liked.html')
-#class RSSPageView(ListView):
- #   model = News
-  #  template_name = 'core/rsstest.html'
-   # context_object_name = 'articles' 
-    #thing = News.objects.all()
-    # assign "News" object list to the object "articles"
-    # pass news objects as queryset for listview
-    #print("Check thing:", thing)
-  
-    #def get_queryset(self):
-     #   return News.objects.all()
 
 
+#Create a view for Posts associated with a specific URL
+
+class URLSpecificPostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    form_class = URLSpecificPostForm
+    template_name = 'core/url_specific_post_create.html'
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.author = self.request.user
+        obj.slug = slugify(form.cleaned_data['title'])
+        obj.save()
+        messages.success(self.request, 'Your post has been created successfully.')
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("core:post", kwargs={"pk": self.object.pk, "slug": self.object.slug})
+    
+    def get_initial(self):
+        initial = super().get_initial()
+        # Retrieve the URLSub instance from the URL parameters
+        pk = self.kwargs.get('pk')
+        slug = self.kwargs.get('slug')
+        urlsub = get_object_or_404(URLsub, pk=pk, slug=slug)
+        initial['urlsub'] = urlsub
+        return initial
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add the URLsub title to the context
+        context['urlsub_title'] = self.get_initial()['urlsub'].title
+        return context
+
+    def get_form(self, form_class=None):
+        # Initialize the form with an empty "tags" field for GET requests
+        form = super().get_form(form_class=form_class)
+        if self.request.method == 'GET':
+            form.fields['tags'].initial = ''
+        return form

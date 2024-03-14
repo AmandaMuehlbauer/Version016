@@ -31,3 +31,10 @@ class PostForumForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ["title", "content", "image", "tags"]
+
+
+
+class URLSpecificPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ["title", "content", "image", "tags"]
