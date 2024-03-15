@@ -1,7 +1,7 @@
 # core/urls.py
 from django.urls import path
 from . import views
-from .views import  HomeView, PostView, PostCreateView, PostUpdateView, PostDeleteView,  ForumView, URLSpecificPostCreateView, YourPostsView, SavedForLaterView, LikedView
+from .views import  HomeView, PostView, PostCreateView, PostUpdateView, PostDeleteView,  ForumView, URLSpecificPostCreateView, URLSpecificPostView, URLSpecificForumView, YourPostsView, SavedForLaterView, LikedView
 #, AddDislike, AddLike, 
 
 urlpatterns = [
@@ -24,6 +24,8 @@ urlpatterns = [
     path('Liked/', views.LikedView, name='liked'),
 
     path('urlsub/<int:pk>/<slug:slug>/create_post', URLSpecificPostCreateView.as_view(), name='urlsub_post_create'),
+    path('urlsub/<int:pk>/<slug:slug>/<int:post_pk>/<slug:post_slug>/', URLSpecificPostView.as_view(), name='url_specific_post'),
+    path('urlsub/<int:pk>/<slug:slug>/discussion/', URLSpecificForumView.as_view(), name='url_specific_forum'),
 
  #   path('rsstest/', RSSPageView.as_view(), name="rsstest"),
 

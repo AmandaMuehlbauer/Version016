@@ -28,8 +28,9 @@
                             <button class="styled-button"> Details</button>
                         </div>
                     </a>
-                    <a>
+                  
                         <div class="button-wrapper">
+                          <a href="{% url 'core:url_specific_forum' pk=blog.pk slug=blog.slug %}">
                             <button class="styled-button"> Discussion</button>
                         </div>
                     </a>

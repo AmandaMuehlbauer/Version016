@@ -1,0 +1,28 @@
+<!-- templates/core/url_specific_forum.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="wrapper">
+    {% for post in object_list %}
+    <a href="{% url 'core:url_specific_post' pk=post.urlsub.pk slug=post.urlsub.slug post_pk=post.pk post_slug=post.slug %}">
+        <div class="entry">
+        <div class="thumbnail">
+          {% if post.image %}
+          <img src="{{ post.image.url }}" alt="{{ post.title }}">
+          {% else %}
+          <img src="/static/img/default.png">
+          {% endif %}
+        </div>
+        <div class="card-title">{{ post.title|truncatechars:100 }}</div>
+        <div class="author">{{ post.author.username }}</div>
+        <div class="card-text">{{ post.content|truncatechars:100 }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

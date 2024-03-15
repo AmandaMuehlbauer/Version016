@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}  
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+{% endblock css%}
+
+{% block head_title %}{{ url_specific_post.title }}{% endblock %}
+
+{% block content %} 
+  <!-- Display URLsub details -->
+
+<div class="container-fluid my-5">
+    <div class="urlsub-details">
+        <h3>Associated URLsub</h3>
+        <p><strong>Title:</strong> {{ urlsub.title }}</p>
+        <p><strong>Description:</strong> {{ urlsub.description }}</p>
+        <!-- Add any other URLsub details you want to display -->
+      </div>
+  <div class="post-card">
+    <h2 class="card-title text-center my-3">{{ url_specific_post.title }}</h2>
+    <div class="card-content">
+      {% if url_specific_post.image %}
+      <div class="image-container">
+        <img class="card-img" src="{{ url_specific_post.image.url }}" alt="{{ url_specific_post.title }}">
+      </div>
+      {% endif %}
+      <div class="card-text">
+        {{ url_specific_post.content }}
+      </div>
+    </div>
+
+    <div class="text-muted text-center mb-3">
+      <div>
+        created: {{ url_specific_post.created_on|date:"N j Y" }},
+        last updated: {{ url_specific_post.updated_on|timesince }},
+        by 
+        <a class="badge badge-secondary" href="{% url 'users:profile' url_specific_post.author.username %}">
+          {{ url_specific_post.author.username }}
+        </a>
+      </div>
+      <div>
+        {% for tag in url_specific_post.tags.all %}
+          <a href="{% url 'SubjectTags:post_list_by_tag' tag.slug %}" class="badge badge-dark">{{ tag }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Form to leave comment -->
+  <div class="row mt-5">
+    <div class="col-lg-6 offset-lg-3">
+      <h3>Leave a comment</h3>
+      {% if user.is_authenticated %}
+      <form method='POST'>
+        {% csrf_token %}
+        <input type="hidden" name="author" value="{{ user.id }}">
+        <input type="hidden" name="username" value="{{ user.username }}">
+        <div style="display: none;">
+          <input type="email" name="email" value="{{ user.email }}">
+        </div>
+        {{ form.author.errors }}
+        {{ form.username.errors }}
+        <div class="form-group">
+          {% if user.profile.avatar %}
+          <img class="rounded-circle mr-2" src="{{ user.profile.avatar.url }}" width="60" height="60" alt="Avatar">
+          {% else %}
+          <img class="rounded-circle mr-2" src="{% static 'img/cat.png' %}" width="60" height="60" alt="Default Avatar">
+          {% endif %}        
+          <span class="ml-2"></span>
+          {{ form.content.label_tag }}
+          <textarea class="form-control {% if form.content.errors %}is-invalid{% endif %}" id="id_content"
+            name="content" rows="4">{{ form.content.value|default:'' }}</textarea>
+        </div>
+        <button class="btn btn-primary ml-2" type="submit">Reply</button>
+      </form>
+      {% else %}
+      <div class="navbar-nav ml-auto">
+        <a href="{% url 'users:signup' %}"
+          class="nav-item nav-link {% if request.path == '/users/signup/' %}active{% endif %}">Sign up</a>
+        <a href="{% url 'users:login' %}">Log In</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+
+
+
+  <!-- List of comments -->
+  {% if comments %}
+  <div class="row mt-5">
+    <div class="col-lg-6 offset-lg-3">
+      Comment{{ comments.count|pluralize }}
+      <span class="badge badge-dark ml-2">{{ comments.count }}</span>
+    </div>
+    {% for comment in comments %}
+    <div class="col-lg-6 offset-lg-3 mt-2">
+      <div class="row">
+        <div class="col-12">
+          {% if comment.author.profile.avatar %}
+          <img class="rounded-circle mr-2" src="{{ comment.author.profile.avatar.url }}" width="60" height="60" alt="Avatar">
+          {% else %}
+          <img class="rounded-circle mr-2" src="{% static 'img/cat.png' %}" width="60" height="60" alt="Default Avatar">
+          {% endif %}
+          <strong>{{ comment.author.username }}</strong> said
+        </div>
+        <div class="col-12">
+          <p class="m-1 mt-3">{{ comment.content }}</p>
+          <p class="text-right text-muted"><small>{{ comment.created }}</small></p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock content %}
