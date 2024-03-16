@@ -24,7 +24,9 @@
                                     <a href="{% url 'core:urlsub_post_create' pk=urlsub.pk slug=urlsub.slug %}">
                                         <button class="styled-button">Create Post</button>
                                     </a>
-                                    <a href="#">
+
+                                    <a href="{% url 'core:url_specific_forum' pk=urlsub.pk slug=urlsub.slug %}">
+
                                         <button class="styled-button">Discussion</button>
                                     </a>
                                 </div>

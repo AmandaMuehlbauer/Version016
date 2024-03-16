@@ -1,13 +1,26 @@
 <!-- templates/core/url_specific_forum.html -->
-
 {% extends 'base.html' %}
 
 {% block content %}
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="row">
-  <div class="wrapper">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The WilderNet Home</title>
+    {% load static %}
+    {% block css %}{% endblock css %}
+  <!--  <link rel="stylesheet" type="text/css" href="{% static 'css/core/home.css' %}">-->
+</head>
+
+<div class="container mt-4">
+    <div class="urlsub-details">
+        <p><strong>Title:</strong> {{ urlsub_title }}</p>
+      </div>
+    <div class="row">
     {% for post in object_list %}
-    <a href="{% url 'core:url_specific_post' pk=post.urlsub.pk slug=post.urlsub.slug post_pk=post.pk post_slug=post.slug %}">
+    <a href="{% url 'core:url_specific_forum' pk=post.pk slug=post.slug %}">
         <div class="entry">
         <div class="thumbnail">
           {% if post.image %}
@@ -24,5 +37,4 @@
     {% endfor %}
   </div>
 </div>
-
 {% endblock content %}

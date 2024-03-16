@@ -45,6 +45,11 @@ class HomeView(ListView):
         for blog in blogs:
             blog.tags_list = blog.tags.all()
 
+        # Add slug and pk for each URLsub object
+        for blog in blogs:
+            blog.slug = blog.slug  # Assuming URLsub model has a 'slug' field
+            blog.pk = blog.pk  # Assuming URLsub model has a 'pk' field
+
         context['blogs'] = blogs
         return context
 
@@ -280,7 +285,7 @@ class URLSpecificPostView(DetailView):
 class URLSpecificForumView(ListView):
     template_name = 'core/discussion.html'
     queryset = Post.objects.all()
-    paginate_by = 10
+    paginate_by = 12
 
     def get_queryset(self):
         # Get the URLsub id and slug from the URL parameters
@@ -290,3 +295,14 @@ class URLSpecificForumView(ListView):
         # Filter posts by the URLsub id and slug
         queryset = Post.objects.filter(urlsub_id=urlsub_id, urlsub__slug=urlsub_slug)
         return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Get the URLsub object
+        urlsub = get_object_or_404(URLsub, pk=self.kwargs.get('pk'))
+        
+        # Add URLsub title to the context
+        context['urlsub_title'] = urlsub.title
+        
+        return context
