@@ -25,8 +25,8 @@
     </div>
     <div class="row">
     {% for post in object_list %}
-    <a href="{% url 'core:url_specific_forum' pk=post.pk slug=post.slug %}">
-        <div class="entry">
+    <a href="{% url 'core:url_specific_forum' pk=post.urlsub.pk slug=post.urlsub.slug %}">
+      <div class="entry">
         <div class="thumbnail">
           {% if post.image %}
           <img src="{{ post.image.url }}" alt="{{ post.title }}">
