@@ -304,5 +304,6 @@ class URLSpecificForumView(ListView):
         
         # Add URLsub title to the context
         context['urlsub_title'] = urlsub.title
+        context['urlsub_url'] = urlsub.url
         
         return context

@@ -46,5 +46,4 @@ class Description(models.Model):
 
 
     class Meta:
-        unique_together = ('urlsub', 'description')
         ordering = ['-timestamp']  # Sort by URLsub's timestamp in descending order

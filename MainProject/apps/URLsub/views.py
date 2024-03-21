@@ -1,7 +1,7 @@
 #apps/URLsub/views.py
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import  HttpResponseRedirect, HttpResponseNotFound
-from .forms import URLSubForm
+from .forms import URLSubForm, AdditionalDescriptionForm
 from django.contrib.auth.decorators import login_required
 from .models import URLsub, Description, Tag
 from django.views.generic import DetailView
@@ -60,26 +60,39 @@ def url_thanks(request):
 ##View to see individual blogs and their descriptions, reviews authors etc
 class URLsubDetailView(DetailView):
     model = URLsub
-    template_name = 'URLsub/urlsub_detail.html'  # Create a template for the detail view
+    template_name = 'URLsub/urlsub_detail.html'
     context_object_name = 'urlsub'
-    paginate_by = 10 # set number of items per page
+    paginate_by = 10
 
     def get_object(self, queryset=None):
-        # Retrieve the object based on both primary key and slug
         pk = self.kwargs.get('pk')
         slug = self.kwargs.get('slug')
         return get_object_or_404(URLsub, pk=pk, slug=slug)
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
-        # Paginate additional descriptions
         additional_descriptions = self.object.additional_descriptions.order_by('timestamp')
         paginator = Paginator(additional_descriptions, self.paginate_by)
         page_number = self.request.GET.get('page')
         additional_descriptions_page = paginator.get_page(page_number)
-        
-        # Add paginated additional descriptions to the context
         context['additional_descriptions_page'] = additional_descriptions_page
-        
         return context
+
+def add_additional_description(request, pk, slug):
+    urlsub = get_object_or_404(URLsub, pk=pk, slug=slug)
+    
+    if request.method == 'POST':
+        form = AdditionalDescriptionForm(request.POST)
+        if form.is_valid():
+            additional_description = form.save(commit=False)
+            additional_description.urlsub = urlsub
+            additional_description.user = request.user
+            additional_description.save()
+
+            form.save_m2m()  # Save the tags associated with the additional description
+
+            return redirect('URLsub:urlsub_detail', pk=pk, slug=slug)  # Redirect to the URLsub detail page with slug
+    else:
+        form = AdditionalDescriptionForm()
+    
+    return render(request, 'URLsub/add_additional_description.html', {'form': form, 'urlsub': urlsub})

@@ -1,4 +1,5 @@
-<!-- templates/core/url_specific_forum.html -->
+<!-- templates/core/discussion.html -->
+<!--This is for the url specific discussion forum-->
 {% extends 'base.html' %}
 
 {% block content %}
@@ -11,13 +12,17 @@
     <title>The WilderNet Home</title>
     {% load static %}
     {% block css %}{% endblock css %}
-  <!--  <link rel="stylesheet" type="text/css" href="{% static 'css/core/home.css' %}">-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/core/discussion.css' %}">
 </head>
 
 <div class="container mt-4">
+    <i class="material-icons">arrow_back</i>
+
     <div class="urlsub-details">
-        <p><strong>Title:</strong> {{ urlsub_title }}</p>
-      </div>
+        <h1><a href="{{ urlsub_url }}" target="_blank" class="urlsub-title">{{ urlsub_title }}</a></h1>
+    </div>
     <div class="row">
     {% for post in object_list %}
     <a href="{% url 'core:url_specific_forum' pk=post.pk slug=post.slug %}">
