@@ -18,7 +18,10 @@
 </head>
 
 <div class="container mt-4">
-    <i class="material-icons">arrow_back</i>
+    <!-- Button for creating a new post -->
+    <a href="{% url 'core:urlsub_post_create' pk=urlsub_pk slug=urlsub_slug %}" class="btn btn-primary mb-4">
+      Create New Post
+  </a>
 
     <div class="urlsub-details">
         <h1><a href="{{ urlsub_url }}" target="_blank" class="urlsub-title">{{ urlsub_title }}</a></h1>
@@ -41,5 +44,29 @@
     </a>
     {% endfor %}
   </div>
+  <!-- Pagination Controls -->
+{% if is_paginated %}
+<ul class="pagination">
+  {% if page_obj.has_previous %}
+    <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+  {% else %}
+    <li class="disabled"><span>&laquo;</span></li>
+  {% endif %}
+  {% for i in paginator.page_range %}
+    {% if page_obj.number == i %}
+      <li class="current"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+    {% else %}
+      <li><a href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %}
+  {% endfor %}
+  {% if page_obj.has_next %}
+    <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+  {% else %}
+    <li class="disabled"><span>&raquo;</span></li>
+  {% endif %}
+</ul>
+{% endif %}
 </div>
+</div>
+
 {% endblock content %}

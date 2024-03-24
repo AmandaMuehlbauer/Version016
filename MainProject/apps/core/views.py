@@ -298,12 +298,14 @@ class URLSpecificForumView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
-        # Get the URLsub object
+    
+    # Get the URLsub object
         urlsub = get_object_or_404(URLsub, pk=self.kwargs.get('pk'))
-        
-        # Add URLsub title to the context
+    
+    # Add URLsub title, URL, pk, and slug to the context
         context['urlsub_title'] = urlsub.title
         context['urlsub_url'] = urlsub.url
-        
+        context['urlsub_pk'] = urlsub.pk
+        context['urlsub_slug'] = urlsub.slug
+    
         return context

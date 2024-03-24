@@ -78,6 +78,8 @@ class URLsubDetailView(DetailView):
         context['additional_descriptions_page'] = additional_descriptions_page
         return context
 
+
+@login_required
 def add_additional_description(request, pk, slug):
     urlsub = get_object_or_404(URLsub, pk=pk, slug=slug)
     
